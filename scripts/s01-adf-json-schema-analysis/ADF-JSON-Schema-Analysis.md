@@ -6,6 +6,76 @@
 - Node definitions (`*_node`): 62
 - Mark definitions (`*_mark`): 16
 - Other definitions: 4
+- Unique type enum values: 64
+
+## All Type Enum Values
+
+64 unique type values:
+
+- alignment
+- annotation
+- backgroundColor
+- blockCard
+- blockTaskItem
+- blockquote
+- bodiedExtension
+- bodiedSyncBlock
+- border
+- breakout
+- bulletList
+- caption
+- code
+- codeBlock
+- dataConsumer
+- date
+- decisionItem
+- decisionList
+- doc
+- em
+- embedCard
+- emoji
+- expand
+- extension
+- external
+- file
+- fragment
+- hardBreak
+- heading
+- image
+- indentation
+- inlineCard
+- inlineExtension
+- layoutColumn
+- layoutSection
+- link
+- listItem
+- media
+- mediaGroup
+- mediaInline
+- mediaSingle
+- mention
+- nestedExpand
+- orderedList
+- panel
+- paragraph
+- placeholder
+- rule
+- status
+- strike
+- strong
+- sub
+- subsup
+- sup
+- syncBlock
+- table
+- tableCell
+- tableHeader
+- tableRow
+- taskItem
+- taskList
+- text
+- textColor
+- underline
 
 ## Implementation Order
 

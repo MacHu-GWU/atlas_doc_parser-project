@@ -31,6 +31,34 @@ def extract_refs(obj: dict | list | str, refs: set) -> None:
             extract_refs(item, refs)
 
 
+def extract_type_enums(obj: dict | list, type_enums: set | None = None) -> set[str]:
+    """
+    Recursively extract all type enum values from schema.
+
+    Looks for pattern: {"type": {"enum": [...]}} anywhere in the schema.
+    """
+    if type_enums is None:
+        type_enums = set()
+
+    if isinstance(obj, dict):
+        # Check if this dict has "type" key with "enum" inside
+        if "type" in obj:
+            type_val = obj["type"]
+            if isinstance(type_val, dict) and "enum" in type_val:
+                for val in type_val["enum"]:
+                    type_enums.add(val)
+
+        # Recurse into all values
+        for value in obj.values():
+            extract_type_enums(value, type_enums)
+
+    elif isinstance(obj, list):
+        for item in obj:
+            extract_type_enums(item, type_enums)
+
+    return type_enums
+
+
 def get_base_type(def_name: str) -> str | None:
     """Extract base type from definition name."""
     if def_name.endswith("_node"):
@@ -84,6 +112,9 @@ def main():
         schema = json.load(f)
 
     definitions = schema.get("definitions", {})
+
+    # Extract all type enum values
+    type_enums = extract_type_enums(definitions)
 
     # Separate nodes and marks
     node_defs = {}
@@ -145,6 +176,15 @@ def main():
     lines.append(f"- Node definitions (`*_node`): {len(node_defs)}")
     lines.append(f"- Mark definitions (`*_mark`): {len(mark_defs)}")
     lines.append(f"- Other definitions: {len(other_defs)}")
+    lines.append(f"- Unique type enum values: {len(type_enums)}")
+    lines.append("")
+
+    lines.append("## All Type Enum Values")
+    lines.append("")
+    lines.append(f"{len(type_enums)} unique type values:")
+    lines.append("")
+    for t in sorted(type_enums):
+        lines.append(f"- {t}")
     lines.append("")
 
     lines.append("## Implementation Order")
