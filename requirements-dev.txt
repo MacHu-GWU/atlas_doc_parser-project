@@ -1,10 +1,39 @@
-# This requirements file should only include dependencies for development
-pathlib_mate                            # autopep8 your code
-twine                                   # make distribution archive
-wheel                                   # make pre-compiled distribution package
-build                                   # build distribution package
-requests
-beautifulsoup4
-pyatlassian
-diskcache
-rich
+backports-tarfile==1.2.0 ; python_version >= "3.10" and python_version < "3.12" and platform_machine != "ppc64le" and platform_machine != "s390x"
+build==1.3.0 ; python_version >= "3.10" and python_version < "4.0"
+certifi==2025.11.12 ; python_version >= "3.10" and python_version < "4.0"
+cffi==2.0.0 ; python_version >= "3.10" and python_version < "4.0" and (platform_machine != "ppc64le" and platform_machine != "s390x" and sys_platform == "linux" and platform_python_implementation != "PyPy" or implementation_name == "pypy") and python_version >= "3.9"
+charset-normalizer==3.4.4 ; python_version >= "3.10" and python_version < "4.0"
+colorama==0.4.6 ; python_version >= "3.10" and python_version < "4.0" and (os_name == "nt" or sys_platform == "win32")
+cryptography==46.0.3 ; python_version >= "3.10" and python_version < "4.0" and platform_machine != "ppc64le" and platform_machine != "s390x" and sys_platform == "linux"
+docutils==0.21.2 ; python_version >= "3.10" and python_version < "4.0"
+id==1.5.0 ; python_version >= "3.10" and python_version < "4.0"
+idna==3.11 ; python_version >= "3.10" and python_version < "4.0"
+importlib-metadata==8.7.1 ; python_version >= "3.10" and python_version < "3.12" and (platform_machine != "ppc64le" and platform_machine != "s390x" or python_full_version < "3.10.2")
+jaraco-classes==3.4.0 ; python_version >= "3.10" and python_version < "4.0" and platform_machine != "ppc64le" and platform_machine != "s390x"
+jaraco-context==6.0.2 ; python_version >= "3.10" and python_version < "4.0" and platform_machine != "ppc64le" and platform_machine != "s390x"
+jaraco-functools==4.4.0 ; python_version >= "3.10" and python_version < "4.0" and platform_machine != "ppc64le" and platform_machine != "s390x"
+jeepney==0.9.0 ; python_version >= "3.10" and python_version < "4.0" and platform_machine != "ppc64le" and platform_machine != "s390x" and sys_platform == "linux"
+jinja2==3.1.6 ; python_version >= "3.10" and python_version < "4.0"
+keyring==25.7.0 ; python_version >= "3.10" and python_version < "4.0" and platform_machine != "ppc64le" and platform_machine != "s390x"
+markdown-it-py==4.0.0 ; python_version >= "3.10" and python_version < "4.0"
+markupsafe==3.0.3 ; python_version >= "3.10" and python_version < "4.0"
+mdurl==0.1.2 ; python_version >= "3.10" and python_version < "4.0"
+more-itertools==10.8.0 ; python_version >= "3.10" and python_version < "4.0" and platform_machine != "ppc64le" and platform_machine != "s390x"
+nh3==0.3.2 ; python_version >= "3.10" and python_version < "4.0"
+packaging==25.0 ; python_version >= "3.10" and python_version < "4.0"
+pycparser==2.23 ; python_version >= "3.10" and python_version < "4.0" and (platform_machine != "ppc64le" and platform_machine != "s390x" and sys_platform == "linux" and platform_python_implementation != "PyPy" and implementation_name != "PyPy" or implementation_name == "pypy") and python_version >= "3.8"
+pygments==2.19.2 ; python_version >= "3.10" and python_version < "4.0"
+pyproject-hooks==1.2.0 ; python_version >= "3.10" and python_version < "4.0"
+pywin32-ctypes==0.2.3 ; python_version >= "3.10" and python_version < "4.0" and platform_machine != "ppc64le" and platform_machine != "s390x" and sys_platform == "win32"
+readme-renderer==44.0 ; python_version >= "3.10" and python_version < "4.0"
+requests-toolbelt==1.0.0 ; python_version >= "3.10" and python_version < "4.0"
+requests==2.32.5 ; python_version >= "3.10" and python_version < "4.0"
+rfc3986==2.0.0 ; python_version >= "3.10" and python_version < "4.0"
+rich==14.2.0 ; python_version >= "3.10" and python_version < "4.0"
+secretstorage==3.5.0 ; python_version >= "3.10" and python_version < "4.0" and platform_machine != "ppc64le" and platform_machine != "s390x" and sys_platform == "linux"
+tomli==2.3.0 ; python_version >= "3.10" and python_full_version <= "3.11.0a6"
+twine==6.2.0 ; python_version >= "3.10" and python_version < "4.0"
+typing-extensions==4.15.0 ; python_version >= "3.10" and python_version < "4.0"
+urllib3==2.6.2 ; python_version >= "3.10" and python_version < "4.0"
+wheel==0.45.1 ; python_version >= "3.10" and python_version < "4.0"
+zipp==3.23.0 ; python_version >= "3.10" and python_version < "3.12" and (platform_machine != "ppc64le" and platform_machine != "s390x" or python_full_version < "3.10.2")
