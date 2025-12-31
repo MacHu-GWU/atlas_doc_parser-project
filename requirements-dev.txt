@@ -6,6 +6,7 @@ charset-normalizer==3.4.4 ; python_version >= "3.10" and python_version < "4.0"
 colorama==0.4.6 ; python_version >= "3.10" and python_version < "4.0" and (os_name == "nt" or sys_platform == "win32")
 cryptography==46.0.3 ; python_version >= "3.10" and python_version < "4.0" and platform_machine != "ppc64le" and platform_machine != "s390x" and sys_platform == "linux"
 docutils==0.21.2 ; python_version >= "3.10" and python_version < "4.0"
+func-args==1.0.1 ; python_version >= "3.10" and python_version < "4.0"
 id==1.5.0 ; python_version >= "3.10" and python_version < "4.0"
 idna==3.11 ; python_version >= "3.10" and python_version < "4.0"
 importlib-metadata==8.7.1 ; python_version >= "3.10" and python_version < "3.12" and (platform_machine != "ppc64le" and platform_machine != "s390x" or python_full_version < "3.10.2")
