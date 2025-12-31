@@ -218,21 +218,23 @@ class BaseNode(Base):
 
     def to_dict(self) -> T_DATA:
         """Serialize to dictionary, handling nested attrs, content, and marks."""
+        # Even deepcopy does not copy the OPT sentinel; after copying, it is still
+        # a singleton and can be compared with is.
         inst = copy.copy(self)
 
         # Serialize attrs
         if hasattr(inst, "attrs"):
-            if isinstance(inst.attrs, OPT) is False:
+            if inst.attrs is not OPT:
                 inst.attrs = inst.attrs.to_dict()
 
         # Serialize content
         if hasattr(inst, "content"):
-            if isinstance(inst.content, OPT) is False:
+            if inst.content is not OPT:
                 inst.content = [c.to_dict() for c in inst.content]
 
         # Serialize marks
         if hasattr(inst, "marks"):
-            if isinstance(inst.marks, OPT) is False:
+            if inst.marks is not OPT:
                 inst.marks = [m.to_dict() for m in inst.marks]
 
         data = dataclasses.asdict(inst)
