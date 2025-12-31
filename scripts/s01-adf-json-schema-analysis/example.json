@@ -1,0 +1,44 @@
+{
+    "type": "doc",
+    "content": [
+        {
+            "type": "heading",
+            "attrs": {
+                "level": 2,
+                "localId": "ce208079-41bd-4b66-87ed-e4f8b9cbda07"
+            },
+            "content": [
+                {
+                    "text": "Text Style and Format e0dfeb",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "type": "paragraph",
+            "attrs": {
+                "localId": "50e7d3c4-0eae-4911-b76d-281dce814549"
+            },
+            "content": [
+                {
+                    "text": "This is a ",
+                    "type": "text"
+                },
+                {
+                    "text": "bolded text",
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "strong"
+                        }
+                    ]
+                },
+                {
+                    "text": ", do you see that?",
+                    "type": "text"
+                }
+            ]
+        }
+    ],
+    "version": 1
+}
