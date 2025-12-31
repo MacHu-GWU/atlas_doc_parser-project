@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Write(.claude/**/*.md)",
+      "Write(./**/*.rst)",
+      "Write(docs/source/**/*.rst)",
+      "Write(atlas_doc_parser/**/*.py)",
+      "Write(tests/**/*.py)",
+      "Edit(.claude/**/*.md)",
+      "Edit(./**/*.rst)",
+      "Edit(docs/source/**/*.rst)",
+      "Edit(atlas_doc_parser/**/*.py)",
+      "Edit(tests/**/*.py)",
+      "Bash(~/.pyenv/shims/python bin/*.py)",
+      "Bash(.venv/bin/python debug/**/*.py)",
+      "Bash(.venv/bin/python scripts/**/*.py)",
+      "Bash(.venv/bin/python config/**/*.py)",
+      "Bash(.venv/bin/python tests/**/*.py)",
+      "Bash(make:*)",
+      "Bash(uvx:*)",
+      "Skill(mini-kanban:mini-kanban)",
+      "WebFetch(domain:developer.atlassian.com)",
+      "WebFetch(domain:docs.claude.com)"
+    ]
+  }
+}
