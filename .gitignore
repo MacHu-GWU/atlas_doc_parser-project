@@ -1,6 +1,7 @@
 # User Settings
 atlas_doc_parser.egg-info/
 tmp/
+.claude/claude-code-message.md
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

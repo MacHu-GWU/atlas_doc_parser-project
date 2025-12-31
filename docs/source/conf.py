@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# atlas_doc_parser documentation build configuration file, created by
+# sanhe_confluence_sdk documentation build configuration file, created by
 # sphinx-quickstart on Mon Jul 1 00:00:00 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -20,7 +20,6 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
-from __future__ import unicode_literals
 import os
 from datetime import datetime
 import atlas_doc_parser as package
@@ -30,46 +29,46 @@ package_author = package.__author__
 package_version = package.__version__
 
 # -- General configuration ------------------------------------------------
-
 # If your documentation needs a minimal Sphinx version, state it here.
 
-# needs_sphinx = '5.0'
+# needs_sphinx = '8.0'
 
+# -- General configuration ---------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
-    'sphinx.ext.coverage',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.ifconfig',
-    'sphinx.ext.viewcode',
-    'sphinx_jinja',
-    'sphinx_copybutton',
-    'sphinx_design',
-    'sphinx_search.extension',
-    'docfly.directives',
-    'nbsphinx',
+    "sphinx.ext.autodoc",
+    "sphinx.ext.doctest",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.todo",
+    "sphinx.ext.coverage",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.ifconfig",
+    "sphinx.ext.viewcode",
+    "sphinx_jinja",
+    "sphinx_copybutton",
+    "sphinx_design",
+    "docfly.directives",
+    "nbsphinx",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
-#
-# source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = {
+    ".rst": "restructuredtext",
+}
 
 # The master toctree document.
-master_doc = 'index'
+master_doc = "index"
 
 # General information about the project.
 project = package_name
-copyright = '{}, {}'.format(datetime.utcnow().year, package_author)
+copyright = "{}, {}".format(datetime.utcnow().year, package_author)
 author = package_author
 
 # The version info for the project you're documenting, acts as replacement for
@@ -100,7 +99,7 @@ pygments_style = "monokai"
 todo_include_todos = True
 
 # -- Options for HTML output ----------------------------------------------
-
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
@@ -118,12 +117,12 @@ pygments_dark_style = "monokai"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ["_static"]
 html_css_files = [
-    'css/custom-style.css',
+    "css/custom-style.css",
 ]
 html_js_files = [
-    'js/sorttable.js',
+    "js/sorttable.js",
 ]
 html_logo = "./_static/{}-logo.png".format(package_name)
 html_favicon = "./_static/{}-favicon.ico".format(package_name)
@@ -146,7 +145,7 @@ html_favicon = "./_static/{}-favicon.ico".format(package_name)
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = '{}doc'.format(package_name)
+htmlhelp_basename = "{}doc".format(package_name)
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -154,15 +153,12 @@ latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
     # 'papersize': 'letterpaper',
-
     # The font size ('10pt', '11pt' or '12pt').
     #
     # 'pointsize': '10pt',
-
     # Additional stuff for the LaTeX preamble.
     #
     # 'preamble': '',
-
     # Latex figure (float) alignment
     #
     # 'figure_align': 'htbp',
@@ -174,10 +170,10 @@ latex_elements = {
 latex_documents = [
     (
         master_doc,
-        '{}.tex'.format(package_name),
-        '{} Documentation'.format(package_name),
+        "{}.tex".format(package_name),
+        "{} Documentation".format(package_name),
         author,
-        'manual'
+        "manual",
     ),
 ]
 
@@ -186,13 +182,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (
-        master_doc,
-        package_name,
-        '{} Documentation'.format(package_name),
-        [author],
-        1
-    )
+    (master_doc, package_name, "{} Documentation".format(package_name), [author], 1)
 ]
 
 # -- Options for Texinfo output -------------------------------------------
@@ -204,28 +194,32 @@ texinfo_documents = [
     (
         master_doc,
         package_name,
-        '{} Documentation'.format(package_name),
+        "{} Documentation".format(package_name),
         author,
         package_name,
-        'One line description of project.',
-        'Miscellaneous'
+        "One line description of project.",
+        "Miscellaneous",
     ),
 ]
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+}
 
-autodoc_member_order = 'bysource'
+autodoc_member_order = "bysource"
 
 # Enable custom css
-custom_style_file_path = os.path.join(os.path.dirname(__file__), "_static", ".custom-style.rst")
+custom_style_file_path = os.path.join(
+    os.path.dirname(__file__), "_static", ".custom-style.rst"
+)
 with open(custom_style_file_path, "rb") as f:
     custom_style_file_content = f.read().decode("utf-8")
 rst_prolog = "\n" + custom_style_file_content + "\n"
 
 # Add data for Jinja2
 try:
-    from atlas_doc_parser.docs import doc_data
+    from sanhe_confluence_sdk.docs import doc_data
 except:
     doc_data = dict()
 
@@ -236,16 +230,19 @@ jinja_contexts = {
 }
 
 # Api Reference Doc
-import docfly
+from pathlib import Path
+import docfly.api as docfly
 
-docfly.ApiReferenceDoc(
-    conf_file=__file__,
+docfly.ApiDocGenerator(
+    dir_output=Path(__file__).absolute().parent.joinpath("api"),
     package_name=package_name,
-    ignored_package=[
-        "%s.docs" % package_name,
-        "%s.tests" % package_name,
-        "%s.vendor" % package_name,
-        "%s._version" % package_name,
-        "%s.paths" % package_name,
-    ]
+    ignore_patterns=[
+        # Package
+        f"{package_name}.docs",
+        f"{package_name}.tests",
+        f"{package_name}.vendor",
+        # Module
+        f"{package_name}._version",
+        f"{package_name}.paths",
+    ],
 ).fly()
