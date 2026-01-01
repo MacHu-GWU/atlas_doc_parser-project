@@ -55,7 +55,7 @@ class PathEnum:
 
     # Development
     dir_cache = dir_project_root / ".cache"
-    dir_test_pages = dir_unit_test / "test_pages"
+    dir_adf_samples = dir_unit_test / "adf_samples"
     path_adf_json_schema = dir_project_root / "adf_json_schema.json"
 
 
