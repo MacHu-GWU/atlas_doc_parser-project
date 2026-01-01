@@ -1,0 +1,46 @@
+# -*- coding: utf-8 -*-
+
+"""
+Auto-generated ADF Node: {{ type_name }}
+"""
+
+import typing as T
+import dataclasses
+
+from func_args.api import OPT
+from ..type_enum import TypeEnum
+{% if has_mixin %}
+from ..mixins.{{ module_name }} import {{ class_name }}Mixin
+{% endif %}
+from .base import Base, BaseMark, BaseNode
+
+
+{% if has_attrs %}
+@dataclasses.dataclass(frozen=True)
+class {{ class_name }}Attrs(Base):
+    """Attributes for {{ class_name }}."""
+{% for field in attrs_fields %}
+    {{ field.name }}: {{ field.type }} = {{ field.default }}
+{% endfor %}
+
+
+{% endif %}
+@dataclasses.dataclass(frozen=True)
+class {{ class_name }}({% if has_mixin %}{{ class_name }}Mixin, {% endif %}BaseNode):
+    """
+    ADF Node: {{ type_name }}
+    """
+
+    type: str = dataclasses.field(default=TypeEnum.{{ type_enum }}.value)
+{% if has_attrs %}
+    attrs: {{ class_name }}Attrs = OPT
+{% endif %}
+{% if has_content %}
+    content: T.List[BaseNode] = OPT
+{% endif %}
+{% if has_marks %}
+    marks: T.List[BaseMark] = OPT
+{% endif %}
+{% for field in extra_fields %}
+    {{ field.name }}: {{ field.type }} = {{ field.default }}
+{% endfor %}

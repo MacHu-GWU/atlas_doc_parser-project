@@ -1,0 +1,18 @@
+# -*- coding: utf-8 -*-
+
+"""
+Mixin for ADF Mark: {{ type_name }}
+
+This file is NOT auto-generated. Implement to_markdown() method here.
+"""
+
+import typing as T
+
+if T.TYPE_CHECKING:  # pragma: no cover
+    from ..nodes.{{ module_name }} import {{ class_name }}
+
+
+class {{ class_name }}Mixin:
+    def to_markdown(self: "{{ class_name }}", text: str) -> str:
+        # TODO: Implement markdown conversion
+        return text

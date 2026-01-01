@@ -1,0 +1,60 @@
+# -*- coding: utf-8 -*-
+
+"""
+Auto-generated ADF Parser
+
+This module provides functions to parse ADF JSON into Python objects.
+"""
+
+import typing as T
+from ..type_hint import T_DATA
+
+if T.TYPE_CHECKING:  # pragma: no cover
+    from .base import T_MARK, T_NODE
+
+# =============================================================================
+# Mark imports
+# =============================================================================
+{% for mark in marks %}
+from .{{ mark.module_name }} import {{ mark.class_name }}
+{% endfor %}
+
+# =============================================================================
+# Node imports
+# =============================================================================
+{% for node in nodes %}
+from .{{ node.module_name }} import {{ node.class_name }}
+{% endfor %}
+
+# =============================================================================
+# Mark registry
+# =============================================================================
+_mark_type_to_class_mapping = {
+{% for mark in marks %}
+    "{{ mark.type_name }}": {{ mark.class_name }},
+{% endfor %}
+}
+
+
+def parse_mark(dct: T_DATA) -> "T_MARK":
+    """Parse a mark dictionary into a Mark object."""
+    type_ = dct["type"]
+    klass = _mark_type_to_class_mapping[type_]
+    return klass.from_dict(dct)
+
+
+# =============================================================================
+# Node registry
+# =============================================================================
+_node_type_to_class_mapping = {
+{% for node in nodes %}
+    "{{ node.type_name }}": {{ node.class_name }},
+{% endfor %}
+}
+
+
+def parse_node(dct: T_DATA) -> "T_NODE":
+    """Parse a node dictionary into a Node object."""
+    type_ = dct["type"]
+    klass = _node_type_to_class_mapping[type_]
+    return klass.from_dict(dct)
