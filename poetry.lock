@@ -761,6 +761,25 @@ files = [
 devel = ["colorama", "json-spec", "jsonschema", "pylint", "pytest", "pytest-benchmark", "pytest-cache", "validictory"]
 
 [[package]]
+name = "fire"
+version = "0.7.1"
+description = "A library for automatically generating command line interfaces."
+optional = true
+python-versions = ">=3.7"
+groups = ["main"]
+markers = "extra == \"test\""
+files = [
+    {file = "fire-0.7.1-py3-none-any.whl", hash = "sha256:e43fd8a5033a9001e7e2973bab96070694b9f12f2e0ecf96d4683971b5ab1882"},
+    {file = "fire-0.7.1.tar.gz", hash = "sha256:3b208f05c736de98fb343310d090dcc4d8c78b2a89ea4f32b837c586270a9cbf"},
+]
+
+[package.dependencies]
+termcolor = "*"
+
+[package.extras]
+test = ["hypothesis (<6.136.0)", "levenshtein (<=0.27.1)", "pip", "pylint (<3.3.8)", "pytest (<=8.4.1)", "pytest-pylint (<=1.1.2)", "pytest-runner (<7.0.0)", "setuptools (<=80.9.0)", "termcolor (<3.2.0)"]
+
+[[package]]
 name = "func-args"
 version = "1.0.1"
 description = "A lightweight Python library for creating wrapper functions with enhanced argument handling using sentinel values to mark parameters as required or optional."
@@ -2736,6 +2755,22 @@ pure-eval = "*"
 tests = ["cython", "littleutils", "pygments", "pytest", "typeguard"]
 
 [[package]]
+name = "termcolor"
+version = "3.3.0"
+description = "ANSI color formatting for output in terminal"
+optional = true
+python-versions = ">=3.10"
+groups = ["main"]
+markers = "extra == \"test\""
+files = [
+    {file = "termcolor-3.3.0-py3-none-any.whl", hash = "sha256:cf642efadaf0a8ebbbf4bc7a31cec2f9b5f21a9f726f4ccbb08192c9c26f43a5"},
+    {file = "termcolor-3.3.0.tar.gz", hash = "sha256:348871ca648ec6a9a983a13ab626c0acce02f515b9e1983332b17af7979521c5"},
+]
+
+[package.extras]
+tests = ["pytest", "pytest-cov"]
+
+[[package]]
 name = "tinycss2"
 version = "1.4.0"
 description = "A tiny CSS parser"
@@ -3009,9 +3044,9 @@ type = ["pytest-mypy"]
 auto = []
 dev = ["build", "jinja2", "twine", "wheel"]
 doc = ["Sphinx", "docfly", "furo", "ipython", "nbsphinx", "pygments", "rstobj", "sphinx-copybutton", "sphinx-design", "sphinx-jinja"]
-test = ["diskcache", "home-secret-toml", "home_secret_toml", "jinja2", "pytest", "pytest-cov", "rich", "sanhe-confluence_sdk", "varname"]
+test = ["diskcache", "fire", "home-secret-toml", "home_secret_toml", "jinja2", "pytest", "pytest-cov", "rich", "sanhe-confluence_sdk", "varname"]
 
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<4.0"
-content-hash = "7c0258f441138509acf78d2eadd70d0f5a2c1a9be646f70581d420fa076055dc"
+content-hash = "2169e6c5e8e9a70cdea72e8a7dabe75bd191e3f780707c085fc8929bcf2552a2"
