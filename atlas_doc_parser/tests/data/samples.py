@@ -6,8 +6,12 @@ ADF Test Samples Module
 Provides sample ADF node/mark data extracted from real Confluence pages for
 testing serialization and deserialization of ADF dataclasses.
 
-Each sample references a Confluence page and uses JMESPath to extract the
-specific ADF node or mark for testing.
+Two-layer architecture:
+    - :class:`PageSample`: Represents a Confluence page with cached ADF content.
+    - :class:`AdfSample`: Extracts a specific node/mark from a PageSample via JMESPath.
+
+This design allows multiple samples to be extracted from the same page
+(e.g., both ``mark_sub`` and ``mark_sup`` from a single "subsup" page).
 """
 
 import json
@@ -26,23 +30,25 @@ from ...paths import path_enum
 
 
 @dataclasses.dataclass
-class AdfSample:
+class PageSample:
     """
-    A test sample containing a specific ADF node or mark extracted from a Confluence page.
+    A Confluence page as a source of ADF test samples.
+
+    Fetches and caches the full ADF content of a Confluence page. Use
+    :meth:`get_sample` to extract specific nodes/marks via JMESPath.
 
     Attributes:
         name: Unique identifier, used as the cache filename.
         url: Confluence page URL (used to extract page_id).
-        jpath: JMESPath expression to extract the target node/mark from the page's ADF.
 
     Example:
-        >>> sample = AdfSample(name="mark_strong", url="...", jpath="content[0].content[0].marks[0]")
-        >>> sample.data  # Returns the specific mark's JSON, not the whole page
+        >>> page = PageSample(name="mark_subsup", url="...")
+        >>> mark_sub = page.get_sample(jpath="content[0].content[1].marks[1]")
+        >>> mark_sup = page.get_sample(jpath="content[0].content[3].marks[1]")
     """
 
     name: str
     url: str
-    jpath: str
 
     @property
     def page_id(self) -> int:
@@ -75,65 +81,93 @@ class AdfSample:
             self.path.write_text(content, encoding="utf-8")
             return data
 
+    def get_sample(self, jpath: str) -> "AdfSample":
+        """Create an AdfSample that extracts a specific node/mark from this page."""
+        return AdfSample(page=self, jpath=jpath)
+
+
+@dataclasses.dataclass
+class AdfSample:
+    """
+    A specific ADF node or mark extracted from a PageSample.
+
+    Attributes:
+        page: The source PageSample containing the full ADF.
+        jpath: JMESPath expression to locate the target node/mark.
+
+    Example:
+        >>> sample = AdfSampleEnum.mark_strong
+        >>> sample.data  # Returns {'type': 'strong'}
+    """
+
+    page: PageSample
+    jpath: str
+
     @cached_property
     def data(self) -> dict:
-        """The extracted ADF node/mark JSON, located via jpath from the full ADF."""
-        return jmespath.search(self.jpath, self.adf)
+        """The extracted ADF node/mark JSON, located via jpath from the page's ADF."""
+        return jmespath.search(self.jpath, self.page.adf)
 
 
 class AdfSampleEnum:
     """
     Registry of ADF test samples for nodes and marks.
 
-    Each attribute is an :class:`AdfSample` that extracts a specific ADF element
-    from a real Confluence page using JMESPath.
+    Each public attribute is an :class:`AdfSample` that extracts a specific ADF
+    element from a Confluence page using JMESPath. Use ``_page`` prefix for
+    intermediate PageSample objects when extracting multiple samples from one page.
 
     Naming Conventions:
         - ``mark_*``: Mark type samples (text formatting)
         - ``node_*``: Node type samples (block elements)
+        - ``_page*``: Internal PageSample for multi-sample extraction
 
     Example:
         >>> from atlas_doc_parser.tests.data.samples import AdfSampleEnum
         >>> AdfSampleEnum.mark_strong.data
         {'type': 'strong'}
     """
-    # mark_background_color = AdfSample(
-    #     name="mark_background_color",
-    #     url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558524/Mark+-+backgroundColor"
-    # )
-    # mark_code = AdfSample(
-    #     name="mark_code",
-    #     url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049333/Mark+-+code",
-    # )
-    # mark_em = AdfSample(
-    #     name="mark_em",
-    #     url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049341/Mark+-+em",
-    # )
-    # mark_link = AdfSample(
-    #     name="mark_link",
-    #     url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082109/Mark+-+link",
-    # )
-    # mark_strike = AdfSample(
-    #     name="mark_strike",
-    #     url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558555/Mark+-+strike",
-    # )
-    mark_strong = AdfSample(
+
+    mark_background_color = PageSample(
+        name="mark_background_color",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558524/Mark+-+backgroundColor",
+    ).get_sample(jpath="content[0].content[1].marks[1]")
+    mark_code = PageSample(
+        name="mark_code",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049333/Mark+-+code",
+    ).get_sample(jpath="content[0].content[1].marks[1]")
+    mark_em = PageSample(
+        name="mark_em",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049341/Mark+-+em",
+    ).get_sample(jpath="content[0].content[1].marks[1]")
+    mark_link = PageSample(
+        name="mark_link",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082109/Mark+-+link",
+    ).get_sample(jpath="content[0].content[1].marks[1]")
+    mark_strike = PageSample(
+        name="mark_strike",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558555/Mark+-+strike",
+    ).get_sample(jpath="content[0].content[1].marks[1]")
+    mark_strong = PageSample(
         name="mark_strong",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049306/Mark+-+strong",
-        jpath="content[0].content[0].marks[1]"
+    ).get_sample(jpath="content[0].content[1].marks[1]")
+
+    _page = PageSample(
+        name="mark_subsup",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558564/Mark+-+subsup",
     )
-    # mark_subsup = AdfSample(
-    #     name="mark_subsup",
-    #     url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558564/Mark+-+subsup",
-    # )
-    # mark_text_color = AdfSample(
-    #     name="mark_text_color",
-    #     url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558571/Mark+-+textColor",
-    # )
-    # mark_underline = AdfSample(
-    #     name="mark_underline",
-    #     url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082132/Mark+-+underline",
-    # )
+    mark_sub = _page.get_sample(jpath="content[0].content[1].marks[1]")
+    mark_sup = _page.get_sample(jpath="content[0].content[3].marks[1]")
+
+    mark_text_color = PageSample(
+        name="mark_text_color",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558571/Mark+-+textColor",
+    ).get_sample(jpath="content[0].content[1].marks[1]")
+    mark_underline = PageSample(
+        name="mark_underline",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082132/Mark+-+underline",
+    ).get_sample(jpath="content[0].content[1].marks[1]")
     # node_block_quote = AdfSample(
     #     name="node_block_quote",
     #     url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492407/Node+-+blockquote",
