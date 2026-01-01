@@ -27,19 +27,62 @@ from ...paths import path_enum
 
 @dataclasses.dataclass
 class Page:
+    """
+    Represents a Confluence page with lazy-loaded ADF content.
+
+    This class provides a convenient way to access Confluence page content
+    in ADF format. The content is fetched from the Confluence API on first
+    access and cached locally as a JSON file for subsequent uses.
+
+    Attributes:
+        name: A unique identifier for the page, used as the cache filename.
+        url: The full Confluence URL of the page (used to extract page_id).
+
+    Example:
+        >>> page = Page(name="my_page", url="https://example.atlassian.net/.../pages/12345/...")
+        >>> adf_content = page.data  # Fetches from API or loads from cache
+    """
+
     name: str
     url: str
 
     @property
     def page_id(self) -> int:
+        """
+        Extract the numeric page ID from the Confluence URL.
+
+        The page ID is the second-to-last segment of the URL path.
+        For example: ".../pages/12345/Page-Title" -> 12345
+        """
         return int(self.url.split("/")[-2])
 
     @property
     def path(self):
+        """
+        Get the local cache file path for this page's ADF content.
+
+        Returns:
+            Path object pointing to {test_pages_dir}/{name}.json
+        """
         return path_enum.dir_test_pages / f"{self.name}.json"
 
     @cached_property
     def data(self) -> dict:
+        """
+        Get the ADF content of the page.
+
+        On first access, attempts to load from local cache file. If the cache
+        file doesn't exist, fetches the page from the Confluence API, caches
+        the result locally, and returns the content.
+
+        Returns:
+            dict: The page content in Atlassian Document Format (ADF),
+                  containing 'type', 'content', and 'version' fields.
+
+        Note:
+            The result is cached using @cached_property, so subsequent
+            accesses return the same data without re-reading the file.
+        """
         try:
             return json.loads(self.path.read_text(encoding="utf-8"))
         except FileNotFoundError:
@@ -57,51 +100,29 @@ class Page:
 
 class PageEnum:
     """
-    Example usage:
+    Registry of Confluence test pages for ADF node and mark types.
 
-    >>> from atlas_doc_parser.tests.data.pages import PageEnum
-    >>> PageEnum.mark_background_color.data
-    {
-        "type": "doc",
-        "content": [
-            {
-                "type": "paragraph",
-                "attrs": {
-                    "localId": "b3ded07e-95a4-43ef-a10d-53033d802404"
-                },
-                "content": [
-                    {
-                        "text": "this is ",
-                        "type": "text"
-                    },
-                    {
-                        "text": "backgroundColor",
-                        "type": "text",
-                        "marks": [
-                            {
-                                "type": "annotation",
-                                "attrs": {
-                                    "annotationType": "inlineComment",
-                                    "id": "91ea44b3-4301-4fc3-be59-73c8968268df"
-                                }
-                            },
-                            {
-                                "type": "backgroundColor",
-                                "attrs": {
-                                    "color": "#fedec8"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "text": " text.",
-                        "type": "text"
-                    }
-                ]
-            }
-        ],
-        "version": 1
-    }
+    This class provides class-level attributes for each test page, organized
+    by ADF element type. Each attribute is a :class:`Page` instance that
+    provides lazy-loaded access to real Confluence page content.
+
+    The test pages are hosted in a dedicated Confluence space and contain
+    examples of specific ADF elements for testing the parser implementation.
+
+    Naming Conventions:
+        - ``mark_*``: Pages demonstrating ADF mark types (text formatting)
+        - ``node_*``: Pages demonstrating ADF node types (block elements)
+
+    Example:
+        >>> from atlas_doc_parser.tests.data.pages import PageEnum
+        >>> # Access ADF content for testing strong mark
+        >>> adf_data = PageEnum.mark_strong.data
+        >>> adf_data["type"]
+        'doc'
+
+    Note:
+        Page content is cached locally after first fetch. To refresh,
+        delete the corresponding JSON file in the test pages directory.
     """
     mark_background_color = Page(
         name="mark_background_color",
