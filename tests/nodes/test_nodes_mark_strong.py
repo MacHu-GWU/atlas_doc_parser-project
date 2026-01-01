@@ -3,39 +3,35 @@
 from atlas_doc_parser.nodes.mark_strong import MarkStrong
 
 from atlas_doc_parser.tests import check_seder
-from atlas_doc_parser.tests.case import NodeCase, CaseEnum
+from atlas_doc_parser.tests.data.samples import AdfSampleEnum
 
 
-class TestMarkStrong:
+class TestSeder:
     def test_basic_strong_mark(self):
-        """Test basic strong mark creation and markdown conversion."""
-        data = {"type": "strong"}
+        data = AdfSampleEnum.mark_strong.data
         mark = MarkStrong.from_dict(data)
         check_seder(mark)
-        assert mark.to_markdown("Hello world") == "**Hello world**"
 
-    def test_strong_mark_with_special_chars(self):
-        """Test strong mark with text containing special characters."""
-        data = {"type": "strong"}
-        mark = MarkStrong.from_dict(data)
-        check_seder(mark)
-        special_text = "Hello * World ** !"
-        assert mark.to_markdown(special_text) == f"**{special_text}**"
 
-    def test_strong_mark_with_empty_string(self):
-        """Test strong mark with empty text."""
-        data = {"type": "strong"}
+class TestToMarkdown:
+    def test(self):
+        data = AdfSampleEnum.mark_strong.data
         mark = MarkStrong.from_dict(data)
-        check_seder(mark)
-        assert mark.to_markdown("") == "****"
 
-    def test_strong_mark_preserves_whitespace(self):
-        """Test strong mark with text containing various whitespace."""
-        data = {"type": "strong"}
-        mark = MarkStrong.from_dict(data)
-        check_seder(mark)
-        text_with_spaces = "  Hello  World  "
-        assert mark.to_markdown(text_with_spaces) == f"**{text_with_spaces}**"
+        valid_text = [
+            "Hello world",
+            "Hello * World ** !",
+            "  Hello  World  ",
+        ]
+        for before in valid_text:
+            assert mark.to_markdown(before) == f"**{before}**"
+
+        invalid_text = [
+            "",
+            "  ",
+        ]
+        for before in invalid_text:
+            assert mark.to_markdown(before) == before
 
 
 if __name__ == "__main__":

@@ -8,4 +8,7 @@ if T.TYPE_CHECKING:  # pragma: no cover
 
 class MarkStrongMixin:
     def to_markdown(self: "MarkStrong", text: str) -> str:
-        return f"**{text}**"
+        if text.strip():
+            return f"**{text}**"
+        else:
+            return text
