@@ -2,8 +2,6 @@
 
 """
 Mixin for ADF Mark: code
-
-This file is NOT auto-generated. Implement to_markdown() method here.
 """
 
 import typing as T
