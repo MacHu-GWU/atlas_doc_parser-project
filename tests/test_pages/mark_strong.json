@@ -1,0 +1,56 @@
+{
+    "type": "doc",
+    "content": [
+        {
+            "type": "paragraph",
+            "attrs": {
+                "localId": "9f691781-60c2-4c74-b97f-53e055a7731e"
+            },
+            "content": [
+                {
+                    "text": "this is ",
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "annotation",
+                            "attrs": {
+                                "annotationType": "inlineComment",
+                                "id": "e0cd324a-efae-4a41-b7f0-329b9a05f47d"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "text": "strong",
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "annotation",
+                            "attrs": {
+                                "annotationType": "inlineComment",
+                                "id": "e0cd324a-efae-4a41-b7f0-329b9a05f47d"
+                            }
+                        },
+                        {
+                            "type": "strong"
+                        }
+                    ]
+                },
+                {
+                    "text": " text.",
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "annotation",
+                            "attrs": {
+                                "annotationType": "inlineComment",
+                                "id": "e0cd324a-efae-4a41-b7f0-329b9a05f47d"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": 1
+}

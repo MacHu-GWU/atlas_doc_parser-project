@@ -53,6 +53,11 @@ class PathEnum:
     dir_build = dir_project_root / "build"
     dir_dist = dir_project_root / "dist"
 
+    # Development
+    dir_cache = dir_project_root / ".cache"
+    dir_test_pages = dir_unit_test / "test_pages"
+    path_adf_json_schema = dir_project_root / "adf_json_schema.json"
+
 
 path_enum = PathEnum()
 """

@@ -2,6 +2,7 @@
 atlas_doc_parser.egg-info/
 tmp/
 .claude/claude-code-message.md
+adf_json_schema.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
