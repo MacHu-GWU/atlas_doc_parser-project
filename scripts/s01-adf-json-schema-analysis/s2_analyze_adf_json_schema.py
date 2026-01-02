@@ -15,6 +15,8 @@ import json
 from pathlib import Path
 from collections import defaultdict
 
+from atlas_doc_parser.tests.data.schema import adf_json_schema
+
 
 def extract_refs(obj: dict | list | str, refs: set) -> None:
     """Recursively extract all $ref references from a schema object."""
@@ -105,11 +107,9 @@ def topological_sort(graph: dict[str, set[str]]) -> list[str]:
 
 def main():
     # Load schema
-    schema_path = Path(__file__).parent / "adf_json_schema.json"
     output_path = Path(__file__).parent / "ADF-JSON-Schema-Analysis.md"
 
-    with open(schema_path) as f:
-        schema = json.load(f)
+    schema = adf_json_schema.data
 
     definitions = schema.get("definitions", {})
 

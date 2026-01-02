@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from pathlib import Path
-import requests
+from atlas_doc_parser.tests.data.schema import adf_json_schema
+from rich import print as rprint
 
-dir_here = Path(__file__).absolute().parent
-path = dir_here / "adf_json_schema.json"
-url = "https://unpkg.com/@atlaskit/adf-schema@51.5.4/dist/json-schema/v1/full.json"
-path.write_text(requests.get(url).text, encoding="utf-8")
+rprint(adf_json_schema.data)

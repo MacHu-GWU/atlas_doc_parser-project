@@ -6,9 +6,9 @@ Auto-generated ADF Mark: {{ type_name }}
 
 import typing as T
 import dataclasses
-{% if has_attrs %}
+
 from func_args.api import OPT
-{% endif %}
+
 from ..type_enum import TypeEnum
 {% if has_mixin %}
 from ..mixins.{{ module_name }} import {{ class_name }}Mixin
@@ -21,7 +21,11 @@ from .base import Base, BaseMark
 class {{ class_name }}Attrs(Base):
     """Attributes for {{ class_name }}."""
 {% for field in attrs_fields %}
+{% if field.required %}
+    {{ field.name }}: {{ field.type }}
+{% else %}
     {{ field.name }}: {{ field.type }} = {{ field.default }}
+{% endif %}
 {% endfor %}
 
 

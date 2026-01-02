@@ -8,6 +8,7 @@ import typing as T
 import dataclasses
 
 from func_args.api import OPT
+
 from ..type_enum import TypeEnum
 {% if has_mixin %}
 from ..mixins.{{ module_name }} import {{ class_name }}Mixin
@@ -20,7 +21,11 @@ from .base import Base, BaseMark, BaseNode
 class {{ class_name }}Attrs(Base):
     """Attributes for {{ class_name }}."""
 {% for field in attrs_fields %}
+{% if field.required %}
+    {{ field.name }}: {{ field.type }}
+{% else %}
     {{ field.name }}: {{ field.type }} = {{ field.default }}
+{% endif %}
 {% endfor %}
 
 
