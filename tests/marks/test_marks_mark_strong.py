@@ -1,21 +1,21 @@
 # -*- coding: utf-8 -*-
 
-from atlas_doc_parser.marks.mark_strike import MarkStrike
+from atlas_doc_parser.marks.mark_strong import MarkStrong
 
 from atlas_doc_parser.tests.data.samples import AdfSampleEnum
 
 
-class TestMarkStrike:
-    def test_basic_strike_mark(self):
-        mark = AdfSampleEnum.mark_strike.test(MarkStrike)
+class TestMarkStrong:
+    def test_basic_strong_mark(self):
+        mark = AdfSampleEnum.mark_strong.test(MarkStrong)
 
         valid_text = [
             "Hello world",
-            "Hello ~ World ~~ !",
+            "Hello * World ** !",
             "  Hello  World  ",
         ]
         for before in valid_text:
-            assert mark.to_markdown(before) == f"~~{before}~~"
+            assert mark.to_markdown(before) == f"**{before}**"
 
         invalid_text = [
             "",
@@ -30,6 +30,6 @@ if __name__ == "__main__":
 
     run_cov_test(
         __file__,
-        "atlas_doc_parser.marks.mark_strike",
+        "atlas_doc_parser.marks.mark_strong",
         preview=False,
     )
