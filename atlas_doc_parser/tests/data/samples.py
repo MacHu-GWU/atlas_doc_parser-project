@@ -135,13 +135,12 @@ class AdfSample:
         Test serialization/deserialization and Markdown conversion.
         """
         node_or_mark = self.get_inst(klass)
-        # check_seder(inst=node_or_mark)
+        check_seder(inst=node_or_mark)
         if isinstance(node_or_mark, BaseNode) and self.markdown is not None:
-            print(node_or_mark.to_markdown())
-            # check_markdown(
-            #     node=node_or_mark,
-            #     expected=self.markdown,
-            # )
+            check_markdown(
+                node=node_or_mark,
+                expected=self.markdown,
+            )
         return node_or_mark
 
 
