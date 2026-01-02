@@ -5,7 +5,7 @@ from atlas_doc_parser.marks.mark_background_color import MarkBackgroundColor
 from atlas_doc_parser.tests.data.samples import AdfSampleEnum
 
 
-class TestSeder:
+class TestMarkBackgroundColor:
     def test_basic_strong_mark(self):
         mark = AdfSampleEnum.mark_background_color.test(MarkBackgroundColor)
 

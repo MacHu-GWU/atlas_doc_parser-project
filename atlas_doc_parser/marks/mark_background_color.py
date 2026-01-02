@@ -21,5 +21,5 @@ class MarkBackgroundColor(BaseMark):
     - https://developer.atlassian.com/cloud/jira/platform/apis/document/marks/backgroundColor/
     """
 
-    type: str = dataclasses.field(default=TypeEnum.backgroundColor.value)
+    type: str = TypeEnum.backgroundColor.value
     attrs: MarkBackgroundColorAttrs = OPT

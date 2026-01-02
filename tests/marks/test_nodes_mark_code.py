@@ -6,7 +6,7 @@ import pytest
 from atlas_doc_parser.tests.data.samples import AdfSampleEnum
 
 
-class TestSeder:
+class TestMarkCode:
     def test_basic_code_mark(self):
         mark = AdfSampleEnum.mark_code.test(MarkCode)
 

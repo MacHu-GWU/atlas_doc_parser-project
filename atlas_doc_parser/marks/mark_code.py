@@ -17,7 +17,7 @@ class MarkCode(BaseMark):
     - https://developer.atlassian.com/cloud/jira/platform/apis/document/marks/code/
     """
 
-    type: str = dataclasses.field(default=TypeEnum.code.value)
+    type: str = TypeEnum.code.value
 
     def to_markdown(
         self: "MarkCode",
