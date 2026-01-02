@@ -71,7 +71,8 @@ class DefinitionNames:
     - class_name: PascalCase class name (e.g., 'MarkStrong', 'NodeParagraph')
     - attrs_class_name: PascalCase attrs class name (e.g., 'MarkStrongAttrs')
     - mixin_class_name: PascalCase mixin class name (e.g., 'MarkStrongMixin')
-    - type_name: The ADF type enum value (e.g., 'strong', 'paragraph')
+    - type_name: Derived type name for docs (e.g., 'table_cell', 'paragraph')
+    - type_enum: The actual ADF type enum value from schema (e.g., 'tableCell', 'paragraph')
     """
 
     def_name: str
@@ -80,6 +81,7 @@ class DefinitionNames:
     attrs_class_name: str
     mixin_class_name: str
     type_name: str
+    type_enum: str
 
 
 @dataclass
@@ -107,6 +109,40 @@ class SchemaInfo:
 # =============================================================================
 # Name Mapping Utility
 # =============================================================================
+def get_type_enum_from_schema(def_name: str) -> str:
+    """
+    Extract the actual type enum value from the schema definition.
+
+    The ADF schema defines the type enum in properties.type.enum[0].
+    For example, 'table_cell_node' has type enum value 'tableCell'.
+
+    Args:
+        def_name: The definition name (e.g., 'table_cell_node')
+
+    Returns:
+        The type enum value from the schema (e.g., 'tableCell')
+    """
+    definition = adf_json_schema.data["definitions"].get(def_name, {})
+    props = definition.get("properties", {})
+
+    # Handle allOf - merge properties from all schemas
+    if "allOf" in definition:
+        for item in definition["allOf"]:
+            if "properties" in item:
+                props.update(item["properties"])
+
+    type_prop = props.get("type", {})
+    if "enum" in type_prop and type_prop["enum"]:
+        return type_prop["enum"][0]
+
+    # Fallback: derive from definition name
+    if def_name.endswith("_mark"):
+        return def_name[:-5]
+    elif def_name.endswith("_node"):
+        return def_name[:-5]
+    return def_name
+
+
 def camel_to_snake(name: str) -> str:
     """
     Convert camelCase or PascalCase to snake_case.
@@ -160,6 +196,9 @@ def def_name_to_names(def_name: str) -> DefinitionNames:
     else:
         raise ValueError(f"Unknown definition type: {def_name}")
 
+    # Get the actual type enum value from the schema
+    type_enum = get_type_enum_from_schema(def_name)
+
     # Convert type name to snake_case for module name
     # Handles both camelCase (bulletList) and existing snake_case (table_cell)
     snake_name = camel_to_snake(type_name)
@@ -181,6 +220,7 @@ def def_name_to_names(def_name: str) -> DefinitionNames:
         attrs_class_name=f"{class_name}Attrs",
         mixin_class_name=f"{class_name}Mixin",
         type_name=type_name,
+        type_enum=type_enum,
     )
 
 
@@ -213,6 +253,14 @@ def get_all_definitions() -> tuple[list[str], list[str]]:
         if def_name == "non_nestable_block_content":
             continue
         if def_name == "block_content":
+            continue
+        # Skip definitions that inherit from other nodes without their own type
+        # These are schema-level specializations, not actual ADF types
+        if def_name in (
+            "code_inline_node",
+            "formatted_text_inline_node",
+            "mediaSingle_caption_node",
+        ):
             continue
 
         if def_name.endswith("_mark"):
@@ -373,7 +421,7 @@ def generate_mark_file(names: DefinitionNames, schema_info: SchemaInfo) -> str:
     """Generate Python code for a mark dataclass."""
     return tpl_mark.render(
         type_name=names.type_name,
-        type_enum=names.type_name,
+        type_enum=names.type_enum,
         class_name=names.class_name,
         module_name=names.module_name,
         has_mixin=True,
@@ -394,7 +442,7 @@ def generate_node_file(names: DefinitionNames, schema_info: SchemaInfo) -> str:
     """Generate Python code for a node dataclass."""
     return tpl_node.render(
         type_name=names.type_name,
-        type_enum=names.type_name,
+        type_enum=names.type_enum,
         class_name=names.class_name,
         module_name=names.module_name,
         has_mixin=True,
@@ -476,6 +524,7 @@ def main():
         marks_info.append(
             {
                 "type_name": names.type_name,
+                "type_enum": names.type_enum,
                 "class_name": names.class_name,
                 "module_name": names.module_name,
             }
@@ -496,6 +545,7 @@ def main():
         nodes_info.append(
             {
                 "type_name": names.type_name,
+                "type_enum": names.type_enum,
                 "class_name": names.class_name,
                 "module_name": names.module_name,
             }

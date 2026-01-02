@@ -227,7 +227,7 @@ class AdfSampleEnum:
     node_table = PageSample(
         name="node_table",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082217/Node+-+table",
-    ).get_sample(jpath="content[0]]")
+    ).get_sample(jpath="content[0]")
     node_text = PageSample(
         name="node_text",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049439/Node+-+text",

@@ -31,7 +31,7 @@ from .{{ node.module_name }} import {{ node.class_name }}
 # =============================================================================
 _mark_type_to_class_mapping = {
 {% for mark in marks %}
-    "{{ mark.type_name }}": {{ mark.class_name }},
+    "{{ mark.type_enum }}": {{ mark.class_name }},
 {% endfor %}
 }
 
@@ -48,7 +48,7 @@ def parse_mark(dct: T_DATA) -> "T_MARK":
 # =============================================================================
 _node_type_to_class_mapping = {
 {% for node in nodes %}
-    "{{ node.type_name }}": {{ node.class_name }},
+    "{{ node.type_enum }}": {{ node.class_name }},
 {% endfor %}
 }
 
