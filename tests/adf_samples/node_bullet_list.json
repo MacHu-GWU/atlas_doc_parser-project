@@ -1,0 +1,74 @@
+{
+    "type": "doc",
+    "content": [
+        {
+            "type": "bulletList",
+            "attrs": {
+                "localId": "75e6c236-c975-45ef-bfba-2830ca6ac492"
+            },
+            "content": [
+                {
+                    "type": "listItem",
+                    "attrs": {
+                        "localId": "b67c3a2c-c329-407d-8750-120c91e7d8bb"
+                    },
+                    "content": [
+                        {
+                            "type": "paragraph",
+                            "attrs": {
+                                "localId": "a482d172-84f8-494b-a9b1-c04af3227167"
+                            },
+                            "content": [
+                                {
+                                    "text": "item 1",
+                                    "type": "text"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "listItem",
+                    "attrs": {
+                        "localId": "22ea1392-90be-4fe1-813a-5e2084cb747b"
+                    },
+                    "content": [
+                        {
+                            "type": "paragraph",
+                            "attrs": {
+                                "localId": "5a5ee388-7164-4087-b643-33bdf121792f"
+                            },
+                            "content": [
+                                {
+                                    "text": "item 2",
+                                    "type": "text"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "listItem",
+                    "attrs": {
+                        "localId": "e439737b-095d-4ed1-a0cf-459038f7df95"
+                    },
+                    "content": [
+                        {
+                            "type": "paragraph",
+                            "attrs": {
+                                "localId": "9de9863e-add2-4905-8f90-9e684dda86f8"
+                            },
+                            "content": [
+                                {
+                                    "text": "item 3",
+                                    "type": "text"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": 1
+}

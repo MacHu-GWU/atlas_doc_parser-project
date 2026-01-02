@@ -1,0 +1,182 @@
+{
+    "type": "doc",
+    "content": [
+        {
+            "type": "table",
+            "attrs": {
+                "layout": "default",
+                "width": 760.0,
+                "localId": "d15db724-4b20-40a2-9b99-34ae342563ea"
+            },
+            "content": [
+                {
+                    "type": "tableRow",
+                    "attrs": {
+                        "localId": "fbeb810a-3b14-4f0e-92de-d5ed7d11c5ba"
+                    },
+                    "content": [
+                        {
+                            "type": "tableHeader",
+                            "attrs": {
+                                "colspan": 1,
+                                "rowspan": 1,
+                                "localId": "14a6defc-948f-4a38-8b44-d04ce951389e"
+                            },
+                            "content": [
+                                {
+                                    "type": "paragraph",
+                                    "attrs": {
+                                        "localId": "a3d3b93d-1c8f-4e32-b32e-f5ed9b861f3c"
+                                    },
+                                    "content": [
+                                        {
+                                            "text": "id",
+                                            "type": "text",
+                                            "marks": [
+                                                {
+                                                    "type": "strong"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "tableHeader",
+                            "attrs": {
+                                "colspan": 1,
+                                "rowspan": 1,
+                                "localId": "a95cd864-07dc-4179-8915-3f9651d6ef86"
+                            },
+                            "content": [
+                                {
+                                    "type": "paragraph",
+                                    "attrs": {
+                                        "localId": "05f4e7a0-11b6-4ab1-aeaa-9e13bbcfed06"
+                                    },
+                                    "content": [
+                                        {
+                                            "text": "name",
+                                            "type": "text",
+                                            "marks": [
+                                                {
+                                                    "type": "strong"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "tableRow",
+                    "attrs": {
+                        "localId": "462e018f-a0aa-43dc-9ad7-087511a92a22"
+                    },
+                    "content": [
+                        {
+                            "type": "tableCell",
+                            "attrs": {
+                                "colspan": 1,
+                                "rowspan": 1,
+                                "localId": "4d47adc6-74a5-4729-b445-ddee10a5b91c"
+                            },
+                            "content": [
+                                {
+                                    "type": "paragraph",
+                                    "attrs": {
+                                        "localId": "2ee58bba-e306-4ff0-989d-58db4ed98672"
+                                    },
+                                    "content": [
+                                        {
+                                            "text": "1",
+                                            "type": "text"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "tableCell",
+                            "attrs": {
+                                "colspan": 1,
+                                "rowspan": 1,
+                                "localId": "0c3bc89d-5d85-430b-914b-77a236007943"
+                            },
+                            "content": [
+                                {
+                                    "type": "paragraph",
+                                    "attrs": {
+                                        "localId": "1943b5d4-11a4-4ee8-add4-45949e7123f7"
+                                    },
+                                    "content": [
+                                        {
+                                            "text": "alice",
+                                            "type": "text"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "tableRow",
+                    "attrs": {
+                        "localId": "3e847aac-9588-4b33-aee5-fafb145e58f3"
+                    },
+                    "content": [
+                        {
+                            "type": "tableCell",
+                            "attrs": {
+                                "colspan": 1,
+                                "rowspan": 1,
+                                "localId": "7ed477fb-c50c-404d-9dbb-447587dab425"
+                            },
+                            "content": [
+                                {
+                                    "type": "paragraph",
+                                    "attrs": {
+                                        "localId": "b7296a32-39a6-4014-8f8a-1ce86f2fd02c"
+                                    },
+                                    "content": [
+                                        {
+                                            "text": "2",
+                                            "type": "text"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "tableCell",
+                            "attrs": {
+                                "colspan": 1,
+                                "rowspan": 1,
+                                "localId": "e2d33113-2e7b-4f6f-bcff-0e0798122de5"
+                            },
+                            "content": [
+                                {
+                                    "type": "paragraph",
+                                    "attrs": {
+                                        "localId": "92930ff9-353c-4a9d-a763-8629cc8818b4"
+                                    },
+                                    "content": [
+                                        {
+                                            "text": "bob",
+                                            "type": "text"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": 1
+}
