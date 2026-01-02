@@ -12,4 +12,7 @@ if T.TYPE_CHECKING:  # pragma: no cover
 
 class MarkStrikeMixin:
     def to_markdown(self: "MarkStrike", text: str) -> str:
-        return f"~~{text}~~"
+        if text.strip():
+            return f"~~{text}~~"
+        else:
+            return text
