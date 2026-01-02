@@ -18,6 +18,7 @@ import dataclasses
 from func_args.api import BaseFrozenModel, REQ, OPT, remove_optional
 
 from .type_hint import T_DATA
+from .type_enum import TypeEnum, check_type_match
 
 T_FIELDS = dict[str, dataclasses.Field]
 _CLASS_FIELD: dict[T.Any, T_FIELDS] = {}  # class fields cache
@@ -84,6 +85,7 @@ class Base(BaseFrozenModel):
     def is_opt(self, value: T.Any) -> bool:
         return value is OPT
 
+
 T_BASE = T.TypeVar("T_BASE", bound=Base)
 
 
@@ -140,6 +142,29 @@ class BaseMark(Base):
         """
         return text
 
+    @staticmethod
+    def is_type_of(
+        mark_or_node: T.Union["T_MARK", "T_NODE"],
+        expected_types: TypeEnum | list[TypeEnum],
+    ) -> bool:
+        """
+        Check if this element's type matches one or more expected types.
+
+        :param expected_types: A single TypeEnum member or list of TypeEnum members
+            to match against. If a list is provided, returns True if this element's
+            type matches ANY of the expected types.
+
+        :return: True if this element's type matches (any of) the expected type(s).
+
+        Example::
+
+            >>> node.is_type_of(TypeEnum.paragraph)
+            True
+            >>> mark.is_type_of([TypeEnum.strong, TypeEnum.em])
+            True
+        """
+        return check_type_match(mark_or_node.type, expected_types)
+
 
 T_MARK = T.TypeVar("T_MARK", bound=BaseMark)
 
@@ -180,7 +205,8 @@ class BaseNode(Base):
         - ``content``: Using ``parse_node()`` for each child
         - ``marks``: Using ``parse_mark()`` for each mark
         """
-        from .parse import parse_mark, parse_node
+        from .marks.parse_mark import parse_mark
+        from .nodes.parse_node import parse_node
 
         dct = copy.deepcopy(dct)
 
