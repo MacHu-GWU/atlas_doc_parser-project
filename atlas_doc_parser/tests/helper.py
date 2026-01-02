@@ -44,8 +44,8 @@ DEFAULT_VERBOSE = True
 
 def check_seder(
     inst: T.Optional[T_BASE],
-    # verbose: bool = DEFAULT_VERBOSE,
-    verbose: bool = False,
+    verbose: bool = DEFAULT_VERBOSE,  # True
+    # verbose: bool = False,
 ):
     if verbose:
         print("========== Check seder ==========")
@@ -77,7 +77,8 @@ def check_seder(
 def check_markdown(
     node: T_NODE,
     expected: str,
-    verbose: bool = DEFAULT_VERBOSE,
+    verbose: bool = DEFAULT_VERBOSE,  # True
+    # verbose: bool = False,
 ):
     markdown = node.to_markdown().strip()
     expected = textwrap.dedent(expected).strip()

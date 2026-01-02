@@ -14,6 +14,7 @@ This design allows multiple samples to be extracted from the same page
 (e.g., both ``mark_sub`` and ``mark_sup`` from a single "subsup" page).
 """
 
+import typing as T
 import json
 import textwrap
 import dataclasses
@@ -26,8 +27,10 @@ from sanhe_confluence_sdk.methods.page.get_page import (
     GetPageRequest,
 )
 
-from .client import client
+from ...nodes.base import T_BASE, T_NODE, BaseMark, BaseNode
 from ...paths import path_enum
+from ..helper import check_seder, check_markdown
+from .client import client
 
 
 @dataclasses.dataclass
@@ -82,7 +85,11 @@ class PageSample:
             self.path.write_text(content, encoding="utf-8")
             return data
 
-    def get_sample(self, jpath: str, md: str | None) -> "AdfSample":
+    def get_sample(
+        self,
+        jpath: str,
+        md: str | None = None,
+    ) -> "AdfSample":
         """Create an AdfSample that extracts a specific node/mark from this page."""
         return AdfSample(page=self, jpath=jpath, md=md)
 
@@ -117,6 +124,26 @@ class AdfSample:
         else:
             return textwrap.dedent(self.md)
 
+    def get_inst(self, klass: T.Type["T_BASE"]) -> "T_BASE":
+        """
+        Get the deserialized instance of the extracted node/mark.
+        """
+        return klass.from_dict(self.data)
+
+    def test(self, klass: T.Type["T_BASE"]) -> "T_BASE":
+        """
+        Test serialization/deserialization and Markdown conversion.
+        """
+        node_or_mark = self.get_inst(klass)
+        # check_seder(inst=node_or_mark)
+        if isinstance(node_or_mark, BaseNode) and self.markdown is not None:
+            print(node_or_mark.to_markdown())
+            # check_markdown(
+            #     node=node_or_mark,
+            #     expected=self.markdown,
+            # )
+        return node_or_mark
+
 
 class AdfSampleEnum:
     """
@@ -135,9 +162,9 @@ class AdfSampleEnum:
         >>> from atlas_doc_parser.tests.data.samples import AdfSampleEnum
         >>> AdfSampleEnum.mark_strong.data
         {'type': 'strong'}
-        
+
     .. seealso::
-    
+
         https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082078/atlas_doc_parser+-+Single+Mark+or+Node+Test
     """
 
@@ -184,7 +211,14 @@ class AdfSampleEnum:
     node_block_quote = PageSample(
         name="node_block_quote",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492407/Node+-+blockquote",
-    ).get_sample(jpath="content[0]")
+    ).get_sample(
+        jpath="content[0]",
+        md="""
+        > Alice says:
+        > 
+        > Just do it!
+        """,
+    )
     node_bullet_list = PageSample(
         name="node_bullet_list",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082139/Node+-+bulletList",
