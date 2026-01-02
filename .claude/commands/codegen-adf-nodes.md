@@ -3,7 +3,7 @@ description: Update s3_gen_code.py script to generate ADF node/mark dataclasses
 ---
 
 Modify the code generation script at:
-`./scripts/s01-adf-json-schema-analysis/s3_gen_code.py`
+`./scripts/s02-nodes-code-gen/s1_gen_code.py`
 
 ## Background
 
@@ -15,9 +15,9 @@ The `atlas_doc_parser` library parses Atlassian Document Format (ADF) JSON into 
 
 ## Key Files
 
-- **Script**: `./scripts/s01-adf-json-schema-analysis/s3_gen_code.py`
+- **Script**: `./scripts/s02-nodes-code-gen/s1_gen_code.py`
 - **Output dir**: `./atlas_doc_parser/nodes/` (generates `mark_*.py`, `node_*.py`, `parse.py`)
-- **Jinja Templates dir**: `./scripts/s01-adf-json-schema-analysis/templates/`
+- **Jinja Templates dir**: `./scripts/s02-nodes-code-gen/templates/`
 - **Example node file**: `./atlas_doc_parser/nodes/example_mark_background_color.py`
 - **Example parse file**: `./atlas_doc_parser/nodes/example_parse.py`
 - **Mixin dir**: `./atlas_doc_parser/mixins/` (manually maintained, do NOT generate)
@@ -32,7 +32,7 @@ The `atlas_doc_parser` library parses Atlassian Document Format (ADF) JSON into 
 
 ### 2. Use Jinja2 templates for code generation
 
-**What**: Store templates in `./scripts/s01-adf-json-schema-analysis/templates/` and use Jinja2 to render the output files.
+**What**: Store templates in `./scripts/s02-nodes-code-gen/templates/` and use Jinja2 to render the output files.
 
 **Why**: Separating templates from logic makes the code generator easier to maintain and modify.
 
