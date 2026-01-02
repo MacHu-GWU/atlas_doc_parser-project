@@ -15,6 +15,7 @@ This design allows multiple samples to be extracted from the same page
 """
 
 import json
+import textwrap
 import dataclasses
 from functools import cached_property
 
@@ -81,9 +82,9 @@ class PageSample:
             self.path.write_text(content, encoding="utf-8")
             return data
 
-    def get_sample(self, jpath: str) -> "AdfSample":
+    def get_sample(self, jpath: str, md: str | None) -> "AdfSample":
         """Create an AdfSample that extracts a specific node/mark from this page."""
-        return AdfSample(page=self, jpath=jpath)
+        return AdfSample(page=self, jpath=jpath, md=md)
 
 
 @dataclasses.dataclass
@@ -102,11 +103,19 @@ class AdfSample:
 
     page: PageSample
     jpath: str
+    md: str | None
 
     @cached_property
     def data(self) -> dict:
         """The extracted ADF node/mark JSON, located via jpath from the page's ADF."""
         return jmespath.search(self.jpath, self.page.adf)
+
+    @cached_property
+    def markdown(self) -> str | None:
+        if self.md is None:
+            return self.md
+        else:
+            return textwrap.dedent(self.md)
 
 
 class AdfSampleEnum:
