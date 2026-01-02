@@ -27,7 +27,7 @@ from sanhe_confluence_sdk.methods.page.get_page import (
     GetPageRequest,
 )
 
-from ...nodes.base import T_BASE, T_NODE, BaseMark, BaseNode
+from ...mark_or_node import T_BASE, T_NODE, BaseMark, BaseNode
 from ...paths import path_enum
 from ..helper import check_seder, check_markdown
 from .client import client
