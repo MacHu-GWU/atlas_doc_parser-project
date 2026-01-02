@@ -2,6 +2,7 @@
 atlas_doc_parser.egg-info/
 tmp/
 .claude/claude-code-message.md
+tests/adf_samples/tmp.json
 adf_json_schema.json
 
 # Byte-compiled / optimized / DLL files

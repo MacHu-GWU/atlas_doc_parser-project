@@ -24,7 +24,7 @@ class Command:
 
         :param confluence_url: Full Confluence page URL.
         """
-        page_sample = PageSample(name="...", url=confluence_url)
+        page_sample = PageSample(name="tmp", url=confluence_url)
         print(json.dumps(page_sample.adf, indent=4, ensure_ascii=False))
 
 
