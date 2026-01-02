@@ -82,3 +82,4 @@ See the following source code for complete examples:
 - `./atlas_doc_parser/marks/mark_background_color.py`
 - `./atlas_doc_parser/marks/mark_code.py`
 - `./atlas_doc_parser/marks/mark_em.py`
+- `./atlas_doc_parser/marks/mark_link.py`
