@@ -167,10 +167,13 @@ class AdfSampleEnum:
         https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082078/atlas_doc_parser+-+Single+Mark+or+Node+Test
     """
 
-    mark_background_color = PageSample(
+    _page = PageSample(
         name="mark_background_color",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558524/Mark+-+backgroundColor",
-    ).get_sample(jpath="content[0].content[1].marks[1]")
+    )
+    mark_background_color = _page.get_sample(jpath="content[0].content[1].marks[1]")
+    mark_annotation = _page.get_sample(jpath="content[0].content[1].marks[0]")
+
     mark_code = PageSample(
         name="mark_code",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049333/Mark+-+code",
@@ -187,10 +190,13 @@ class AdfSampleEnum:
         name="mark_strike",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558555/Mark+-+strike",
     ).get_sample(jpath="content[0].content[1].marks[1]")
-    mark_strong = PageSample(
+
+    _page = PageSample(
         name="mark_strong",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049306/Mark+-+strong",
-    ).get_sample(jpath="content[0].content[1].marks[1]")
+    )
+    mark_strong = _page.get_sample(jpath="content[0].content[1].marks[1]")
+    node_strong_text = _page.get_sample(jpath="content[0].content[1]")
 
     _page = PageSample(
         name="mark_subsup",
@@ -273,4 +279,7 @@ class AdfSampleEnum:
     node_text = PageSample(
         name="node_text",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049439/Node+-+text",
-    ).get_sample(jpath="content[0].content[0]")
+    ).get_sample(
+        jpath="content[0].content[0]",
+        md="this is a text.",
+    )
