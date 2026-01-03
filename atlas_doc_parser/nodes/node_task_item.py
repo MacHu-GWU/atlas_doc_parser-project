@@ -20,7 +20,7 @@ class NodeTaskItemAttrs(Base):
     """
 
     localId: str = OPT
-    state: str = OPT  # "TODO" or "DONE"
+    state: T.Literal["TODO", "DONE"] = OPT
 
 
 @dataclasses.dataclass(frozen=True)
