@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from atlas_doc_parser.nodes.node_hard_break import NodeHardBreak
+from atlas_doc_parser.nodes.node_paragraph import NodeParagraph
 
 from atlas_doc_parser.tests.data.samples import AdfSampleEnum
 
 
 class TestNodeHardBreak:
     def test_node_hard_break_basic(self):
-        node = AdfSampleEnum.node_hard_break.test(NodeHardBreak)
+        node = AdfSampleEnum.node_hard_break.test(NodeParagraph)
 
 
 if __name__ == "__main__":

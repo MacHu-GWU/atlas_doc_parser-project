@@ -364,10 +364,7 @@ class AdfSampleEnum:
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082310/Node+-+hardBreak",
     ).get_sample(
         jpath="content[1]",
-        md="""
-        below is a hard break
-        above is a hard break
-        """,
+        md="below is a hard break  \nabove is a hard break",
     )
 
     node_date = PageSample(

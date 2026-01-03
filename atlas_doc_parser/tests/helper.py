@@ -42,6 +42,16 @@ def run_cov_test(
 DEFAULT_VERBOSE = True
 
 
+def print_adf_json(
+    data: T.Any,
+    verbose: bool = DEFAULT_VERBOSE,  # True
+    # verbose: bool = False,
+):
+    if verbose:
+        print("========== ADF JSON ==========")
+        rprint(data)
+
+
 def check_seder(
     inst: T.Optional[T_BASE],
     verbose: bool = DEFAULT_VERBOSE,  # True
