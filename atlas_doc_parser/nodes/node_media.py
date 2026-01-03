@@ -6,7 +6,8 @@ import dataclasses
 from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
-from ..mark_or_node import Base, BaseNode, T_MARK
+from ..mark_or_node import Base, BaseNode
+from ..markdown_helpers import add_style_to_markdown
 
 if T.TYPE_CHECKING:  # pragma: no cover
     from ..marks.mark_link import MarkLink
@@ -38,7 +39,7 @@ class NodeMediaAttrs(Base):
     :param occurrenceKey: Optional. Enables file deletion from collections when present.
     """
 
-    type: T.Literal["file", "link", "external"] = OPT
+    type: T.Literal["file", "link", "external"] = REQ
     id: str = OPT
     collection: str = OPT
     url: str = OPT
@@ -92,12 +93,16 @@ class NodeMedia(BaseNode):
         ignore_error: bool = False,
     ) -> str:
         # For external media, return as markdown image/link
-        if self.attrs.type == "external" and isinstance(self.attrs.url, str):
+        if self.attrs.is_external_type() and isinstance(self.attrs.url, str):
             alt = self.attrs.alt if isinstance(self.attrs.alt, str) else "media"
-            return f"![{alt}]({self.attrs.url})"
+            md = f"![{alt}]({self.attrs.url})"
+            return add_style_to_markdown(md, self)
         # For internal media, return placeholder with id
-        elif isinstance(self.attrs.id, str):
+        elif self.attrs.is_file_type():
             alt = self.attrs.alt if isinstance(self.attrs.alt, str) else "media"
-            return f"![{alt}](media:{self.attrs.id})"
+            md = f"![{alt}](media:{self.attrs.id})"
+            return add_style_to_markdown(md, self)
+        elif self.attrs.is_link_type():
+            return "[media]"  # TODO: implement link type markdown
         else:
-            return "[media]"
+            raise TypeError("Invalid media node attributes")
