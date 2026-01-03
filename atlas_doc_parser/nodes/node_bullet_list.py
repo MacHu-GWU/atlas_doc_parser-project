@@ -32,11 +32,11 @@ class NodeBulletList(BaseNode):
         indent = "    " * level  # 4 spaces per level
 
         for item in self.content:
-            if item.type == TypeEnum.listItem.value:
+            if self.is_type_of(item, TypeEnum.listItem):
                 # Process the list item content
                 content_lines = []
                 for node in item.content:
-                    if isinstance(node, NodeBulletList):
+                    if self.is_type_of(node, TypeEnum.bulletList):
                         # Nested list - increase level
                         try:
                             md = node.to_markdown(level=level + 1)

@@ -85,6 +85,29 @@ class Base(BaseFrozenModel):
     def is_opt(self, value: T.Any) -> bool:
         return value is OPT
 
+    @staticmethod
+    def is_type_of(
+        mark_or_node: T.Union["T_MARK", "T_NODE"],
+        expected_types: TypeEnum | list[TypeEnum],
+    ) -> bool:
+        """
+        Check if this element's type matches one or more expected types.
+
+        :param expected_types: A single TypeEnum member or list of TypeEnum members
+            to match against. If a list is provided, returns True if this element's
+            type matches ANY of the expected types.
+
+        :return: True if this element's type matches (any of) the expected type(s).
+
+        Example::
+
+            >>> node.is_type_of(TypeEnum.paragraph)
+            True
+            >>> mark.is_type_of([TypeEnum.strong, TypeEnum.em])
+            True
+        """
+        return check_type_match(mark_or_node.type, expected_types)
+
 
 T_BASE = T.TypeVar("T_BASE", bound=Base)
 
@@ -141,29 +164,6 @@ class BaseMark(Base):
         Default implementation returns text unchanged.
         """
         return text
-
-    @staticmethod
-    def is_type_of(
-        mark_or_node: T.Union["T_MARK", "T_NODE"],
-        expected_types: TypeEnum | list[TypeEnum],
-    ) -> bool:
-        """
-        Check if this element's type matches one or more expected types.
-
-        :param expected_types: A single TypeEnum member or list of TypeEnum members
-            to match against. If a list is provided, returns True if this element's
-            type matches ANY of the expected types.
-
-        :return: True if this element's type matches (any of) the expected type(s).
-
-        Example::
-
-            >>> node.is_type_of(TypeEnum.paragraph)
-            True
-            >>> mark.is_type_of([TypeEnum.strong, TypeEnum.em])
-            True
-        """
-        return check_type_match(mark_or_node.type, expected_types)
 
 
 T_MARK = T.TypeVar("T_MARK", bound=BaseMark)
