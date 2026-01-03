@@ -37,6 +37,9 @@ from .node_code_block import NodeCodeBlock
 from .node_inline_card import NodeInlineCard
 from .node_block_card import NodeBlockCard
 from .node_media import NodeMedia
+from .node_media_group import NodeMediaGroup
+from .node_media_single import NodeMediaSingle
+from .node_embed_card import NodeEmbedCard
 
 
 # =============================================================================
@@ -63,6 +66,9 @@ NODE_TYPE_TO_CLASS_MAPPING = {
     TypeEnum.inlineCard.value: NodeInlineCard,
     TypeEnum.blockCard.value: NodeBlockCard,
     TypeEnum.media.value: NodeMedia,
+    TypeEnum.mediaGroup.value: NodeMediaGroup,
+    TypeEnum.mediaSingle.value: NodeMediaSingle,
+    TypeEnum.embedCard.value: NodeEmbedCard,
 }
 
 
