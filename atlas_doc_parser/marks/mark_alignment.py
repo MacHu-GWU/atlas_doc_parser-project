@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import typing as T
 import dataclasses
 
 from func_args.api import OPT
@@ -17,7 +18,7 @@ class MarkAlignmentAttrs(Base):
         Valid values are ``"center"`` or ``"end"``.
     """
 
-    align: str
+    align: T.Literal["center", "end"]
 
 
 @dataclasses.dataclass(frozen=True)

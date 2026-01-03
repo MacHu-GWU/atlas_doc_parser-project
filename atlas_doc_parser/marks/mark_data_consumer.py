@@ -10,7 +10,11 @@ from ..mark_or_node import Base, BaseMark
 
 @dataclasses.dataclass(frozen=True)
 class MarkDataConsumerAttrs(Base):
-    """Attributes for :class:`MarkDataConsumer`."""
+    """
+    Attributes for :class:`MarkDataConsumer`.
+
+    :param sources: Required. An array of source identifiers (minimum 1 item).
+    """
 
     sources: list[str]
 

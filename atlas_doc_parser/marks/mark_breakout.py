@@ -2,7 +2,6 @@
 
 import typing as T
 import dataclasses
-import typing
 
 from func_args.api import OPT
 
@@ -12,12 +11,15 @@ from ..mark_or_node import Base, BaseMark
 
 @dataclasses.dataclass(frozen=True)
 class MarkBreakoutAttrs(Base):
-    """Attributes for :class:`MarkBreakout`."""
+    """
+    Attributes for :class:`MarkBreakout`.
 
-    mode: typing.Literal['wide', 'full-width']
-    """Breakout mode. One of 'wide' or 'full-width'."""
+    :param mode: Required. Breakout mode. Valid values are ``"wide"`` or ``"full-width"``.
+    :param width: Optional. Width value.
+    """
+
+    mode: T.Literal["wide", "full-width"]
     width: int = OPT
-    """Optional width value."""
 
 
 @dataclasses.dataclass(frozen=True)
