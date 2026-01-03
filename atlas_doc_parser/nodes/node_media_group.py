@@ -27,3 +27,9 @@ class NodeMediaGroup(BaseNode):
 
     type: str = TypeEnum.mediaGroup.value
     content: list["NodeMedia"] = REQ
+
+    def to_markdown(
+        self,
+        ignore_error: bool = False,
+    ) -> str:
+        return ""
