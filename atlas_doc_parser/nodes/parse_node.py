@@ -34,6 +34,8 @@ from .node_mention import NodeMention
 from .node_status import NodeStatus
 from .node_heading import NodeHeading
 from .node_code_block import NodeCodeBlock
+from .node_inline_card import NodeInlineCard
+from .node_block_card import NodeBlockCard
 
 
 # =============================================================================
@@ -57,6 +59,8 @@ NODE_TYPE_TO_CLASS_MAPPING = {
     TypeEnum.status.value: NodeStatus,
     TypeEnum.heading.value: NodeHeading,
     TypeEnum.codeBlock.value: NodeCodeBlock,
+    TypeEnum.inlineCard.value: NodeInlineCard,
+    TypeEnum.blockCard.value: NodeBlockCard,
 }
 
 

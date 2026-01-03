@@ -2,11 +2,19 @@
     "type": "doc",
     "content": [
         {
-            "type": "blockCard",
+            "type": "paragraph",
             "attrs": {
-                "localId": "ee9567d2-05b0-4f16-86fa-a1eeb6d546f5",
-                "url": "https://example.com"
-            }
+                "localId": "56b8c570-2813-4a27-af6d-89759ad00a1e"
+            },
+            "content": [
+                {
+                    "type": "inlineCard",
+                    "attrs": {
+                        "localId": "ee9567d2-05b0-4f16-86fa-a1eeb6d546f5",
+                        "url": "https://example.com"
+                    }
+                }
+            ]
         },
         {
             "type": "paragraph",

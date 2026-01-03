@@ -467,11 +467,27 @@ class AdfSampleEnum:
         """,
     )
 
-
     node_inline_card = PageSample(
         name="node_inline_card",
-        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492455/Node+-+inlineCard",
-    ).get_sample(jpath="content[0]")
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654180353/Node+-+inlineCard",
+    ).get_sample(
+        jpath="content[0].content[0]",
+        md="""
+        [https://example.com](https://example.com)
+        """,
+    )
+
+    node_block_card = PageSample(
+        name="node_block_card",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492455/Node+-+blockCard",
+    ).get_sample(
+        jpath="content[0].content[0]",
+        md="""
+        [https://example.com](https://example.com)
+        """,
+    )
+
+    "https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558733/Node+-+Media"
 
     node_block_quote = PageSample(
         name="node_block_quote",
