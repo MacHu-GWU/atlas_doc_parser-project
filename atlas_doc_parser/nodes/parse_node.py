@@ -27,6 +27,9 @@ from .node_task_item import NodeTaskItem
 from .node_task_list import NodeTaskList
 from .node_decision_item import NodeDecisionItem
 from .node_decision_list import NodeDecisionList
+from .node_emoji import NodeEmoji
+from .node_hard_break import NodeHardBreak
+from .node_date import NodeDate
 
 
 # =============================================================================
@@ -43,6 +46,9 @@ NODE_TYPE_TO_CLASS_MAPPING = {
     TypeEnum.taskList.value: NodeTaskList,
     TypeEnum.decisionItem.value: NodeDecisionItem,
     TypeEnum.decisionList.value: NodeDecisionList,
+    TypeEnum.emoji.value: NodeEmoji,
+    TypeEnum.hardBreak.value: NodeHardBreak,
+    TypeEnum.date.value: NodeDate,
 }
 
 

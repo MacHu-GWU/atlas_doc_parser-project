@@ -370,18 +370,43 @@ class AdfSampleEnum:
         """,
     )
 
+    node_hard_break = PageSample(
+        name="node_hard_break",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082310/Node+-+hardBreak",
+    ).get_sample(
+        jpath="content[0].content[1]",
+        md="""
+        abc
+        
+        efg
+        """,
+    )
+
+    node_date = PageSample(
+        name="node_date",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082153/Node+-+date",
+    ).get_sample(
+        jpath="content[0].content[1]",
+        md="""
+        this is a date: 2026-01-01
+        """,
+    )
+
+    node_emoji = PageSample(
+        name="node_emoji",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049377/Node+-+emoji",
+    ).get_sample(
+        jpath="content[0].content[1]",
+        md="""
+        this is an emoji:
+        """,
+    )
+
     node_code_block = PageSample(
         name="node_code_block",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049370/Node+-+codeBlock",
     ).get_sample(jpath="content[0]")
-    node_date = PageSample(
-        name="node_date",
-        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082153/Node+-+date",
-    ).get_sample(jpath="content[0].content[1]")
-    node_emoji = PageSample(
-        name="node_emoji",
-        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049377/Node+-+emoji",
-    ).get_sample(jpath="content[0].content[1]")
+
     node_heading = PageSample(
         name="node_heading",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492448/Node+-+heading",
