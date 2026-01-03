@@ -63,14 +63,14 @@ class NodeTaskList(BaseNode):
 
         .. note::
 
-            This structure differs from :meth:`NodeBulletList.to_markdown` and
-            :meth:`NodeOrderedList.to_markdown` where nested lists are **children**
-            of ``listItem`` nodes, requiring two nested loops.
+            This structure differs from :meth:`~atlas_doc_parser.nodes.node_bullet_list.NodeBulletList.to_markdown`
+            and :meth:`~atlas_doc_parser.nodes.node_ordered_list.NodeOrderedList.to_markdown`
+            where nested lists are **children** of ``listItem`` nodes, requiring two nested loops.
 
         .. seealso::
 
-            - :meth:`NodeBulletList.to_markdown` - different structure, two loops
-            - :meth:`NodeOrderedList.to_markdown` - different structure, two loops
+            - :meth:`~atlas_doc_parser.nodes.node_bullet_list.NodeBulletList.to_markdown` - different structure, two loops
+            - :meth:`~atlas_doc_parser.nodes.node_ordered_list.NodeOrderedList.to_markdown` - different structure, two loops
         """
         lines = []
         indent = "    " * level  # 4 spaces per level
