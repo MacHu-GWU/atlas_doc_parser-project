@@ -45,6 +45,8 @@ from .node_caption import NodeCaption
 from .node_media_inline import NodeMediaInline
 from .node_panel import NodePanel
 from .node_blockquote import NodeBlockquote
+from .node_expand import NodeExpand
+from .node_nested_expand import NodeNestedExpand
 
 
 # =============================================================================
@@ -79,6 +81,8 @@ NODE_TYPE_TO_CLASS_MAPPING = {
     TypeEnum.mediaInline.value: NodeMediaInline,
     TypeEnum.panel.value: NodePanel,
     TypeEnum.blockquote.value: NodeBlockquote,
+    TypeEnum.expand.value: NodeExpand,
+    TypeEnum.nestedExpand.value: NodeNestedExpand,
 }
 
 
