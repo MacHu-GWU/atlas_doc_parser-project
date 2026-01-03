@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import typing as T
 import dataclasses
 
 from func_args.api import OPT
@@ -10,6 +11,9 @@ from ..markdown_helpers import (
     content_to_markdown,
     ATLASSIAN_LANG_TO_MARKDOWN_LANG_MAPPING,
 )
+
+if T.TYPE_CHECKING:  # pragma: no cover
+    from .node_text import NodeText
 
 
 @dataclasses.dataclass(frozen=True)
@@ -45,7 +49,7 @@ class NodeCodeBlock(BaseNode):
 
     type: str = TypeEnum.codeBlock.value
     attrs: NodeCodeBlockAttrs = OPT
-    content: list[BaseNode] = OPT
+    content: list["NodeText"] = OPT
 
     def to_markdown(
         self: "NodeCodeBlock",

@@ -8,6 +8,10 @@ from func_args.api import OPT
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseNode
 
+if T.TYPE_CHECKING:  # pragma: no cover
+    from .node_task_item import NodeTaskItem
+    from .node_block_task_item import NodeBlockTaskItem
+
 
 @dataclasses.dataclass(frozen=True)
 class NodeTaskListAttrs(Base):
@@ -32,7 +36,13 @@ class NodeTaskList(BaseNode):
 
     type: str = TypeEnum.taskList.value
     attrs: NodeTaskListAttrs = OPT
-    content: list[BaseNode] = OPT
+    content: list[
+        T.Union[
+            "NodeTaskItem",
+            "NodeTaskList",
+            "NodeBlockTaskItem",
+        ]
+    ] = OPT
 
     def to_markdown(
         self,

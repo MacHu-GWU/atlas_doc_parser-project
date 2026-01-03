@@ -9,6 +9,15 @@ from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseNode
 from ..markdown_helpers import content_to_markdown
 
+if T.TYPE_CHECKING:  # pragma: no cover
+    from .node_paragraph import NodeParagraph
+    from .node_code_block import NodeCodeBlock
+    from .node_bullet_list import NodeBulletList
+    from .node_ordered_list import NodeOrderedList
+    from .node_task_list import NodeTaskList
+    from .node_media_single import NodeMediaSingle
+    from .node_extension import NodeExtension
+
 
 @dataclasses.dataclass(frozen=True)
 class NodeListItemAttrs(Base):
@@ -33,7 +42,17 @@ class NodeListItem(BaseNode):
 
     type: str = TypeEnum.listItem.value
     attrs: NodeListItemAttrs = OPT
-    content: list[BaseNode] = OPT
+    content: list[
+        T.Union[
+            "NodeParagraph",
+            "NodeCodeBlock",
+            "NodeBulletList",
+            "NodeOrderedList",
+            "NodeTaskList",
+            "NodeMediaSingle",
+            "NodeExtension",
+        ]
+    ] = OPT
 
     def to_markdown(
         self,

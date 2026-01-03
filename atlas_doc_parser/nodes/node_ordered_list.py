@@ -8,6 +8,9 @@ from func_args.api import OPT
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseNode
 
+if T.TYPE_CHECKING:  # pragma: no cover
+    from .node_list_item import NodeListItem
+
 
 @dataclasses.dataclass(frozen=True)
 class NodeOrderedListAttrs(Base):
@@ -37,7 +40,7 @@ class NodeOrderedList(BaseNode):
 
     type: str = TypeEnum.orderedList.value
     attrs: NodeOrderedListAttrs = OPT
-    content: list[BaseNode] = OPT
+    content: list["NodeListItem"] = OPT
 
     def to_markdown(
         self,

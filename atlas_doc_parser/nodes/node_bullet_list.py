@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 
+import typing as T
 import dataclasses
 
 from func_args.api import OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import BaseNode
+
+if T.TYPE_CHECKING:  # pragma: no cover
+    from .node_list_item import NodeListItem
 
 
 @dataclasses.dataclass(frozen=True)
@@ -20,7 +24,7 @@ class NodeBulletList(BaseNode):
     """
 
     type: str = TypeEnum.bulletList.value
-    content: list[BaseNode] = OPT
+    content: list["NodeListItem"] = OPT
 
     def to_markdown(
         self,

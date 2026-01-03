@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 
+import typing as T
 import dataclasses
 
 from func_args.api import OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseNode
+
+if T.TYPE_CHECKING:  # pragma: no cover
+    from .node_decision_item import NodeDecisionItem
 
 
 @dataclasses.dataclass(frozen=True)
@@ -30,7 +34,7 @@ class NodeDecisionList(BaseNode):
 
     type: str = TypeEnum.decisionList.value
     attrs: NodeDecisionListAttrs = OPT
-    content: list[BaseNode] = OPT
+    content: list["NodeDecisionItem"] = OPT
 
     def to_markdown(
         self,

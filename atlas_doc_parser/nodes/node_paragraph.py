@@ -9,6 +9,20 @@ from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseNode, BaseMark
 from ..markdown_helpers import content_to_markdown, add_style_to_markdown
 
+if T.TYPE_CHECKING:  # pragma: no cover
+    from .node_text import NodeText
+    from .node_date import NodeDate
+    from .node_emoji import NodeEmoji
+    from .node_hard_break import NodeHardBreak
+    from .node_inline_card import NodeInlineCard
+    from .node_mention import NodeMention
+    from .node_status import NodeStatus
+    from .node_placeholder import NodePlaceholder
+    from .node_inline_extension import NodeInlineExtension
+    from .node_media_inline import NodeMediaInline
+    from ..marks.mark_alignment import MarkAlignment
+    from ..marks.mark_indentation import MarkIndentation
+
 
 @dataclasses.dataclass(frozen=True)
 class NodeParagraphAttrs(Base):
@@ -34,8 +48,26 @@ class NodeParagraph(BaseNode):
 
     type: str = TypeEnum.paragraph.value
     attrs: NodeParagraphAttrs = OPT
-    content: list[BaseNode] = OPT
-    marks: list[BaseMark] = OPT
+    content: list[
+        T.Union[
+            "NodeText",
+            "NodeDate",
+            "NodeEmoji",
+            "NodeHardBreak",
+            "NodeInlineCard",
+            "NodeMention",
+            "NodeStatus",
+            "NodePlaceholder",
+            "NodeInlineExtension",
+            "NodeMediaInline",
+        ]
+    ] = OPT
+    marks: list[
+        T.Union[
+            "MarkAlignment",
+            "MarkIndentation",
+        ]
+    ] = OPT
 
     def to_markdown(
         self,
