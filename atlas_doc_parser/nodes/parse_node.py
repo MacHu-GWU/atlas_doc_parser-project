@@ -23,6 +23,8 @@ from .node_list_item import NodeListItem
 from .node_bullet_list import NodeBulletList
 from .node_ordered_list import NodeOrderedList
 from .node_paragraph import NodeParagraph
+from .node_task_item import NodeTaskItem
+from .node_decision_item import NodeDecisionItem
 
 
 # =============================================================================
@@ -35,6 +37,8 @@ NODE_TYPE_TO_CLASS_MAPPING = {
     TypeEnum.bulletList.value: NodeBulletList,
     TypeEnum.orderedList.value: NodeOrderedList,
     TypeEnum.paragraph.value: NodeParagraph,
+    TypeEnum.taskItem.value: NodeTaskItem,
+    TypeEnum.decisionItem.value: NodeDecisionItem,
 }
 
 
