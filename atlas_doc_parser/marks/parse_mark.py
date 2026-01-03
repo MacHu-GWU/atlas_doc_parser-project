@@ -28,6 +28,7 @@ from .mark_text_color import MarkTextColor
 from .mark_underline import MarkUnderline
 from .mark_annotation import MarkAnnotation
 from .mark_indentation import MarkIndentation
+from .mark_border import MarkBorder
 
 
 # =============================================================================
@@ -45,6 +46,7 @@ MARK_TYPE_TO_CLASS_MAPPING = {
     TypeEnum.underline.value: MarkUnderline,
     TypeEnum.annotation.value: MarkAnnotation,
     TypeEnum.indentation.value: MarkIndentation,
+    TypeEnum.border.value: MarkBorder,
 }
 
 
