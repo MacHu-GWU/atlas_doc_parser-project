@@ -23,7 +23,7 @@ from .node_text import NodeText
 # =============================================================================
 # Node registry
 # =============================================================================
-_node_type_to_class_mapping = {
+NODE_TYPE_TO_CLASS_MAPPING = {
     TypeEnum.text.value: NodeText,
 }
 
@@ -31,5 +31,5 @@ _node_type_to_class_mapping = {
 def parse_node(dct: T_DATA) -> "T_NODE":
     """Parse a node dictionary into a Node object."""
     type_ = dct["type"]
-    klass = _node_type_to_class_mapping[type_]
+    klass = NODE_TYPE_TO_CLASS_MAPPING[type_]
     return klass.from_dict(dct)

@@ -26,12 +26,14 @@ from .mark_strong import MarkStrong
 from .mark_subsup import MarkSubsup
 from .mark_text_color import MarkTextColor
 from .mark_underline import MarkUnderline
+from .mark_annotation import MarkAnnotation
+from .mark_indentation import MarkIndentation
 
 
 # =============================================================================
 # Mark registry
 # =============================================================================
-_mark_type_to_class_mapping = {
+MARK_TYPE_TO_CLASS_MAPPING = {
     TypeEnum.backgroundColor.value: MarkBackgroundColor,
     TypeEnum.code.value: MarkCode,
     TypeEnum.em.value: MarkEm,
@@ -41,11 +43,13 @@ _mark_type_to_class_mapping = {
     TypeEnum.subsup.value: MarkSubsup,
     TypeEnum.textColor.value: MarkTextColor,
     TypeEnum.underline.value: MarkUnderline,
+    TypeEnum.annotation.value: MarkAnnotation,
+    TypeEnum.indentation.value: MarkIndentation,
 }
 
 
 def parse_mark(dct: T_DATA) -> "T_MARK":
     """Parse a mark dictionary into a Mark object."""
     type_ = dct["type"]
-    klass = _mark_type_to_class_mapping[type_]
+    klass = MARK_TYPE_TO_CLASS_MAPPING[type_]
     return klass.from_dict(dct)
