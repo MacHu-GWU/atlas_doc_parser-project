@@ -333,7 +333,10 @@ class AdfSampleEnum:
     node_rule = PageSample(
         name="node_rule",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558648/Node+-+rule",
-    ).get_sample(jpath="content[0]")
+    ).get_sample(
+        jpath="content[0]",
+        md="\n\n---\n\n",
+    )
     node_status = PageSample(
         name="node_status",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049423/Node+-+status",
