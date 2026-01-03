@@ -42,6 +42,9 @@ from .node_media_single import NodeMediaSingle
 from .node_embed_card import NodeEmbedCard
 from .node_extension import NodeExtension
 from .node_caption import NodeCaption
+from .node_media_inline import NodeMediaInline
+from .node_panel import NodePanel
+from .node_blockquote import NodeBlockquote
 
 
 # =============================================================================
@@ -73,6 +76,9 @@ NODE_TYPE_TO_CLASS_MAPPING = {
     TypeEnum.embedCard.value: NodeEmbedCard,
     TypeEnum.extension.value: NodeExtension,
     TypeEnum.caption.value: NodeCaption,
+    TypeEnum.mediaInline.value: NodeMediaInline,
+    TypeEnum.panel.value: NodePanel,
+    TypeEnum.blockquote.value: NodeBlockquote,
 }
 
 

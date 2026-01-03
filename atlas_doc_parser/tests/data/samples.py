@@ -601,24 +601,8 @@ class AdfSampleEnum:
         """,
     )
 
-
-
-    # node_caption_url_image = _page.get_sample(
-    #     jpath="content[3].content[1]",
-    #     md="""
-    #     ...
-    #     """,
-    # )
-
-    # node_extension_ = _page.get_sample(
-    #     jpath="content[11].content[0]",
-    #     md="""
-    #         ...
-    #         """,
-    # )
-
-    node_block_quote = PageSample(
-        name="node_block_quote",
+    node_blockquote = PageSample(
+        name="node_blockquote",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492407/Node+-+blockquote",
     ).get_sample(
         jpath="content[0]",
