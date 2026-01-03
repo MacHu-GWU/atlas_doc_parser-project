@@ -420,10 +420,54 @@ class AdfSampleEnum:
         """,
     )
 
-    node_heading = PageSample(
+    _page = PageSample(
         name="node_heading",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492448/Node+-+heading",
-    ).get_sample(jpath="content[0]")
+    )
+    node_heading_basic = _page.get_sample(
+        jpath="content[0]",
+        md="""
+            # header 1
+            """,
+    )
+    node_header_1 = _page.get_sample(
+        jpath="content[1]",
+        md="""
+        # header 1
+        """,
+    )
+    node_header_2 = _page.get_sample(
+        jpath="content[2]",
+        md="""
+        ## header 2
+        """,
+    )
+    node_header_3 = _page.get_sample(
+        jpath="content[3]",
+        md="""
+        ### **header** 3
+        """,
+    )
+    node_header_4 = _page.get_sample(
+        jpath="content[4]",
+        md="""
+        #### ~~header~~ 4
+        """,
+    )
+    node_header_5 = _page.get_sample(
+        jpath="content[5]",
+        md="""
+        ##### header 5
+        """,
+    )
+    node_header_6 = _page.get_sample(
+        jpath="content[6]",
+        md="""
+        ###### [header](https://example.com) 6
+        """,
+    )
+
+
     node_inline_card = PageSample(
         name="node_inline_card",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492455/Node+-+inlineCard",

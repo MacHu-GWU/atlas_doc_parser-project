@@ -5,11 +5,36 @@
             "type": "heading",
             "attrs": {
                 "level": 1,
-                "localId": "34de136b-8c02-4a17-bb8f-134cdf3306f1"
+                "localId": "93780556-66ed-4495-aa42-bfd0453a7d22"
             },
             "content": [
                 {
                     "text": "header 1",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "type": "heading",
+            "attrs": {
+                "level": 1,
+                "localId": "34de136b-8c02-4a17-bb8f-134cdf3306f1"
+            },
+            "content": [
+                {
+                    "text": "header",
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "backgroundColor",
+                            "attrs": {
+                                "color": "#fedec8"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "text": " 1",
                     "type": "text"
                 }
             ]
@@ -22,7 +47,19 @@
             },
             "content": [
                 {
-                    "text": "header 2",
+                    "text": "header",
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "textColor",
+                            "attrs": {
+                                "color": "#ff5630"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "text": " 2",
                     "type": "text"
                 }
             ]
@@ -35,7 +72,16 @@
             },
             "content": [
                 {
-                    "text": "header 3",
+                    "text": "header",
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "strong"
+                        }
+                    ]
+                },
+                {
+                    "text": " 3",
                     "type": "text"
                 }
             ]
@@ -48,7 +94,16 @@
             },
             "content": [
                 {
-                    "text": "header 4",
+                    "text": "header",
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "strike"
+                        }
+                    ]
+                },
+                {
+                    "text": " 4",
                     "type": "text"
                 }
             ]
@@ -61,7 +116,16 @@
             },
             "content": [
                 {
-                    "text": "header 5",
+                    "text": "header",
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "underline"
+                        }
+                    ]
+                },
+                {
+                    "text": " 5",
                     "type": "text"
                 }
             ]
@@ -74,7 +138,19 @@
             },
             "content": [
                 {
-                    "text": "header 6",
+                    "text": "header",
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "link",
+                            "attrs": {
+                                "href": "https://example.com"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "text": " 6",
                     "type": "text"
                 }
             ]
