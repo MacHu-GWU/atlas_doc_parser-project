@@ -286,7 +286,20 @@ class AdfSampleEnum:
     node_bullet_list = PageSample(
         name="node_bullet_list",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082139/Node+-+bulletList",
-    ).get_sample(jpath="content[0]")
+    ).get_sample(
+        jpath="content[0]",
+        md="""
+        - item **1**
+            - item **1.1**
+                - item **1.1.1**
+        - item 2
+            - item 2.1
+                - item 2.1.1
+        - item 3
+            - item 3.1
+                - item 3.1.1
+        """,
+    )
     node_code_block = PageSample(
         name="node_code_block",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049370/Node+-+codeBlock",
@@ -314,7 +327,20 @@ class AdfSampleEnum:
     node_ordered_list = PageSample(
         name="node_ordered_list",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558633/Node+-+orderedList",
-    ).get_sample(jpath="content[0]")
+    ).get_sample(
+        jpath="content[0]",
+        md="""
+        1. item **1**
+            1. item **1.1**
+                1. item **1.1.1**
+        2. item 2
+            1. item 2.1
+                1. item 2.1.1
+        3. item 3
+            1. item 3.1
+                1. item 3.1.1
+        """,
+    )
     node_panel = PageSample(
         name="node_panel",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558640/Node+-+panel",
