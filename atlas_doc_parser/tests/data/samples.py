@@ -319,10 +319,17 @@ class AdfSampleEnum:
         name="node_panel",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558640/Node+-+panel",
     ).get_sample(jpath="content[0]")
+
     node_paragraph = PageSample(
         name="node_paragraph",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082201/Node+-+paragraph",
-    ).get_sample(jpath="content[0]")
+    ).get_sample(
+        jpath="content[0]",
+        md="""
+        This is a **bolded text**, do you see that? This is a *italic text*, do you see that? This is a underline, do you see that? This is a ~~strike through~~, do you see that? This is a ***~~bolded itlic strike through and underline~~***, do you see that? This is a subscript, do you see that? This is a superscript, do you see that? This text has color, do you see that? This text has background, do you see that? Note that you can not do Text color and Background color at the same time. This line has code `` a = 1 + 2 ``**.**
+        """,
+    )
+
     node_rule = PageSample(
         name="node_rule",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558648/Node+-+rule",
