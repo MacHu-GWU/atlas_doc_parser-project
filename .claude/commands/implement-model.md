@@ -100,3 +100,6 @@ See the following source code for complete examples:
 - `./atlas_doc_parser/marks/mark_code.py`
 - `./atlas_doc_parser/marks/mark_em.py`
 - `./atlas_doc_parser/marks/mark_link.py`
+- `./atlas_doc_parser/nodes/node_text.py`
+- `./atlas_doc_parser/nodes/node_list_item.py`
+- `./atlas_doc_parser/nodes/node_bullet_list.py`
