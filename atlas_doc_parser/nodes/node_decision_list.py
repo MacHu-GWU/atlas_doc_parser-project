@@ -49,7 +49,7 @@ class NodeDecisionList(BaseNode):
         lines = []
 
         for item in self.content:
-            if self.is_type_of(item, TypeEnum.decisionItem):
+            if item.is_type_of(TypeEnum.decisionItem):
                 # Process the decision item content (text nodes)
                 content_parts = []
                 for node in item.content:

@@ -86,7 +86,7 @@ class NodeTaskList(BaseNode):
         indent = "    " * level  # 4 spaces per level
 
         for item in self.content:
-            if self.is_type_of(item, TypeEnum.taskItem):
+            if item.is_type_of(TypeEnum.taskItem):
                 # Process the task item content (text nodes)
                 content_parts = []
                 for node in item.content:
@@ -110,7 +110,7 @@ class NodeTaskList(BaseNode):
                 line = f"{indent}- {checkbox} {item_content}"
                 lines.append(line)
 
-            elif self.is_type_of(item, TypeEnum.taskList):
+            elif item.is_type_of(TypeEnum.taskList):
                 # Nested task list - increase level
                 try:
                     md = item.to_markdown(level=level + 1, ignore_error=ignore_error)

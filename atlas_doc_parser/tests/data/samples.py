@@ -616,7 +616,50 @@ class AdfSampleEnum:
     node_panel = PageSample(
         name="node_panel",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558640/Node+-+panel",
-    ).get_sample(jpath="content[0]")
+    ).get_sample(
+        jpath="content[0]",
+        md="""
+            > **INFO**
+            > 
+            > This is info
+            """,
+    )
+
+    _page = PageSample(
+        name="node_expand",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049387/Node+-+expand",
+    )
+
+    node_nested_expand_in_expand = _page.get_sample(
+        jpath="content[0].content[3]",
+        md="""
+        level 2 expand content (level 2 is the max)
+        
+        [https://example.com](https://example.com) 
+        
+        > **INFO**
+        > 
+        > some info
+        """,
+    )
+    node_expand = _page.get_sample(
+        jpath="content[0]",
+        md="""
+        level 1 expand content
+        
+        - bullet list
+        
+        > some quote
+        
+        level 2 expand content (level 2 is the max)
+        
+        [https://example.com](https://example.com) 
+        
+        > **INFO**
+        > 
+        > some info
+        """,
+    )
 
     node_paragraph = PageSample(
         name="node_paragraph",

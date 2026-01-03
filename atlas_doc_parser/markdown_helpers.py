@@ -137,17 +137,21 @@ def doc_content_to_markdown(
     else:
         lst = list()
         for node in content:
+            # print("----- Work on a new node -----")  # for debug only
             try:
                 # Add extra newlines around block elements that need separation
-                if node.type in [
-                    TypeEnum.bulletList.value,
-                    TypeEnum.orderedList.value,
-                    TypeEnum.codeBlock.value,
-                ]:
-                    node.title()
+                if node.is_type_of(
+                    [
+                        TypeEnum.bulletList,
+                        TypeEnum.orderedList,
+                        TypeEnum.codeBlock,
+                    ]
+                ):
                     md = "\n" + node.to_markdown() + "\n"
                 else:
                     md = node.to_markdown()
+                # print(f"{node = }")  # for debug only
+                # print(f"{md = }")  # for debug only
                 lst.append(md)
             except Exception as e:  # pragma: no cover
                 if ignore_error:
@@ -190,9 +194,13 @@ def add_style_to_markdown(
         >>> add_style_to_markdown("hello", text_node)
         '*\\*\\*hello\\*\\**'
     """
-    if isinstance(node.marks, list):
-        for mark in node.marks:
-            md = mark.to_markdown(md)
+    try:
+        if isinstance(node.marks, list):
+            for mark in node.marks:
+                md = mark.to_markdown(md)
+    # some node doesn't have marks attribute (don't support styles)
+    except AttributeError:
+        pass
     return md
 
 

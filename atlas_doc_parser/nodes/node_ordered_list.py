@@ -91,11 +91,11 @@ class NodeOrderedList(BaseNode):
             current_num = 1
 
         for item in self.content:
-            if self.is_type_of(item, TypeEnum.listItem):
+            if item.is_type_of(TypeEnum.listItem):
                 # Process the list item content
                 content_lines = []
                 for node in item.content:
-                    if self.is_type_of(node, TypeEnum.orderedList):
+                    if node.is_type_of(TypeEnum.orderedList):
                         # Nested list - increase level
                         try:
                             md = node.to_markdown(level=level + 1)

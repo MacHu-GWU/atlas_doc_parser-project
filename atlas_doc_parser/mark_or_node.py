@@ -85,9 +85,20 @@ class Base(BaseFrozenModel):
     def is_opt(self, value: T.Any) -> bool:
         return value is OPT
 
-    @staticmethod
+
+T_BASE = T.TypeVar("T_BASE", bound=Base)
+
+
+@dataclasses.dataclass(frozen=True)
+class BaseMarkOrNode(Base):
+    """
+    Base class for ADF marks and nodes.
+    """
+
+    type: str = dataclasses.field(default_factory=REQ)
+
     def is_type_of(
-        mark_or_node: T.Union["T_MARK", "T_NODE"],
+        self,
         expected_types: TypeEnum | list[TypeEnum],
     ) -> bool:
         """
@@ -101,22 +112,19 @@ class Base(BaseFrozenModel):
 
         Example::
 
-            >>> node.is_type_of(TypeEnum.paragraph)
+            >>> BaseNode(...).is_type_of(TypeEnum.paragraph)
             True
-            >>> mark.is_type_of([TypeEnum.strong, TypeEnum.em])
+            >>> BaseMark(...).is_type_of([TypeEnum.strong, TypeEnum.em])
             True
         """
-        return check_type_match(mark_or_node.type, expected_types)
-
-
-T_BASE = T.TypeVar("T_BASE", bound=Base)
+        return check_type_match(self.type, expected_types)
 
 
 # =============================================================================
 # BaseMark Class
 # =============================================================================
 @dataclasses.dataclass(frozen=True)
-class BaseMark(Base):
+class BaseMark(BaseMarkOrNode):
     """
     Base class for ADF marks (text formatting).
 
@@ -128,8 +136,6 @@ class BaseMark(Base):
 
     Subclasses should override ``to_markdown()`` to provide format conversion.
     """
-
-    type: str = dataclasses.field(default_factory=REQ)
 
     @classmethod
     def from_dict(cls: T.Type["T_MARK"], dct: T_DATA) -> "T_MARK":
@@ -173,7 +179,7 @@ T_MARK = T.TypeVar("T_MARK", bound=BaseMark)
 # BaseNode Class
 # =============================================================================
 @dataclasses.dataclass(frozen=True)
-class BaseNode(Base):
+class BaseNode(BaseMarkOrNode):
     """
     Base class for ADF nodes (document structure elements).
 
@@ -188,8 +194,6 @@ class BaseNode(Base):
 
     Subclasses should override ``to_markdown()`` to provide format conversion.
     """
-
-    type: str = dataclasses.field(default_factory=REQ)
 
     @classmethod
     def from_dict(
