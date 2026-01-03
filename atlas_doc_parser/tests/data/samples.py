@@ -373,7 +373,7 @@ class AdfSampleEnum:
     ).get_sample(
         jpath="content[0].content[1]",
         md="""
-        this is a date: 2026-01-01
+        2026-01-01
         """,
     )
 
