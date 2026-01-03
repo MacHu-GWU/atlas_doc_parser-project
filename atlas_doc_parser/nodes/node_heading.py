@@ -39,8 +39,8 @@ class NodeHeading(BaseNode):
 
     type: str = TypeEnum.heading.value
     attrs: NodeHeadingAttrs = OPT
-    content: T.List[BaseNode] = OPT
-    marks: T.List[BaseMark] = OPT
+    content: list[BaseNode] = OPT
+    marks: list[BaseMark] = OPT
 
     def to_markdown(
         self,

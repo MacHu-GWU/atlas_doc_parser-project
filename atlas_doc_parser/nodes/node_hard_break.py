@@ -34,7 +34,7 @@ class NodeHardBreak(BaseNode):
     """
 
     type: str = TypeEnum.hardBreak.value
-    attrs: T.Optional[NodeHardBreakAttrs] = OPT
+    attrs: NodeHardBreakAttrs = OPT
 
     def to_markdown(
         self,

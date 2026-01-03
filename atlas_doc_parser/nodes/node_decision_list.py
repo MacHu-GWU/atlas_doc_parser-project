@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import typing as T
 import dataclasses
 
 from func_args.api import OPT

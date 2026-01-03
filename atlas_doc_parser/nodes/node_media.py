@@ -8,6 +8,11 @@ from func_args.api import OPT
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseNode, T_MARK
 
+if T.TYPE_CHECKING:  # pragma: no cover
+    from ..marks.mark_link import MarkLink
+    from ..marks.mark_annotation import MarkAnnotation
+    from ..marks.mark_border import MarkBorder
+
 
 @dataclasses.dataclass(frozen=True)
 class NodeMediaAttrs(Base):
@@ -74,7 +79,13 @@ class NodeMedia(BaseNode):
 
     type: str = TypeEnum.media.value
     attrs: NodeMediaAttrs = OPT
-    marks: list["T_MARK"] = OPT
+    marks: list[
+        T.Union[
+            "MarkLink",
+            "MarkAnnotation",
+            "MarkBorder",
+        ],
+    ] = OPT
 
     def to_markdown(
         self,

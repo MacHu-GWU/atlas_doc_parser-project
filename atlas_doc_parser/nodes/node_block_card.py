@@ -20,7 +20,7 @@ class NodeBlockCardAttrsDatasourceView(Base):
     """
 
     type: str = OPT
-    properties: T.Optional[T_DATA] = OPT
+    properties: T_DATA = OPT
 
 
 @dataclasses.dataclass(frozen=True)
@@ -34,8 +34,8 @@ class NodeBlockCardAttrsDatasource(Base):
     """
 
     id: str = OPT
-    parameters: T.Optional[T_DATA] = OPT
-    views: T.Optional[T.List[NodeBlockCardAttrsDatasourceView]] = OPT
+    parameters: T_DATA = OPT
+    views: list[NodeBlockCardAttrsDatasourceView] = OPT
 
 
 @dataclasses.dataclass(frozen=True)
