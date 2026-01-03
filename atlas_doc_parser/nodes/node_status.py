@@ -22,9 +22,9 @@ class NodeStatusAttrs(Base):
     """
 
     text: str = OPT
-    color: str = OPT
-    localId: T.Optional[str] = OPT
-    style: T.Optional[str] = OPT
+    color: T.Literal["neutral", "purple", "blue", "red", "yellow", "green"] = OPT
+    localId: str = OPT
+    style: str = OPT
 
 
 @dataclasses.dataclass(frozen=True)

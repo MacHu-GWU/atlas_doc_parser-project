@@ -12,7 +12,11 @@ from ..markdown_helpers import content_to_markdown, add_style_to_markdown
 
 @dataclasses.dataclass(frozen=True)
 class NodeParagraphAttrs(Base):
-    """Attributes for :class:`NodeParagraph`."""
+    """
+    Attributes for :class:`NodeParagraph`.
+
+    :param localId: Optional. A unique identifier for the node.
+    """
 
     localId: str = OPT
 

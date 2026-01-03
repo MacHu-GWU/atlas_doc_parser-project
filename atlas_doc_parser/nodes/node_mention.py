@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import typing as T
 import dataclasses
 
 from func_args.api import OPT
@@ -27,7 +28,7 @@ class NodeMentionAttrs(Base):
     localId: str = OPT
     text: str = OPT
     accessLevel: str = OPT
-    userType: str = OPT
+    userType: T.Literal["DEFAULT", "SPECIAL", "APP"] = OPT
 
 
 @dataclasses.dataclass(frozen=True)

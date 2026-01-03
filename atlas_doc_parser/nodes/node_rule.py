@@ -11,7 +11,11 @@ from ..mark_or_node import Base, BaseNode
 
 @dataclasses.dataclass(frozen=True)
 class NodeRuleAttrs(Base):
-    """Attributes for :class:`NodeRule`."""
+    """
+    Attributes for :class:`NodeRule`.
+
+    :param localId: Optional. A unique identifier for the node.
+    """
 
     localId: str = OPT
 

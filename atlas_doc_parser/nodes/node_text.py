@@ -23,7 +23,7 @@ class NodeText(BaseNode):
 
     type: str = TypeEnum.text.value
     text: str = OPT
-    marks: list[T_MARK] | None = OPT
+    marks: list[T_MARK] = OPT
 
     def to_markdown(
         self,
