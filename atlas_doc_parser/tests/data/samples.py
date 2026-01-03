@@ -483,11 +483,139 @@ class AdfSampleEnum:
     ).get_sample(
         jpath="content[0]",
         md="""
-        [https://example.com](https://example.com)
+            [https://example.com](https://example.com)
+            """,
+    )
+
+    node_embed_card = PageSample(
+        name="node_embed_card",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492657/Node+-+embedCard",
+    ).get_sample(
+        jpath="content[0]",
+        md="""
+        [https://www.youtube.com/watch?v=XqZsoesa55w](https://www.youtube.com/watch?v=XqZsoesa55w)
         """,
     )
 
-    "https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558733/Node+-+Media"
+    _page = PageSample(
+        name="node_media",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558733/Node+-+Media",
+    )
+
+    node_media_url_image = _page.get_sample(
+        jpath="content[1].content[0]",
+        md="""
+            ![media](https://www.python.org/static/img/python-logo.png)
+            """,
+    )
+    node_media_url_image_with_caption = _page.get_sample(
+        jpath="content[3].content[0]",
+        md="""
+        ![media](https://www.python.org/static/img/python-logo.png)
+        """,
+    )
+    node_media_url_image_with_alt_text = _page.get_sample(
+        jpath="content[5].content[0]",
+        md="""
+        ![python org](https://www.python.org/static/img/python-logo.png)
+        """,
+    )
+    node_media_url_image_with_clickable_link = _page.get_sample(
+        jpath="content[7].content[0]",
+        md="""
+        [![media](https://www.python.org/static/img/python-logo.png)](https://python.org)
+        """,
+    )
+    node_media_url_image_with_caption_and_clickable_link = _page.get_sample(
+        jpath="content[9].content[0]",
+        md="""
+        [![this is alt text](https://www.python.org/static/img/python-logo.png)](https://python.org)
+        """,
+    )
+    node_media_uploaded_image = _page.get_sample(
+        jpath="content[11].content[0]",
+        md="""
+        ![python-logo.png](media:14407e98-14d3-4d5e-aa66-6a23621d5a85)
+        """,
+    )
+
+    node_media_single_url_image = _page.get_sample(
+        jpath="content[1]",
+        md="""
+        ![media](https://www.python.org/static/img/python-logo.png)
+        """,
+    )
+    node_media_single_url_image_with_caption = _page.get_sample(
+        jpath="content[3]",
+        md="""
+        ![media](https://www.python.org/static/img/python-logo.png)
+        """,
+    )
+    node_media_single_url_image_with_alt_text = _page.get_sample(
+        jpath="content[5]",
+        md="""
+        ![python org](https://www.python.org/static/img/python-logo.png)
+        """,
+    )
+    node_media_single_url_image_with_clickable_link = _page.get_sample(
+        jpath="content[7]",
+        md="""
+        [![media](https://www.python.org/static/img/python-logo.png)](https://python.org)
+        """,
+    )
+    node_media_single_url_image_with_caption_and_clickable_link = _page.get_sample(
+        jpath="content[9]",
+        md="""
+        [![this is alt text](https://www.python.org/static/img/python-logo.png)](https://python.org)
+        """,
+    )
+    node_media_single_uploaded_image = _page.get_sample(
+        jpath="content[11]",
+        md="""
+        ![python-logo.png](media:14407e98-14d3-4d5e-aa66-6a23621d5a85)
+        """,
+    )
+
+    _page = PageSample(
+        name="node_caption",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653885451/Node+-+caption",
+    )
+    node_caption_on_url_image = _page.get_sample(
+        jpath="content[0].content[1]",
+        md="""
+        """,
+    )
+    node_caption_on_uploaded_image = _page.get_sample(
+        jpath="content[1].content[1]",
+        md="""
+        """,
+    )
+
+    node_extension_draw_io_diagram = PageSample(
+        name="node_extension_draw_io_diagram",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654245889/Node+-+Extension",
+    ).get_sample(
+        jpath="content[0]",
+        md="""
+        [Extension: 1afdce52-d22e-4d27-84db-5be989c3c83b/92d899e8-452f-4c9b-9f60-823ab11c8253/static/drawio] draw.io Diagram
+        """,
+    )
+
+
+
+    # node_caption_url_image = _page.get_sample(
+    #     jpath="content[3].content[1]",
+    #     md="""
+    #     ...
+    #     """,
+    # )
+
+    # node_extension_ = _page.get_sample(
+    #     jpath="content[11].content[0]",
+    #     md="""
+    #         ...
+    #         """,
+    # )
 
     node_block_quote = PageSample(
         name="node_block_quote",

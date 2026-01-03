@@ -7,6 +7,7 @@ from func_args.api import OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseNode
+from ..markdown_helpers import content_to_markdown
 
 if T.TYPE_CHECKING:  # pragma: no cover
     from .node_media import NodeMedia
@@ -78,3 +79,9 @@ class NodeMediaSingle(BaseNode):
     attrs: NodeMediaSingleAttrs = OPT
     content: list["NodeMedia"] = OPT
     marks: list["MarkLink"] = OPT
+
+    def to_markdown(
+        self,
+        ignore_error: bool = False,
+    ) -> str:
+        return content_to_markdown(content=self.content, ignore_error=ignore_error)
