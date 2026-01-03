@@ -41,6 +41,7 @@ from .node_media_group import NodeMediaGroup
 from .node_media_single import NodeMediaSingle
 from .node_embed_card import NodeEmbedCard
 from .node_extension import NodeExtension
+from .node_caption import NodeCaption
 
 
 # =============================================================================
@@ -71,6 +72,7 @@ NODE_TYPE_TO_CLASS_MAPPING = {
     TypeEnum.mediaSingle.value: NodeMediaSingle,
     TypeEnum.embedCard.value: NodeEmbedCard,
     TypeEnum.extension.value: NodeExtension,
+    TypeEnum.caption.value: NodeCaption,
 }
 
 
