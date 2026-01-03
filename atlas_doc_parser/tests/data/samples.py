@@ -410,7 +410,15 @@ class AdfSampleEnum:
     node_code_block = PageSample(
         name="node_code_block",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049370/Node+-+codeBlock",
-    ).get_sample(jpath="content[0]")
+    ).get_sample(
+        jpath="content[0]",
+        md="""
+        ```python
+        def add_two(a, b):
+            return a + b
+        ```
+        """,
+    )
 
     node_heading = PageSample(
         name="node_heading",

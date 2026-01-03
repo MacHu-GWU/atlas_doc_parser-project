@@ -32,6 +32,8 @@ from .node_hard_break import NodeHardBreak
 from .node_date import NodeDate
 from .node_mention import NodeMention
 from .node_status import NodeStatus
+from .node_heading import NodeHeading
+from .node_code_block import NodeCodeBlock
 
 
 # =============================================================================
@@ -53,6 +55,8 @@ NODE_TYPE_TO_CLASS_MAPPING = {
     TypeEnum.date.value: NodeDate,
     TypeEnum.mention.value: NodeMention,
     TypeEnum.status.value: NodeStatus,
+    TypeEnum.heading.value: NodeHeading,
+    TypeEnum.codeBlock.value: NodeCodeBlock,
 }
 
 
