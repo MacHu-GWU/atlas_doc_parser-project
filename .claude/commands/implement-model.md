@@ -74,30 +74,48 @@ Create `mark_*.py` or `node_*.py` file with:
 
 ### Important Implementation Rules
 
-#### Rule 1: Cross-Reference Type Hints
+#### Rule 1: Cross-Reference Type Hints (`$ref` in JSON Schema)
 
-When a field references other ADF types (via `$ref` in JSON schema), use `if T.TYPE_CHECKING:` to import and avoid circular imports:
+**CRITICAL:** When JSON schema contains `$ref` anywhere (in `content`, `marks`, or nested `attrs`), you MUST use cross-reference type hints.
 
+**How to identify:** Look for `$ref` in the schema output:
+```json
+"content": { "items": { "$ref": "#/definitions/listItem_node" } }
+"marks": { "items": { "anyOf": [{ "$ref": "#/definitions/link_mark" }, ...] } }
+```
+
+**Implementation pattern:**
 ```python
 import typing as T
 
 if T.TYPE_CHECKING:  # pragma: no cover
+    from .node_list_item import NodeListItem
     from ..marks.mark_link import MarkLink
-    from ..nodes.node_paragraph import NodeParagraph
 
 @dataclasses.dataclass(frozen=True)
 class NodeExample(BaseNode):
-    # Use quoted string for forward reference
-    marks: list["MarkLink"] = OPT
-    content: list["NodeParagraph"] = OPT
+    content: list["NodeListItem"] = OPT  # $ref → cross-reference
+    marks: list["MarkLink"] = OPT        # $ref → cross-reference
+```
+
+**For multiple refs (anyOf/oneOf):**
+```python
+content: list[
+    T.Union[
+        "NodeParagraph",
+        "NodeCodeBlock",
+        "NodeBulletList",
+    ]
+] = OPT
 ```
 
 **Key points:**
-- Even if the referenced module doesn't exist yet, add the import anyway - `TYPE_CHECKING` ensures it won't fail at runtime
-- Use quoted strings (`"ClassName"`) in type annotations for forward references
-- Derive module name from class name: `MarkLink` → `mark_link`, `NodeParagraph` → `node_paragraph`
+- `$ref` = cross-reference type hint required (never use `BaseNode` or `BaseMark`)
+- Add imports even if module doesn't exist yet - `TYPE_CHECKING` prevents runtime errors
+- Use quoted strings (`"ClassName"`) for forward references
+- Derive module name: `MarkLink` → `mark_link`, `NodeParagraph` → `node_paragraph`
 
-See `./atlas_doc_parser/nodes/node_media.py` for a complete example.
+See `./atlas_doc_parser/nodes/node_list_item.py` for a complete example with multiple refs.
 
 #### Rule 2: Optional Attributes - Do NOT Use `T.Optional`
 
@@ -176,5 +194,7 @@ See the following source code for complete examples:
 - `./atlas_doc_parser/nodes/node_text.py` - simple node
 - `./atlas_doc_parser/nodes/node_list_item.py` - node with content
 
-**Cross-reference type hint example (Rule 1):**
-- `./atlas_doc_parser/nodes/node_media.py` - demonstrates `if T.TYPE_CHECKING:` pattern for marks field
+**Cross-reference type hint examples (Rule 1):**
+- `./atlas_doc_parser/nodes/node_list_item.py` - multiple content refs with `T.Union`
+- `./atlas_doc_parser/nodes/node_text.py` - multiple marks refs with `T.Union`
+- `./atlas_doc_parser/nodes/node_media.py` - marks with `T.Union`
