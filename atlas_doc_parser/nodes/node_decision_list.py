@@ -43,29 +43,21 @@ class NodeDecisionList(BaseNode):
         """
         Convert the decision list to Markdown format.
 
-        Each decision item is rendered as a blockquote line with ``> `` prefix,
-        separated by blank lines.
+        Each decision item is rendered as a blockquote with ``> `` prefix
+        on every line, separated by blank lines between items.
         """
-        lines = []
+        decision_blocks = []
 
         for item in self.content:
             if item.is_type_of(TypeEnum.decisionItem):
-                # Process the decision item content (text nodes)
-                content_parts = []
-                for node in item.content:
-                    try:
-                        md = node.to_markdown()
-                        content_parts.append(md)
-                    except Exception as e:
-                        if ignore_error:
-                            pass
-                        else:
-                            raise e
-
-                # Join content parts and format as blockquote
-                item_content = "".join(content_parts).rstrip()
-                line = f"> {item_content}"
-                lines.append(line)
+                try:
+                    md = item.to_markdown(ignore_error=ignore_error)
+                    decision_blocks.append(md)
+                except Exception as e:
+                    if ignore_error:
+                        pass
+                    else:
+                        raise e
 
         # Join with blank lines between each decision
-        return "\n\n".join(lines)
+        return "\n\n".join(decision_blocks)

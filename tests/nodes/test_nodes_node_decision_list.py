@@ -1,8 +1,20 @@
 # -*- coding: utf-8 -*-
 
 from atlas_doc_parser.nodes.node_decision_list import NodeDecisionList
+from atlas_doc_parser.nodes.node_decision_item import NodeDecisionItem
 
 from atlas_doc_parser.tests.data.samples import AdfSampleEnum
+
+
+class TestNodeDecisionItem:
+    def test_node_decision_item_simple(self):
+        node = AdfSampleEnum.node_decision_item_simple.test(NodeDecisionItem)
+
+    def test_node_decision_item_complex_1(self):
+        node = AdfSampleEnum.node_decision_item_complex_1.test(NodeDecisionItem)
+
+    def test_node_decision_item_complex_2(self):
+        node = AdfSampleEnum.node_decision_item_complex_2.test(NodeDecisionItem)
 
 
 class TestNodeDecisionList:

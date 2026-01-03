@@ -350,6 +350,38 @@ class AdfSampleEnum:
                     - [x] item 3.1.1
             """,
     )
+
+    _page = PageSample(
+        name="node_decision_list",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654147585/Node+-+decisionList",
+    )
+    node_decision_item_simple = _page.get_sample(
+        jpath="content[0].content[0]",
+        md="""
+        > decision **1**
+        """,
+    )
+    node_decision_item_complex_1 = _page.get_sample(
+        jpath="content[0].content[1]",
+        md="""
+        > decision 2
+        > - first
+        > - second
+        >
+        > some text
+        """,
+    )
+    node_decision_item_complex_2 = _page.get_sample(
+        jpath="content[0].content[2]",
+        md="""
+        > decision 3
+        > 1. [https://example.com](https://example.com)
+        > 2. [https://example.com](https://example.com)
+        >
+        > some text
+        """,
+    )
+
     node_decision_list = PageSample(
         name="node_decision_list",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654147585/Node+-+decisionList",

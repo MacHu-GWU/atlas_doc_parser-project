@@ -65,4 +65,45 @@ class NodeDecisionItem(BaseNode):
         self,
         ignore_error: bool = False,
     ) -> str:
-        return content_to_markdown(content=self.content, ignore_error=ignore_error)
+        """
+        Convert the decision item to Markdown format.
+
+        Each line is prefixed with ``> `` for blockquote formatting.
+        Leading empty lines after the first content line are skipped,
+        and consecutive empty lines are collapsed.
+        """
+        # Get raw content markdown
+        item_content = content_to_markdown(
+            content=self.content,
+            ignore_error=ignore_error,
+        ).rstrip()
+
+        # Split into lines and prefix each with "> "
+        raw_lines = item_content.split("\n")
+
+        # Process lines:
+        # 1. Skip empty lines that appear immediately after the first line
+        #    (the decision title line)
+        # 2. Collapse consecutive empty lines
+        # 3. Keep single empty lines between content
+        prefixed_lines = []
+        line_count = 0  # Count of non-empty content lines
+        prev_was_empty = False
+        for line in raw_lines:
+            line = line.rstrip()
+            is_empty = not line
+
+            if is_empty:
+                # Skip empty lines after only the first content line
+                # (skip leading blanks after title)
+                # Also skip consecutive empty lines
+                if line_count <= 1 or prev_was_empty:
+                    continue
+                prefixed_lines.append(">")
+                prev_was_empty = True
+            else:
+                prefixed_lines.append(f"> {line}")
+                line_count += 1
+                prev_was_empty = False
+
+        return "\n".join(prefixed_lines)
