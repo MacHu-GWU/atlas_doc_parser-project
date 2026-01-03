@@ -44,6 +44,40 @@ class NodeOrderedList(BaseNode):
         level: int = 0,
         ignore_error: bool = False,
     ) -> str:
+        """
+        Convert the ordered list to Markdown format.
+
+        **ADF Structure** (nested list is a **child** of listItem)::
+
+            orderedList
+            ├── listItem (item 1)
+            │   ├── paragraph → text nodes    ← text wrapped in paragraph
+            │   └── orderedList (nested)      ← nested list is CHILD of listItem
+            │       └── listItem (item 1.1)
+            │           ├── paragraph
+            │           └── orderedList (nested)
+            ├── listItem (item 2)
+            │   ├── paragraph
+            │   └── orderedList (nested)
+            ...
+
+        **Implementation**: Uses two nested loops because:
+
+        - Outer loop: iterates over ``listItem`` nodes in ``orderedList.content``
+        - Inner loop: iterates over ``listItem.content`` which contains both
+          ``paragraph`` (text) and nested ``orderedList`` nodes
+
+        .. note::
+
+            This structure differs from :meth:`NodeTaskList.to_markdown` where
+            nested ``taskList`` nodes are **siblings** of ``taskItem`` nodes,
+            not children. See :class:`NodeTaskList` for comparison.
+
+        .. seealso::
+
+            - :meth:`NodeBulletList.to_markdown` - same structure, uses bullets
+            - :meth:`NodeTaskList.to_markdown` - different structure, single loop
+        """
         lines = []
         indent = "    " * level  # 4 spaces per level
 

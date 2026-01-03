@@ -180,7 +180,9 @@ class AdfSampleEnum:
 
         https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082078/atlas_doc_parser+-+Single+Mark+or+Node+Test
     """
-
+    # --------------------------------------------------------------------------
+    # Mark
+    # --------------------------------------------------------------------------
     _page = PageSample(
         name="mark_background_color",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558524/Mark+-+backgroundColor",
@@ -272,6 +274,93 @@ class AdfSampleEnum:
         jpath="content[0].content[1]",
         md="underline",
     )
+
+    # --------------------------------------------------------------------------
+    # Node
+    # --------------------------------------------------------------------------
+    node_text = PageSample(
+        name="node_text",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049439/Node+-+text",
+    ).get_sample(
+        jpath="content[0].content[0]",
+        md="this is a text.",
+    )
+    node_rule = PageSample(
+        name="node_rule",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558648/Node+-+rule",
+    ).get_sample(
+        jpath="content[0]",
+        md="\n\n---\n\n",
+    )
+    node_bullet_list = PageSample(
+        name="node_bullet_list",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082139/Node+-+bulletList",
+    ).get_sample(
+        jpath="content[0]",
+        md="""
+            - item **1**
+                - item **1.1**
+                    - item **1.1.1**
+            - item 2
+                - item 2.1
+                    - item 2.1.1
+            - item 3
+                - item 3.1
+                    - item 3.1.1
+            """,
+    )
+    node_ordered_list = PageSample(
+        name="node_ordered_list",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558633/Node+-+orderedList",
+    ).get_sample(
+        jpath="content[0]",
+        md="""
+            1. item **1**
+                1. item **1.1**
+                    1. item **1.1.1**
+            2. item 2
+                1. item 2.1
+                    1. item 2.1.1
+            3. item 3
+                1. item 3.1
+                    1. item 3.1.1
+            """,
+    )
+    node_task_list = PageSample(
+        name="node_task_list",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653885443/Node+-+taskList",
+    ).get_sample(
+        jpath="content[0]",
+        md="""
+            - [x] item **1**
+                - [x] item **1.1**
+                    - [x] item **1.1.1**
+            - [ ] item 2
+                - [x] item 2.1
+                    - [ ] item 2.1.1
+            - [ ] item 3
+                - [ ] item 3.1
+                    - [x] item 3.1.1
+            """,
+    )
+    node_decision_list = PageSample(
+        name="node_decision_list",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654147585/Node+-+decisionList",
+    ).get_sample(
+        jpath="content[0]",
+        md="""
+            - [x] item **1**
+                - [x] item **1.1**
+                    - [x] item **1.1.1**
+            - [ ] item 2
+                - [x] item 2.1
+                    - [ ] item 2.1.1
+            - [ ] item 3
+                - [ ] item 3.1
+                    - [x] item 3.1.1
+            """,
+    )
+
     node_block_quote = PageSample(
         name="node_block_quote",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492407/Node+-+blockquote",
@@ -283,23 +372,7 @@ class AdfSampleEnum:
         > Just do it!
         """,
     )
-    node_bullet_list = PageSample(
-        name="node_bullet_list",
-        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082139/Node+-+bulletList",
-    ).get_sample(
-        jpath="content[0]",
-        md="""
-        - item **1**
-            - item **1.1**
-                - item **1.1.1**
-        - item 2
-            - item 2.1
-                - item 2.1.1
-        - item 3
-            - item 3.1
-                - item 3.1.1
-        """,
-    )
+
     node_code_block = PageSample(
         name="node_code_block",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049370/Node+-+codeBlock",
@@ -324,23 +397,7 @@ class AdfSampleEnum:
         name="node_mention",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492462/Node+-+mention",
     ).get_sample(jpath="content[0].content[0]")
-    node_ordered_list = PageSample(
-        name="node_ordered_list",
-        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558633/Node+-+orderedList",
-    ).get_sample(
-        jpath="content[0]",
-        md="""
-        1. item **1**
-            1. item **1.1**
-                1. item **1.1.1**
-        2. item 2
-            1. item 2.1
-                1. item 2.1.1
-        3. item 3
-            1. item 3.1
-                1. item 3.1.1
-        """,
-    )
+
     node_panel = PageSample(
         name="node_panel",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558640/Node+-+panel",
@@ -356,13 +413,6 @@ class AdfSampleEnum:
         """,
     )
 
-    node_rule = PageSample(
-        name="node_rule",
-        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558648/Node+-+rule",
-    ).get_sample(
-        jpath="content[0]",
-        md="\n\n---\n\n",
-    )
     node_status = PageSample(
         name="node_status",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049423/Node+-+status",
@@ -371,10 +421,4 @@ class AdfSampleEnum:
         name="node_table",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082217/Node+-+table",
     ).get_sample(jpath="content[0]")
-    node_text = PageSample(
-        name="node_text",
-        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049439/Node+-+text",
-    ).get_sample(
-        jpath="content[0].content[0]",
-        md="this is a text.",
-    )
+

@@ -39,46 +39,76 @@ class NodeTaskList(BaseNode):
         level: int = 0,
         ignore_error: bool = False,
     ) -> str:
+        """
+        Convert the task list to Markdown format.
+
+        **ADF Structure** (nested list is a **sibling** of taskItem)::
+
+            taskList
+            ├── taskItem (item 1) → [text nodes]  ← text directly in content
+            ├── taskList (nested)                  ← nested list is SIBLING of taskItem
+            │   ├── taskItem (item 1.1)
+            │   └── taskList (nested)
+            │       └── taskItem (item 1.1.1)
+            ├── taskItem (item 2)
+            ├── taskList (nested)
+            ...
+
+        **Implementation**: Uses a single loop because:
+
+        - ``taskItem`` and nested ``taskList`` are **siblings** in ``taskList.content``
+        - Text nodes are directly inside ``taskItem.content`` (no wrapper like paragraph)
+        - The loop handles both ``taskItem`` (render with checkbox) and
+          ``taskList`` (recursive call with increased level) in the same iteration
+
+        .. note::
+
+            This structure differs from :meth:`NodeBulletList.to_markdown` and
+            :meth:`NodeOrderedList.to_markdown` where nested lists are **children**
+            of ``listItem`` nodes, requiring two nested loops.
+
+        .. seealso::
+
+            - :meth:`NodeBulletList.to_markdown` - different structure, two loops
+            - :meth:`NodeOrderedList.to_markdown` - different structure, two loops
+        """
         lines = []
         indent = "    " * level  # 4 spaces per level
 
         for item in self.content:
             if self.is_type_of(item, TypeEnum.taskItem):
-                # Process the list item content
-                content_lines = []
+                # Process the task item content (text nodes)
+                content_parts = []
                 for node in item.content:
-                    if self.is_type_of(node, TypeEnum.taskList):
-                        # Nested list - increase level
-                        try:
-                            md = node.to_markdown(level=level + 1)
-                            content_lines.append(md)
-                        except Exception as e:
-                            if ignore_error:
-                                pass
-                            else:
-                                raise e
+                    try:
+                        md = node.to_markdown()
+                        content_parts.append(md)
+                    except Exception as e:
+                        if ignore_error:
+                            pass
+                        else:
+                            raise e
+
+                # Join content parts (they should be on the same line)
+                # Use rstrip() on the final result to remove trailing whitespace
+                item_content = "".join(content_parts).rstrip()
+
+                # Determine checkbox state based on item.attrs.state
+                checkbox = "[x]" if item.attrs.state == "DONE" else "[ ]"
+
+                # Format the line with checkbox
+                line = f"{indent}- {checkbox} {item_content}"
+                lines.append(line)
+
+            elif self.is_type_of(item, TypeEnum.taskList):
+                # Nested task list - increase level
+                try:
+                    md = item.to_markdown(level=level + 1, ignore_error=ignore_error)
+                    lines.append(md)
+                except Exception as e:
+                    if ignore_error:
+                        pass
                     else:
-                        # Regular content (like paragraph)
-                        try:
-                            md = node.to_markdown().rstrip()
-                            content_lines.append(md)
-                        except Exception as e:
-                            if ignore_error:
-                                pass
-                            else:
-                                raise e
-
-                # Join the content lines
-                item_content = "\n".join(content_lines)
-
-                # Format the first line with bullet point
-                bullet_content = item_content.split("\n")[0]
-                first_line = f"{indent}- [ ] {bullet_content}"
-                lines.append(first_line)
-
-                # Add remaining lines
-                remaining_lines = item_content.split("\n")[1:]
-                if remaining_lines:
-                    lines.extend(remaining_lines)
+                        raise e
 
         return "\n".join(lines)
