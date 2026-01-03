@@ -47,6 +47,10 @@ from .node_panel import NodePanel
 from .node_blockquote import NodeBlockquote
 from .node_expand import NodeExpand
 from .node_nested_expand import NodeNestedExpand
+from .node_table_cell import NodeTableCell
+from .node_table_header import NodeTableHeader
+from .node_table_row import NodeTableRow
+from .node_table import NodeTable
 
 
 # =============================================================================
@@ -83,6 +87,10 @@ NODE_TYPE_TO_CLASS_MAPPING = {
     TypeEnum.blockquote.value: NodeBlockquote,
     TypeEnum.expand.value: NodeExpand,
     TypeEnum.nestedExpand.value: NodeNestedExpand,
+    TypeEnum.tableCell.value: NodeTableCell,
+    TypeEnum.tableHeader.value: NodeTableHeader,
+    TypeEnum.tableRow.value: NodeTableRow,
+    TypeEnum.table.value: NodeTable,
 }
 
 

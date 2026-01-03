@@ -1,0 +1,90 @@
+# -*- coding: utf-8 -*-
+
+import typing as T
+import dataclasses
+
+from func_args.api import REQ, OPT
+
+from ..type_enum import TypeEnum
+from ..mark_or_node import Base, BaseNode
+from ..markdown_helpers import content_to_markdown
+
+if T.TYPE_CHECKING:  # pragma: no cover
+    from .node_paragraph import NodeParagraph
+    from .node_panel import NodePanel
+    from .node_blockquote import NodeBlockquote
+    from .node_ordered_list import NodeOrderedList
+    from .node_bullet_list import NodeBulletList
+    from .node_rule import NodeRule
+    from .node_heading import NodeHeading
+    from .node_code_block import NodeCodeBlock
+    from .node_media_single import NodeMediaSingle
+    from .node_media_group import NodeMediaGroup
+    from .node_decision_list import NodeDecisionList
+    from .node_task_list import NodeTaskList
+    from .node_block_card import NodeBlockCard
+    from .node_embed_card import NodeEmbedCard
+    from .node_extension import NodeExtension
+    from .node_nested_expand import NodeNestedExpand
+
+
+@dataclasses.dataclass(frozen=True)
+class NodeTableHeaderAttrs(Base):
+    """
+    Attributes for :class:`NodeTableHeader`.
+
+    :param colspan: Optional. Number of columns spanned (positive integer, defaults to 1).
+    :param rowspan: Optional. Number of rows spanned (positive integer, defaults to 1).
+    :param colwidth: Optional. Array of column widths in pixels; use 0 for flexible-width columns.
+    :param background: Optional. Cell background color using hex codes or HTML color names.
+    :param localId: Optional. A unique identifier for the node.
+    """
+
+    colspan: int = OPT
+    rowspan: int = OPT
+    colwidth: list[int] = OPT
+    background: str = OPT
+    localId: str = OPT
+
+
+@dataclasses.dataclass(frozen=True)
+class NodeTableHeader(BaseNode):
+    """
+    A cell within a table heading row.
+
+    The tableHeader node defines a cell in a table's header row.
+    It is a child block node of the tableRow node.
+
+    - https://developer.atlassian.com/cloud/jira/platform/apis/document/nodes/table_header/
+    """
+
+    type: str = TypeEnum.tableHeader.value
+    attrs: NodeTableHeaderAttrs = OPT
+    content: list[
+        T.Union[
+            "NodeParagraph",
+            "NodePanel",
+            "NodeBlockquote",
+            "NodeOrderedList",
+            "NodeBulletList",
+            "NodeRule",
+            "NodeHeading",
+            "NodeCodeBlock",
+            "NodeMediaSingle",
+            "NodeMediaGroup",
+            "NodeDecisionList",
+            "NodeTaskList",
+            "NodeBlockCard",
+            "NodeEmbedCard",
+            "NodeExtension",
+            "NodeNestedExpand",
+        ]
+    ] = REQ
+
+    def to_markdown(
+        self,
+        ignore_error: bool = False,
+    ) -> str:
+        md = content_to_markdown(content=self.content, ignore_error=ignore_error)
+        md = md.replace("|", "\\|").replace("\n", "<br>")
+        return md

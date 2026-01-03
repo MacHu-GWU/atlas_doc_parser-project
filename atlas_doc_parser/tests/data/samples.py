@@ -671,7 +671,44 @@ class AdfSampleEnum:
         """,
     )
 
-    node_table = PageSample(
+    _page = PageSample(
         name="node_table",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082217/Node+-+table",
-    ).get_sample(jpath="content[0]")
+    )
+    node_table_simple = _page.get_sample(
+        jpath="content[0]",
+        md="""
+        | **id**<br> | **name**<br> |
+        | --- | --- |
+        | 1<br> | alice<br> |
+        | 2<br> | bob<br> |
+        """,
+    )
+    node_table_complicated = _page.get_sample(
+        jpath="content[1]",
+        md="""
+        | **col 1**<br>second line<br> | **col 2**<br>second line<br> |
+        | --- | --- |
+        | > abc<br>> <br>> - 1<br>> - 2<br><br>another line<br> | > **INFO**<br>> <br>> efg<br>> <br>> 1. alice<br>> 2. bob<br><br>another line<br> |
+        | ```<br>def add_two(a, b):<br>    return a + b<br>``` | [Extension: com.atlassian.confluence.migration/nested-table] |
+        """,
+    )
+
+    # TODO
+    node_table_cell = _page.get_sample(
+        jpath="content[0]",
+        md="""
+        """,
+    )
+    # TODO
+    node_table_header = _page.get_sample(
+        jpath="content[0]",
+        md="""
+        """,
+    )
+    # TODO
+    node_table_row = _page.get_sample(
+        jpath="content[0]",
+        md="""
+        """,
+    )
