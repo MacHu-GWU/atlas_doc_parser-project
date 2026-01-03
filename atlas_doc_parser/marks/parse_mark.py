@@ -10,6 +10,7 @@ import typing as T
 
 from ..type_hint import T_DATA
 from ..type_enum import TypeEnum
+from ..exc import UnimplementedTypeError
 
 if T.TYPE_CHECKING:  # pragma: no cover
     from ..mark_or_node import T_MARK
@@ -59,7 +60,16 @@ MARK_TYPE_TO_CLASS_MAPPING = {
 
 
 def parse_mark(dct: T_DATA) -> "T_MARK":
-    """Parse a mark dictionary into a Mark object."""
+    """
+    Parse a mark dictionary into a Mark object.
+
+    :param dct: The raw ADF mark dictionary from JSON.
+    :return: The parsed mark instance.
+    :raises UnimplementedTypeError: If the mark type is not registered.
+    """
     type_ = dct["type"]
-    klass = MARK_TYPE_TO_CLASS_MAPPING[type_]
+    try:
+        klass = MARK_TYPE_TO_CLASS_MAPPING[type_]
+    except KeyError:
+        raise UnimplementedTypeError(type_, "mark")
     return klass.from_dict(dct)

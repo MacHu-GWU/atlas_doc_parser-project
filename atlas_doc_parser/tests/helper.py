@@ -39,7 +39,8 @@ def run_cov_test(
     )
 
 
-DEFAULT_VERBOSE = True
+# DEFAULT_VERBOSE = True
+DEFAULT_VERBOSE = False
 
 
 def print_adf_json(

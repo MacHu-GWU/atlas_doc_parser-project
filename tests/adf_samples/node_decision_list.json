@@ -39,6 +39,30 @@
                         {
                             "text": "decision 2",
                             "type": "text"
+                        },
+                        {
+                            "type": "hardBreak"
+                        },
+                        {
+                            "text": "- first",
+                            "type": "text"
+                        },
+                        {
+                            "type": "hardBreak"
+                        },
+                        {
+                            "text": "- second",
+                            "type": "text"
+                        },
+                        {
+                            "type": "hardBreak"
+                        },
+                        {
+                            "type": "hardBreak"
+                        },
+                        {
+                            "text": "some text",
+                            "type": "text"
                         }
                     ]
                 },
@@ -51,6 +75,60 @@
                     "content": [
                         {
                             "text": "decision 3",
+                            "type": "text"
+                        },
+                        {
+                            "type": "hardBreak"
+                        },
+                        {
+                            "type": "hardBreak"
+                        },
+                        {
+                            "text": "1. ",
+                            "type": "text"
+                        },
+                        {
+                            "text": "https://example.com",
+                            "type": "text",
+                            "marks": [
+                                {
+                                    "type": "link",
+                                    "attrs": {
+                                        "href": "https://example.com"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "text": " ",
+                            "type": "text"
+                        },
+                        {
+                            "type": "hardBreak"
+                        },
+                        {
+                            "text": "2. ",
+                            "type": "text"
+                        },
+                        {
+                            "type": "inlineCard",
+                            "attrs": {
+                                "localId": "377a8d0b-04f5-4258-9a77-2010aedfdc71",
+                                "url": "https://example.com"
+                            }
+                        },
+                        {
+                            "text": " ",
+                            "type": "text"
+                        },
+                        {
+                            "type": "hardBreak"
+                        },
+                        {
+                            "type": "hardBreak"
+                        },
+                        {
+                            "text": "some text",
                             "type": "text"
                         }
                     ]

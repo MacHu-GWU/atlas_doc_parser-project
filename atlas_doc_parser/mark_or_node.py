@@ -19,6 +19,11 @@ from func_args.api import BaseFrozenModel, REQ, OPT, remove_optional
 
 from .type_hint import T_DATA
 from .type_enum import TypeEnum, check_type_match
+from .exc import UnimplementedTypeError
+from .logger import logger
+
+from . import settings
+
 
 T_FIELDS = dict[str, dataclasses.Field]
 _CLASS_FIELD: dict[T.Any, T_FIELDS] = {}  # class fields cache
@@ -199,7 +204,6 @@ class BaseNode(BaseMarkOrNode):
     def from_dict(
         cls: T.Type["T_NODE"],
         dct: T_DATA,
-        ignore_error: bool = False,
     ) -> "T_NODE":
         """
         Deserialize from dictionary.
@@ -208,6 +212,10 @@ class BaseNode(BaseMarkOrNode):
         - ``attrs``: Using the field type's ``from_dict()``
         - ``content``: Using ``parse_node()`` for each child
         - ``marks``: Using ``parse_mark()`` for each mark
+
+        Unimplemented node/mark types are gracefully skipped with an optional
+        warning (controlled by ``settings.WARN_UNIMPLEMENTED_TYPE``).
+        Other parsing errors are propagated normally.
         """
         from .marks.parse_mark import parse_mark
         from .nodes.parse_node import parse_node
@@ -230,11 +238,12 @@ class BaseNode(BaseMarkOrNode):
                     try:
                         content = parse_node(d)
                         new_content.append(content)
-                    except Exception as e:
-                        if ignore_error:
-                            pass
-                        else:
-                            raise e
+                    except UnimplementedTypeError as e:
+                        # Skip unimplemented node types gracefully
+                        if settings.WARN_UNIMPLEMENTED_TYPE:
+                            logger.warning(str(e))
+                        # Skip this node and continue
+                    # Other exceptions propagate normally
                 dct["content"] = new_content
 
         # Deserialize marks
@@ -242,8 +251,15 @@ class BaseNode(BaseMarkOrNode):
             if isinstance(dct["marks"], list) and parse_mark is not None:
                 new_marks = []
                 for d in dct["marks"]:
-                    mark = parse_mark(d)
-                    new_marks.append(mark)
+                    try:
+                        mark = parse_mark(d)
+                        new_marks.append(mark)
+                    except UnimplementedTypeError as e:
+                        # Skip unimplemented mark types gracefully
+                        if settings.WARN_UNIMPLEMENTED_TYPE:
+                            logger.warning(str(e))
+                        # Skip this mark and continue
+                    # Other exceptions propagate normally
                 dct["marks"] = new_marks
 
         return super().from_dict(dct)

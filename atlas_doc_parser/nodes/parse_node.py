@@ -10,6 +10,7 @@ import typing as T
 
 from ..type_hint import T_DATA
 from ..type_enum import TypeEnum
+from ..exc import UnimplementedTypeError
 
 if T.TYPE_CHECKING:  # pragma: no cover
     from ..mark_or_node import T_NODE
@@ -97,7 +98,16 @@ NODE_TYPE_TO_CLASS_MAPPING = {
 
 
 def parse_node(dct: T_DATA) -> "T_NODE":
-    """Parse a node dictionary into a Node object."""
+    """
+    Parse a node dictionary into a Node object.
+
+    :param dct: The raw ADF node dictionary from JSON.
+    :return: The parsed node instance.
+    :raises UnimplementedTypeError: If the node type is not registered.
+    """
     type_ = dct["type"]
-    klass = NODE_TYPE_TO_CLASS_MAPPING[type_]
+    try:
+        klass = NODE_TYPE_TO_CLASS_MAPPING[type_]
+    except KeyError:
+        raise UnimplementedTypeError(type_, "node")
     return klass.from_dict(dct)

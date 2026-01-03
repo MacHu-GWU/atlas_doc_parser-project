@@ -359,8 +359,16 @@ class AdfSampleEnum:
         > decision **1**
         
         > decision 2
+        > - first
+        > - second
+        >
+        > some text
         
         > decision 3
+        > 1. [https://example.com](https://example.com)
+        > 2. [https://example.com](https://example.com)
+        >
+        > some text
         """,
     )
 
@@ -718,12 +726,20 @@ class AdfSampleEnum:
         """,
     )
 
+    node_doc = PageSample(
+        name="node_doc",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654114818/Node+-+doc",
+    ).get_sample(
+        jpath="@",
+        # md="Hello World",
+    )
+
+    # This page contains only a bodiedExtension node which is not yet implemented.
+    # The parser should skip it gracefully and return an empty document.
     node_doc_with_unimplemented_model = PageSample(
         name="node_doc_with_unimplemented_model",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492720/Node+-+with-unimplemented-model",
     ).get_sample(
         jpath="@",
-        md="""
-        This is a **bolded text**, do you see that? This is a *italic text*, do you see that? This is a underline, do you see that? This is a ~~strike through~~, do you see that? This is a ***~~bolded itlic strike through and underline~~***, do you see that? This is a subscript, do you see that? This is a superscript, do you see that? This text has color, do you see that? This text has background, do you see that? Note that you can not do Text color and Background color at the same time. This line has code `` a = 1 + 2 ``**.**
-        """,
+        md="Hello World",
     )
