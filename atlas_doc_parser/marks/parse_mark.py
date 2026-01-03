@@ -29,6 +29,10 @@ from .mark_underline import MarkUnderline
 from .mark_annotation import MarkAnnotation
 from .mark_indentation import MarkIndentation
 from .mark_border import MarkBorder
+from .mark_alignment import MarkAlignment
+from .mark_breakout import MarkBreakout
+from .mark_data_consumer import MarkDataConsumer
+from .mark_fragment import MarkFragment
 
 
 # =============================================================================
@@ -47,6 +51,10 @@ MARK_TYPE_TO_CLASS_MAPPING = {
     TypeEnum.annotation.value: MarkAnnotation,
     TypeEnum.indentation.value: MarkIndentation,
     TypeEnum.border.value: MarkBorder,
+    TypeEnum.alignment.value: MarkAlignment,
+    TypeEnum.breakout.value: MarkBreakout,
+    TypeEnum.dataConsumer.value: MarkDataConsumer,
+    TypeEnum.fragment.value: MarkFragment,
 }
 
 
