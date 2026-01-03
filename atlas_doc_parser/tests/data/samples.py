@@ -27,7 +27,7 @@ from sanhe_confluence_sdk.methods.page.get_page import (
     GetPageRequest,
 )
 
-from ...mark_or_node import T_BASE, T_NODE, BaseMark, BaseNode
+from ...mark_or_node import T_BASE, T_MARK, T_NODE, BaseMark, BaseNode
 from ...paths import path_enum
 from ..helper import check_seder, check_markdown
 from .client import client
@@ -130,17 +130,31 @@ class AdfSample:
         """
         return klass.from_dict(self.data)
 
+    @staticmethod
+    def test_node_or_mark(
+        node_or_mark: T.Union["T_MARK", "T_NODE"],
+        markdown: str | None = None,
+    ):
+        """
+        A test helper method.
+
+        Test serialization/deserialization and Markdown conversion.
+        """
+        check_seder(inst=node_or_mark)
+        if isinstance(node_or_mark, BaseNode) and markdown is not None:
+            check_markdown(
+                node=node_or_mark,
+                expected=markdown,
+            )
+
     def test(self, klass: T.Type["T_BASE"]) -> "T_BASE":
         """
+        A test helper method.
+
         Test serialization/deserialization and Markdown conversion.
         """
         node_or_mark = self.get_inst(klass)
-        check_seder(inst=node_or_mark)
-        if isinstance(node_or_mark, BaseNode) and self.markdown is not None:
-            check_markdown(
-                node=node_or_mark,
-                expected=self.markdown,
-            )
+        self.test_node_or_mark(node_or_mark, self.markdown)
         return node_or_mark
 
 
@@ -172,31 +186,57 @@ class AdfSampleEnum:
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558524/Mark+-+backgroundColor",
     )
     mark_background_color = _page.get_sample(jpath="content[0].content[1].marks[1]")
+    node_background_colored_text = _page.get_sample(
+        jpath="content[0].content[1]",
+        md="backgroundColor",
+    )
+
     mark_annotation = _page.get_sample(jpath="content[0].content[1].marks[0]")
 
-    mark_code = PageSample(
+    _page = PageSample(
         name="mark_code",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049333/Mark+-+code",
-    ).get_sample(jpath="content[0].content[1].marks[1]")
-    mark_em = PageSample(
+    )
+    mark_code = _page.get_sample(jpath="content[0].content[1].marks[1]")
+    mark_inline_code_text = _page.get_sample(
+        jpath="content[0].content[1]",
+        md="`` code ``",
+    )
+
+    _page = PageSample(
         name="mark_em",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049341/Mark+-+em",
-    ).get_sample(jpath="content[0].content[1].marks[1]")
+    )
+    mark_em = _page.get_sample(jpath="content[0].content[1].marks[1]")
+    node_italic_text = _page.get_sample(
+        jpath="content[0].content[1]",
+        md="*italic*",
+    )
+
     mark_link = PageSample(
         name="mark_link",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082109/Mark+-+link",
     ).get_sample(jpath="content[0].content[1].marks[1]")
-    mark_strike = PageSample(
+
+    _page = PageSample(
         name="mark_strike",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558555/Mark+-+strike",
-    ).get_sample(jpath="content[0].content[1].marks[1]")
+    )
+    mark_strike = _page.get_sample(jpath="content[0].content[1].marks[1]")
+    node_strike_text = _page.get_sample(
+        jpath="content[0].content[1]",
+        md="~~strike~~",
+    )
 
     _page = PageSample(
         name="mark_strong",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049306/Mark+-+strong",
     )
     mark_strong = _page.get_sample(jpath="content[0].content[1].marks[1]")
-    node_strong_text = _page.get_sample(jpath="content[0].content[1]")
+    node_strong_text = _page.get_sample(
+        jpath="content[0].content[1]",
+        md="**strong**",
+    )
 
     _page = PageSample(
         name="mark_subsup",
@@ -204,15 +244,34 @@ class AdfSampleEnum:
     )
     mark_sub = _page.get_sample(jpath="content[0].content[1].marks[1]")
     mark_sup = _page.get_sample(jpath="content[0].content[3].marks[1]")
+    node_sub_text = _page.get_sample(
+        jpath="content[0].content[1]",
+        md="sub",
+    )
+    node_sup_text = _page.get_sample(
+        jpath="content[0].content[3]",
+        md="sup",
+    )
 
-    mark_text_color = PageSample(
+    _page = PageSample(
         name="mark_text_color",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653558571/Mark+-+textColor",
-    ).get_sample(jpath="content[0].content[1].marks[1]")
-    mark_underline = PageSample(
+    )
+    mark_text_color = _page.get_sample(jpath="content[0].content[1].marks[1]")
+    node_colored_text = _page.get_sample(
+        jpath="content[0].content[1]",
+        md="colored",
+    )
+
+    _page = PageSample(
         name="mark_underline",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082132/Mark+-+underline",
-    ).get_sample(jpath="content[0].content[1].marks[1]")
+    )
+    mark_underline = _page.get_sample(jpath="content[0].content[1].marks[1]")
+    node_underline_text = _page.get_sample(
+        jpath="content[0].content[1]",
+        md="underline",
+    )
     node_block_quote = PageSample(
         name="node_block_quote",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492407/Node+-+blockquote",
