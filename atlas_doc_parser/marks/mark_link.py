@@ -22,10 +22,10 @@ class MarkLinkAttrs(Base):
     """
 
     href: str = OPT
-    title: T.Optional[str] = OPT
-    id: T.Optional[str] = OPT
-    collection: T.Optional[str] = OPT
-    occurrenceKey: T.Optional[str] = OPT
+    title: str = OPT
+    id: str = OPT
+    collection: str = OPT
+    occurrenceKey: str = OPT
 
 
 @dataclasses.dataclass(frozen=True)

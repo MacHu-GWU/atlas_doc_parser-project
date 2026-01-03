@@ -18,7 +18,7 @@ class NodeListItemAttrs(Base):
     :param localId: Optional. A unique identifier for the node.
     """
 
-    localId: T.Optional[str] = OPT
+    localId: str = OPT
 
 
 @dataclasses.dataclass(frozen=True)
@@ -32,8 +32,8 @@ class NodeListItem(BaseNode):
     """
 
     type: str = TypeEnum.listItem.value
-    attrs: T.Optional[NodeListItemAttrs] = OPT
-    content: T.List[BaseNode] = OPT
+    attrs: NodeListItemAttrs = OPT
+    content: list[BaseNode] = OPT
 
     def to_markdown(
         self,

@@ -13,7 +13,7 @@ from ..mark_or_node import Base, BaseNode
 class NodeRuleAttrs(Base):
     """Attributes for :class:`NodeRule`."""
 
-    localId: T.Optional[str] = OPT
+    localId: str = OPT
 
 
 @dataclasses.dataclass(frozen=True)
@@ -29,7 +29,7 @@ class NodeRule(BaseNode):
     """
 
     type: str = TypeEnum.rule.value
-    attrs: T.Optional[NodeRuleAttrs] = OPT
+    attrs: NodeRuleAttrs = OPT
 
     def to_markdown(
         self,

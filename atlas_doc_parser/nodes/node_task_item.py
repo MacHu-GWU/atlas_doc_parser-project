@@ -35,7 +35,7 @@ class NodeTaskItem(BaseNode):
 
     type: str = TypeEnum.taskItem.value
     attrs: NodeTaskItemAttrs = OPT
-    content: T.List[BaseNode] = OPT
+    content: list[BaseNode] = OPT
 
     def to_markdown(
         self,

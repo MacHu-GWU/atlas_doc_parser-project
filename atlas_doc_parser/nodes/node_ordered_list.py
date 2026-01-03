@@ -19,8 +19,8 @@ class NodeOrderedListAttrs(Base):
     :param localId: Optional. A unique identifier for the node.
     """
 
-    order: T.Optional[int] = OPT
-    localId: T.Optional[str] = OPT
+    order: int = OPT
+    localId: str = OPT
 
 
 @dataclasses.dataclass(frozen=True)
@@ -37,7 +37,7 @@ class NodeOrderedList(BaseNode):
 
     type: str = TypeEnum.orderedList.value
     attrs: NodeOrderedListAttrs = OPT
-    content: T.List[BaseNode] = OPT
+    content: list[BaseNode] = OPT
 
     def to_markdown(
         self,

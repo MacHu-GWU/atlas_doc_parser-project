@@ -14,7 +14,7 @@ from ..markdown_helpers import content_to_markdown, add_style_to_markdown
 class NodeParagraphAttrs(Base):
     """Attributes for :class:`NodeParagraph`."""
 
-    localId: T.Optional[str] = OPT
+    localId: str = OPT
 
 
 @dataclasses.dataclass(frozen=True)
@@ -29,9 +29,9 @@ class NodeParagraph(BaseNode):
     """
 
     type: str = TypeEnum.paragraph.value
-    attrs: T.Optional[NodeParagraphAttrs] = OPT
-    content: T.Optional[T.List[BaseNode]] = OPT
-    marks: T.Optional[T.List[BaseMark]] = OPT
+    attrs: NodeParagraphAttrs = OPT
+    content: list[BaseNode] = OPT
+    marks: list[BaseMark] = OPT
 
     def to_markdown(
         self,

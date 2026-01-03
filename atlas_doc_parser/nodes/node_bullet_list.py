@@ -21,7 +21,7 @@ class NodeBulletList(BaseNode):
     """
 
     type: str = TypeEnum.bulletList.value
-    content: T.List[BaseNode] = OPT
+    content: list[BaseNode] = OPT
 
     def to_markdown(
         self,

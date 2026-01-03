@@ -31,7 +31,7 @@ class NodeDecisionList(BaseNode):
 
     type: str = TypeEnum.decisionList.value
     attrs: NodeDecisionListAttrs = OPT
-    content: T.List[BaseNode] = OPT
+    content: list[BaseNode] = OPT
 
     def to_markdown(
         self,
