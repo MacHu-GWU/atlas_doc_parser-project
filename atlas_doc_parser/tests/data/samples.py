@@ -383,7 +383,7 @@ class AdfSampleEnum:
     ).get_sample(
         jpath="content[0].content[1]",
         md="""
-        this is an emoji:
+        ⚙️
         """,
     )
 
