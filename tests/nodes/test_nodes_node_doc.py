@@ -7,7 +7,7 @@ from atlas_doc_parser.tests.data.samples import AdfSampleEnum
 
 class TestNodeDoc:
     def test_node_doc_basic(self):
-        pass
+        node = AdfSampleEnum.node_doc.test(NodeDoc)
 
     def test_node_doc_with_unimplemented_model(self):
         node = AdfSampleEnum.node_doc_with_unimplemented_model.test(NodeDoc)
