@@ -51,12 +51,14 @@ from .node_table_cell import NodeTableCell
 from .node_table_header import NodeTableHeader
 from .node_table_row import NodeTableRow
 from .node_table import NodeTable
+from .node_doc import NodeDoc
 
 
 # =============================================================================
 # Node registry
 # =============================================================================
 NODE_TYPE_TO_CLASS_MAPPING = {
+    TypeEnum.doc.value: NodeDoc,
     TypeEnum.text.value: NodeText,
     TypeEnum.rule.value: NodeRule,
     TypeEnum.listItem.value: NodeListItem,

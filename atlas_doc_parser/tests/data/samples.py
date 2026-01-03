@@ -65,6 +65,17 @@ class PageSample:
         return path_enum.dir_adf_samples / f"{self.name}.json"
 
     @cached_property
+    def adf_no_cache(self) -> dict:
+        request = GetPageRequest(
+            path_params=GetPageRequestPathParams(id=self.page_id),
+            query_params=GetPageRequestQueryParams(body_format="atlas_doc_format"),
+        )
+        response = request.sync(client)
+        content = response.body.atlas_doc_format.value
+        data = json.loads(content)
+        return data
+
+    @cached_property
     def adf(self) -> dict:
         """
         Full ADF content of the source Confluence page.
@@ -74,13 +85,7 @@ class PageSample:
         try:
             return json.loads(self.path.read_text(encoding="utf-8"))
         except FileNotFoundError:
-            request = GetPageRequest(
-                path_params=GetPageRequestPathParams(id=self.page_id),
-                query_params=GetPageRequestQueryParams(body_format="atlas_doc_format"),
-            )
-            response = request.sync(client)
-            content = response.body.atlas_doc_format.value
-            data = json.loads(content)
+            data = self.adf_no_cache
             content = json.dumps(data, indent=4, ensure_ascii=False)
             self.path.write_text(content, encoding="utf-8")
             return data
@@ -710,5 +715,15 @@ class AdfSampleEnum:
     node_table_row = _page.get_sample(
         jpath="content[0]",
         md="""
+        """,
+    )
+
+    node_doc_with_unimplemented_model = PageSample(
+        name="node_doc_with_unimplemented_model",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492720/Node+-+with-unimplemented-model",
+    ).get_sample(
+        jpath="@",
+        md="""
+        This is a **bolded text**, do you see that? This is a *italic text*, do you see that? This is a underline, do you see that? This is a ~~strike through~~, do you see that? This is a ***~~bolded itlic strike through and underline~~***, do you see that? This is a subscript, do you see that? This is a superscript, do you see that? This text has color, do you see that? This text has background, do you see that? Note that you can not do Text color and Background color at the same time. This line has code `` a = 1 + 2 ``**.**
         """,
     )
