@@ -104,7 +104,7 @@ def doc_content_to_markdown(
     ignore_error: bool = False,
 ) -> str:
     """
-    Convert document-level block content to Markdown text.
+    Convert document-level (whole confluence page) block content to Markdown text.
 
     This function is used for **block-level content** where each child node
     represents a separate block (paragraph, heading, list, etc.). Unlike

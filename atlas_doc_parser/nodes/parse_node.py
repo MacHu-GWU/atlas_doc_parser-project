@@ -18,6 +18,11 @@ if T.TYPE_CHECKING:  # pragma: no cover
 # Node imports
 # =============================================================================
 from .node_text import NodeText
+from .node_rule import NodeRule
+from .node_list_item import NodeListItem
+from .node_bullet_list import NodeBulletList
+from .node_ordered_list import NodeOrderedList
+from .node_paragraph import NodeParagraph
 
 
 # =============================================================================
@@ -25,6 +30,11 @@ from .node_text import NodeText
 # =============================================================================
 NODE_TYPE_TO_CLASS_MAPPING = {
     TypeEnum.text.value: NodeText,
+    TypeEnum.rule.value: NodeRule,
+    TypeEnum.listItem.value: NodeListItem,
+    TypeEnum.bulletList.value: NodeBulletList,
+    TypeEnum.orderedList.value: NodeOrderedList,
+    TypeEnum.paragraph.value: NodeParagraph,
 }
 
 
