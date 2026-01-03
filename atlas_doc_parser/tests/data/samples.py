@@ -387,6 +387,26 @@ class AdfSampleEnum:
         """,
     )
 
+    node_mention = PageSample(
+        name="node_mention",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492462/Node+-+mention",
+    ).get_sample(
+        jpath="content[0].content[0]",
+        md="""
+        @machu
+        """,
+    )
+
+    node_status = PageSample(
+        name="node_status",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049423/Node+-+status",
+    ).get_sample(
+        jpath="content[0].content[0]",
+        md="""
+        @machu
+        """,
+    )
+
     node_code_block = PageSample(
         name="node_code_block",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049370/Node+-+codeBlock",
@@ -400,10 +420,6 @@ class AdfSampleEnum:
         name="node_inline_card",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492455/Node+-+inlineCard",
     ).get_sample(jpath="content[0]")
-    node_mention = PageSample(
-        name="node_mention",
-        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492462/Node+-+mention",
-    ).get_sample(jpath="content[0].content[0]")
 
     node_block_quote = PageSample(
         name="node_block_quote",
@@ -432,10 +448,6 @@ class AdfSampleEnum:
         """,
     )
 
-    node_status = PageSample(
-        name="node_status",
-        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654049423/Node+-+status",
-    ).get_sample(jpath="content[0].content[0]")
     node_table = PageSample(
         name="node_table",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082217/Node+-+table",

@@ -30,6 +30,8 @@ from .node_decision_list import NodeDecisionList
 from .node_emoji import NodeEmoji
 from .node_hard_break import NodeHardBreak
 from .node_date import NodeDate
+from .node_mention import NodeMention
+from .node_status import NodeStatus
 
 
 # =============================================================================
@@ -49,6 +51,8 @@ NODE_TYPE_TO_CLASS_MAPPING = {
     TypeEnum.emoji.value: NodeEmoji,
     TypeEnum.hardBreak.value: NodeHardBreak,
     TypeEnum.date.value: NodeDate,
+    TypeEnum.mention.value: NodeMention,
+    TypeEnum.status.value: NodeStatus,
 }
 
 
