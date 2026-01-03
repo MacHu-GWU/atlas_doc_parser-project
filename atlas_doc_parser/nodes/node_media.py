@@ -3,7 +3,7 @@
 import typing as T
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseNode, T_MARK
@@ -78,7 +78,7 @@ class NodeMedia(BaseNode):
     """
 
     type: str = TypeEnum.media.value
-    attrs: NodeMediaAttrs = OPT
+    attrs: NodeMediaAttrs = REQ
     marks: list[
         T.Union[
             "MarkLink",

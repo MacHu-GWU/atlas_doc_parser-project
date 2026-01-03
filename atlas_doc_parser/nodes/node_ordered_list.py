@@ -3,7 +3,7 @@
 import typing as T
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseNode
@@ -40,7 +40,7 @@ class NodeOrderedList(BaseNode):
 
     type: str = TypeEnum.orderedList.value
     attrs: NodeOrderedListAttrs = OPT
-    content: list["NodeListItem"] = OPT
+    content: list["NodeListItem"] = REQ
 
     def to_markdown(
         self,

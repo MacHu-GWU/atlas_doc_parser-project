@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import typing as T
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseMark
@@ -16,7 +17,7 @@ class MarkSubsupAttrs(Base):
     :param type: Required. Either "sub" for subscript or "sup" for superscript.
     """
 
-    type: str = OPT
+    type: T.Literal["sub", "sup"] = REQ
 
 
 @dataclasses.dataclass(frozen=True)
@@ -32,4 +33,4 @@ class MarkSubsup(BaseMark):
     """
 
     type: str = TypeEnum.subsup.value
-    attrs: MarkSubsupAttrs = OPT
+    attrs: MarkSubsupAttrs = REQ

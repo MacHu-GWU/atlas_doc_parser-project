@@ -3,7 +3,7 @@
 import typing as T
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseNode, BaseMark
@@ -34,7 +34,7 @@ class NodeHeadingAttrs(Base):
     :param localId: Optional. A unique identifier for the node within the document.
     """
 
-    level: int = OPT
+    level: int = REQ
     localId: str = OPT
 
 
@@ -52,7 +52,7 @@ class NodeHeading(BaseNode):
     """
 
     type: str = TypeEnum.heading.value
-    attrs: NodeHeadingAttrs = OPT
+    attrs: NodeHeadingAttrs = REQ
     content: list[
         T.Union[
             "NodeText",

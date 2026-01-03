@@ -3,7 +3,7 @@
 import typing as T
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseNode
@@ -21,7 +21,7 @@ class NodeTaskListAttrs(Base):
     :param localId: A unique identifier for the task list.
     """
 
-    localId: str = OPT
+    localId: str = REQ
 
 
 @dataclasses.dataclass(frozen=True)
@@ -35,14 +35,14 @@ class NodeTaskList(BaseNode):
     """
 
     type: str = TypeEnum.taskList.value
-    attrs: NodeTaskListAttrs = OPT
+    attrs: NodeTaskListAttrs = REQ
     content: list[
         T.Union[
             "NodeTaskItem",
             "NodeTaskList",
             "NodeBlockTaskItem",
         ]
-    ] = OPT
+    ] = REQ
 
     def to_markdown(
         self,

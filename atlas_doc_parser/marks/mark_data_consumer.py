@@ -2,7 +2,7 @@
 
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseMark
@@ -29,4 +29,4 @@ class MarkDataConsumer(BaseMark):
     """
 
     type: str = TypeEnum.dataConsumer.value
-    attrs: MarkDataConsumerAttrs = OPT
+    attrs: MarkDataConsumerAttrs = REQ

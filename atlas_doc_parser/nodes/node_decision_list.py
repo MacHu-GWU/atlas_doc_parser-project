@@ -3,7 +3,7 @@
 import typing as T
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseNode
@@ -20,7 +20,7 @@ class NodeDecisionListAttrs(Base):
     :param localId: A unique identifier for the decision list.
     """
 
-    localId: str = OPT
+    localId: str = REQ
 
 
 @dataclasses.dataclass(frozen=True)
@@ -33,8 +33,8 @@ class NodeDecisionList(BaseNode):
     """
 
     type: str = TypeEnum.decisionList.value
-    attrs: NodeDecisionListAttrs = OPT
-    content: list["NodeDecisionItem"] = OPT
+    attrs: NodeDecisionListAttrs = REQ
+    content: list["NodeDecisionItem"] = REQ
 
     def to_markdown(
         self,

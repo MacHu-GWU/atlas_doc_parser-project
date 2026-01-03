@@ -2,7 +2,7 @@
 
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseMark
@@ -26,8 +26,8 @@ class MarkAnnotationAttrs(Base):
         ``"inlineComment"`` is supported.
     """
 
-    id: str = OPT
-    annotationType: str = OPT
+    id: str = REQ
+    annotationType: str = REQ
 
 
 @dataclasses.dataclass(frozen=True)
@@ -42,4 +42,4 @@ class MarkAnnotation(BaseMark):
     """
 
     type: str = TypeEnum.annotation.value
-    attrs: MarkAnnotationAttrs = OPT
+    attrs: MarkAnnotationAttrs = REQ

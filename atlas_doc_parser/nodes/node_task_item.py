@@ -3,7 +3,7 @@
 import typing as T
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseNode
@@ -31,8 +31,8 @@ class NodeTaskItemAttrs(Base):
     :param state: The state of the task item. Either "TODO" or "DONE".
     """
 
-    localId: str = OPT
-    state: T.Literal["TODO", "DONE"] = OPT
+    localId: str = REQ
+    state: T.Literal["TODO", "DONE"] = REQ
 
 
 @dataclasses.dataclass(frozen=True)
@@ -46,7 +46,7 @@ class NodeTaskItem(BaseNode):
     """
 
     type: str = TypeEnum.taskItem.value
-    attrs: NodeTaskItemAttrs = OPT
+    attrs: NodeTaskItemAttrs = REQ
     content: list[
         T.Union[
             "NodeText",

@@ -2,7 +2,7 @@
 
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseNode
@@ -23,7 +23,7 @@ class NodeEmojiAttrs(Base):
     :param localId: Optional. A unique identifier for the node.
     """
 
-    shortName: str = OPT
+    shortName: str = REQ
     id: str = OPT
     text: str = OPT
     localId: str = OPT
@@ -45,7 +45,7 @@ class NodeEmoji(BaseNode):
     """
 
     type: str = TypeEnum.emoji.value
-    attrs: NodeEmojiAttrs = OPT
+    attrs: NodeEmojiAttrs = REQ
 
     def to_markdown(
         self,

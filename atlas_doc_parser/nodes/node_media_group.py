@@ -3,7 +3,7 @@
 import typing as T
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import BaseNode
@@ -26,4 +26,4 @@ class NodeMediaGroup(BaseNode):
     """
 
     type: str = TypeEnum.mediaGroup.value
-    content: list["NodeMedia"] = OPT
+    content: list["NodeMedia"] = REQ

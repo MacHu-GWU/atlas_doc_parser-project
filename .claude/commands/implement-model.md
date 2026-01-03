@@ -117,7 +117,46 @@ content: list[
 
 See `./atlas_doc_parser/nodes/node_list_item.py` for a complete example with multiple refs.
 
-#### Rule 2: Optional Attributes - Do NOT Use `T.Optional`
+#### Rule 2: Required vs Optional Fields - Use `REQ` and `OPT` Correctly
+
+**CRITICAL:** Match the JSON schema's `required` array when setting default values:
+
+- **Required fields** → use `REQ` as default value
+- **Optional fields** → use `OPT` as default value
+
+```python
+# JSON schema shows: "required": ["timestamp"], "properties": {"timestamp": {...}, "localId": {...}}
+
+# ✅ CORRECT - match schema's required array
+class NodeDateAttrs(Base):
+    timestamp: str = REQ    # In required array → REQ
+    localId: str = OPT      # NOT in required array → OPT
+```
+
+**Check both levels:**
+
+1. **Top-level node/mark fields** - check if `attrs`, `content`, `text`, `marks` are in the top-level `required` array
+2. **Attrs class fields** - check if each attr field is in the attrs object's `required` array
+
+```python
+# JSON schema shows:
+# - Top level: "required": ["type", "attrs"]
+# - Attrs: "required": ["text", "color"]
+
+# ✅ CORRECT
+class NodeStatusAttrs(Base):
+    text: str = REQ         # Required in attrs
+    color: str = REQ        # Required in attrs
+    localId: str = OPT      # Optional in attrs
+
+class NodeStatus(BaseNode):
+    type: str = TypeEnum.status.value
+    attrs: NodeStatusAttrs = REQ  # Required at top level
+```
+
+**For `anyOf` schemas:** When attrs has multiple variants (anyOf), use OPT for fields that are only required in some variants, since the Python class must accept all variants.
+
+#### Rule 3: Optional Attributes - Do NOT Use `T.Optional`
 
 **NEVER use `T.Optional[...]`** for optional attributes. The `OPT` sentinel value already indicates optionality:
 
@@ -136,7 +175,7 @@ class NodeExampleAttrs(Base):
 
 **Exception:** Only use `T.Optional` if the JSON schema explicitly specifies `nullable: true` (which is rare).
 
-#### Rule 3: Enum Types - Use `TypeEnum` for `type` Field
+#### Rule 4: Enum Types - Use `TypeEnum` for `type` Field
 
 When JSON schema shows an enum for a string field (e.g., `"enum": ["hardBreak"]`):
 

@@ -2,7 +2,7 @@
 
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseMark
@@ -17,8 +17,8 @@ class MarkBorderAttrs(Base):
     :param color: Required. Border color as hex string (#RRGGBB or #RRGGBBAA).
     """
 
-    size: int = OPT
-    color: str = OPT
+    size: int = REQ
+    color: str = REQ
 
 
 @dataclasses.dataclass(frozen=True)
@@ -31,4 +31,4 @@ class MarkBorder(BaseMark):
     """
 
     type: str = TypeEnum.border.value
-    attrs: MarkBorderAttrs = OPT
+    attrs: MarkBorderAttrs = REQ

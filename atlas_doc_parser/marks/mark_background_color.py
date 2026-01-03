@@ -2,7 +2,7 @@
 
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseMark
@@ -22,4 +22,4 @@ class MarkBackgroundColor(BaseMark):
     """
 
     type: str = TypeEnum.backgroundColor.value
-    attrs: MarkBackgroundColorAttrs = OPT
+    attrs: MarkBackgroundColorAttrs = REQ

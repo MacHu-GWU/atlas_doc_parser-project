@@ -3,7 +3,7 @@
 import dataclasses
 from datetime import datetime, timezone
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseNode
@@ -18,7 +18,7 @@ class NodeDateAttrs(Base):
     :param localId: Optional. A unique identifier for the node.
     """
 
-    timestamp: str = OPT
+    timestamp: str = REQ
     localId: str = OPT
 
 
@@ -38,7 +38,7 @@ class NodeDate(BaseNode):
     """
 
     type: str = TypeEnum.date.value
-    attrs: NodeDateAttrs = OPT
+    attrs: NodeDateAttrs = REQ
 
     def to_markdown(
         self: "NodeDate",

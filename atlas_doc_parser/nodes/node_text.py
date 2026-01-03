@@ -3,7 +3,7 @@
 import typing as T
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import BaseNode
@@ -34,7 +34,7 @@ class NodeText(BaseNode):
     """
 
     type: str = TypeEnum.text.value
-    text: str = OPT
+    text: str = REQ
     marks: list[
         T.Union[
             "MarkLink",

@@ -3,7 +3,7 @@
 import typing as T
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_hint import T_DATA
 from ..type_enum import TypeEnum
@@ -90,7 +90,7 @@ class NodeBlockCard(BaseNode):
     """
 
     type: str = TypeEnum.blockCard.value
-    attrs: NodeBlockCardAttrs = OPT
+    attrs: NodeBlockCardAttrs = REQ
 
     def to_markdown(
         self,

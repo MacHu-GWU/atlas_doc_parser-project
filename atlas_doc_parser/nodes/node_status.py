@@ -3,7 +3,7 @@
 import typing as T
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseNode
@@ -21,8 +21,8 @@ class NodeStatusAttrs(Base):
     :param style: Optional. Style information for the status.
     """
 
-    text: str = OPT
-    color: T.Literal["neutral", "purple", "blue", "red", "yellow", "green"] = OPT
+    text: str = REQ
+    color: T.Literal["neutral", "purple", "blue", "red", "yellow", "green"] = REQ
     localId: str = OPT
     style: str = OPT
 
@@ -42,7 +42,7 @@ class NodeStatus(BaseNode):
     """
 
     type: str = TypeEnum.status.value
-    attrs: NodeStatusAttrs = OPT
+    attrs: NodeStatusAttrs = REQ
 
     def to_markdown(
         self,

@@ -2,7 +2,7 @@
 
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseMark
@@ -32,4 +32,4 @@ class MarkFragment(BaseMark):
     """
 
     type: str = TypeEnum.fragment.value
-    attrs: MarkFragmentAttrs = OPT
+    attrs: MarkFragmentAttrs = REQ

@@ -2,7 +2,7 @@
 
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseMark
@@ -16,7 +16,7 @@ class MarkIndentationAttrs(Base):
     :param level: Required. The indentation level, an integer from 1 to 6.
     """
 
-    level: int = OPT
+    level: int = REQ
 
 
 @dataclasses.dataclass(frozen=True)
@@ -30,7 +30,7 @@ class MarkIndentation(BaseMark):
     """
 
     type: str = TypeEnum.indentation.value
-    attrs: MarkIndentationAttrs = OPT
+    attrs: MarkIndentationAttrs = REQ
 
     def to_markdown(
         self,

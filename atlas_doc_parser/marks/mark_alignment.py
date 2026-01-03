@@ -3,7 +3,7 @@
 import typing as T
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseMark
@@ -37,4 +37,4 @@ class MarkAlignment(BaseMark):
     """
 
     type: str = TypeEnum.alignment.value
-    attrs: MarkAlignmentAttrs = OPT
+    attrs: MarkAlignmentAttrs = REQ

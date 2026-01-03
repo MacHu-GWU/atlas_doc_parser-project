@@ -3,7 +3,7 @@
 import typing as T
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseNode
@@ -31,8 +31,8 @@ class NodeDecisionItemAttrs(Base):
     :param state: The state of the decision (e.g., "DECIDED").
     """
 
-    localId: str = OPT
-    state: str = OPT
+    localId: str = REQ
+    state: str = REQ
 
 
 @dataclasses.dataclass(frozen=True)
@@ -45,7 +45,7 @@ class NodeDecisionItem(BaseNode):
     """
 
     type: str = TypeEnum.decisionItem.value
-    attrs: NodeDecisionItemAttrs = OPT
+    attrs: NodeDecisionItemAttrs = REQ
     content: list[
         T.Union[
             "NodeText",

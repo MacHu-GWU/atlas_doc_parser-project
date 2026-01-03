@@ -3,7 +3,7 @@
 import typing as T
 import dataclasses
 
-from func_args.api import OPT
+from func_args.api import REQ, OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseNode
@@ -24,7 +24,7 @@ class NodeMentionAttrs(Base):
         "DEFAULT" (regular user), "SPECIAL" (special collection like "all"), or "APP" (application).
     """
 
-    id: str = OPT
+    id: str = REQ
     localId: str = OPT
     text: str = OPT
     accessLevel: str = OPT
@@ -45,7 +45,7 @@ class NodeMention(BaseNode):
     """
 
     type: str = TypeEnum.mention.value
-    attrs: NodeMentionAttrs = OPT
+    attrs: NodeMentionAttrs = REQ
 
     def to_markdown(
         self,
