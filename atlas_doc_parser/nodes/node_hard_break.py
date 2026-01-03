@@ -40,4 +40,4 @@ class NodeHardBreak(BaseNode):
         self,
         ignore_error: bool = False,
     ) -> str:
-        return "\n\n"
+        return "  \n"

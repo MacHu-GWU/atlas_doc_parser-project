@@ -29,7 +29,7 @@ from sanhe_confluence_sdk.methods.page.get_page import (
 
 from ...mark_or_node import T_BASE, T_MARK, T_NODE, BaseMark, BaseNode
 from ...paths import path_enum
-from ..helper import check_seder, check_markdown
+from ..helper import print_adf_json, check_seder, check_markdown
 from .client import client
 
 
@@ -153,6 +153,7 @@ class AdfSample:
 
         Test serialization/deserialization and Markdown conversion.
         """
+        print_adf_json(self.data)
         node_or_mark = self.get_inst(klass)
         self.test_node_or_mark(node_or_mark, self.markdown)
         return node_or_mark
@@ -358,27 +359,14 @@ class AdfSampleEnum:
         """,
     )
 
-    node_block_quote = PageSample(
-        name="node_block_quote",
-        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492407/Node+-+blockquote",
-    ).get_sample(
-        jpath="content[0]",
-        md="""
-        > Alice says:
-        > 
-        > Just do it!
-        """,
-    )
-
     node_hard_break = PageSample(
         name="node_hard_break",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082310/Node+-+hardBreak",
     ).get_sample(
-        jpath="content[0].content[1]",
+        jpath="content[1]",
         md="""
-        abc
-        
-        efg
+        below is a hard break
+        above is a hard break
         """,
     )
 
@@ -419,6 +407,18 @@ class AdfSampleEnum:
         name="node_mention",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492462/Node+-+mention",
     ).get_sample(jpath="content[0].content[0]")
+
+    node_block_quote = PageSample(
+        name="node_block_quote",
+        url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492407/Node+-+blockquote",
+    ).get_sample(
+        jpath="content[0]",
+        md="""
+        > Alice says:
+        > 
+        > Just do it!
+        """,
+    )
 
     node_panel = PageSample(
         name="node_panel",
