@@ -118,6 +118,33 @@ class NodeExampleAttrs(Base):
 
 **Exception:** Only use `T.Optional` if the JSON schema explicitly specifies `nullable: true` (which is rare).
 
+#### Rule 3: Enum Types - Use `TypeEnum` for `type` Field
+
+When JSON schema shows an enum for a string field (e.g., `"enum": ["hardBreak"]`):
+
+1. **First check if it's the `type` field** - if yes, use `TypeEnum.xxx.value`
+2. **For other fields** - use `T.Literal[...]`
+
+```python
+# JSON schema shows: "type": { "enum": ["hardBreak"] }
+
+# ✅ CORRECT - use TypeEnum for the `type` field
+class NodeHardBreak(BaseNode):
+    type: str = TypeEnum.hardBreak.value
+
+# ❌ WRONG - do not use T.Literal for the `type` field
+class NodeHardBreak(BaseNode):
+    type: T.Literal["hardBreak"] = "hardBreak"  # NO!
+```
+
+```python
+# JSON schema shows: "layout": { "enum": ["wide", "center", "full-width"] }
+
+# ✅ CORRECT - use T.Literal for non-type enum fields
+class NodeMediaSingleAttrs(Base):
+    layout: T.Literal["wide", "center", "full-width"] = OPT
+```
+
 ## Step 4: Update Type Mapping
 
 After creating the dataclass file, update the type-to-class mapping:
