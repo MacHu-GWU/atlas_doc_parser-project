@@ -481,7 +481,7 @@ class AdfSampleEnum:
         name="node_block_card",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492455/Node+-+blockCard",
     ).get_sample(
-        jpath="content[0].content[0]",
+        jpath="content[0]",
         md="""
         [https://example.com](https://example.com)
         """,
