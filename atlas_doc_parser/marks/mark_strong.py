@@ -17,7 +17,7 @@ class MarkStrong(BaseMark):
     type: str = TypeEnum.strong.value
 
     def to_markdown(
-        self: "MarkStrong",
+        self,
         text: str,
     ) -> str:
         if text.strip():

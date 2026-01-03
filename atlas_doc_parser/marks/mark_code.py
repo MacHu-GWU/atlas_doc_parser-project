@@ -20,7 +20,7 @@ class MarkCode(BaseMark):
     type: str = TypeEnum.code.value
 
     def to_markdown(
-        self: "MarkCode",
+        self,
         text: str,
     ) -> str:
         if "\n" in text:

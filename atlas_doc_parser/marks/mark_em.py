@@ -17,7 +17,7 @@ class MarkEm(BaseMark):
     type: str = TypeEnum.em.value
 
     def to_markdown(
-        self: "MarkEm",
+        self,
         text: str,
     ) -> str:
         if text.strip():

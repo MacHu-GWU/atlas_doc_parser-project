@@ -43,7 +43,7 @@ class MarkLink(BaseMark):
     attrs: MarkLinkAttrs = OPT
 
     def to_markdown(
-        self: "MarkLink",
+        self,
         text: str,
     ) -> str:
         if isinstance(self.attrs.title, str):
