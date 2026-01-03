@@ -6,7 +6,7 @@ from atlas_doc_parser.tests.data.samples import AdfSampleEnum
 
 
 class TestNodeOrderedList:
-    def test_ordered_list_node_basic(self):
+    def test_node_ordered_list_basic(self):
         node = AdfSampleEnum.node_ordered_list.test(NodeOrderedList)
 
 

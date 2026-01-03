@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+# hardBreak is an inline node, we test it within a paragraph to verify the rendering effect
 from atlas_doc_parser.nodes.node_paragraph import NodeParagraph
 
 from atlas_doc_parser.tests.data.samples import AdfSampleEnum

@@ -6,7 +6,7 @@ from atlas_doc_parser.tests.data.samples import AdfSampleEnum
 
 
 class TesNodeTaskList:
-    def test_task_list_node_basic(self):
+    def test_node_task_list_basic(self):
         node = AdfSampleEnum.node_task_list.test(NodeTaskList)
 
 

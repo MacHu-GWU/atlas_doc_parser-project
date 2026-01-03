@@ -6,35 +6,35 @@ from atlas_doc_parser.tests.data.samples import AdfSampleEnum, AdfSample
 
 
 class TestNodeText:
-    def test_text_node_basic(self):
+    def test_node_text_basic(self):
         node = AdfSampleEnum.node_text.test(NodeText)
 
-    def test_text_node_with_strong_emphasis(self):
+    def test_node_text_with_strong_emphasis(self):
         node = AdfSampleEnum.node_strong_text.test(NodeText)
 
-    def test_text_node_with_italic(self):
+    def test_node_text_with_italic(self):
         node = AdfSampleEnum.node_italic_text.test(NodeText)
 
-    def test_text_node_with_underline(self):
+    def test_node_text_with_underline(self):
         node = AdfSampleEnum.node_underline_text.test(NodeText)
 
-    def test_text_node_with_strikethrough(self):
+    def test_node_text_with_strikethrough(self):
         node = AdfSampleEnum.node_strike_text.test(NodeText)
 
-    def test_text_node_with_code_mark(self):
+    def test_node_text_with_code_mark(self):
         node = AdfSampleEnum.mark_inline_code_text.test(NodeText)
 
-    def test_text_node_with_subsup(self):
+    def test_node_text_with_subsup(self):
         node = AdfSampleEnum.node_sub_text.test(NodeText)
         node = AdfSampleEnum.node_sup_text.test(NodeText)
 
-    def test_text_node_with_text_color(self):
+    def test_node_text_with_text_color(self):
         node = AdfSampleEnum.node_colored_text.test(NodeText)
 
-    def test_text_node_with_background_color(self):
+    def test_node_text_with_background_color(self):
         node = AdfSampleEnum.node_background_colored_text.test(NodeText)
 
-    def test_text_node_with_titled_hyperlink(self):
+    def test_node_text_with_titled_hyperlink(self):
         data = {
             "text": "Atlassian",
             "type": "text",
@@ -52,7 +52,7 @@ class TestNodeText:
         md = "[Atlassian](http://atlassian.com)"
         AdfSample.test_node_or_mark(node, md)
 
-    def test_text_node_with_url_hyperlink(self):
+    def test_node_text_with_url_hyperlink(self):
         data = {
             "text": "Atlassian",
             "type": "text",
