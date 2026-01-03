@@ -180,6 +180,7 @@ class AdfSampleEnum:
 
         https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082078/atlas_doc_parser+-+Single+Mark+or+Node+Test
     """
+
     # --------------------------------------------------------------------------
     # Mark
     # --------------------------------------------------------------------------
@@ -349,16 +350,12 @@ class AdfSampleEnum:
     ).get_sample(
         jpath="content[0]",
         md="""
-            - [x] item **1**
-                - [x] item **1.1**
-                    - [x] item **1.1.1**
-            - [ ] item 2
-                - [x] item 2.1
-                    - [ ] item 2.1.1
-            - [ ] item 3
-                - [ ] item 3.1
-                    - [x] item 3.1.1
-            """,
+        > decision **1**
+        
+        > decision 2
+        
+        > decision 3
+        """,
     )
 
     node_block_quote = PageSample(
@@ -421,4 +418,3 @@ class AdfSampleEnum:
         name="node_table",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/654082217/Node+-+table",
     ).get_sample(jpath="content[0]")
-

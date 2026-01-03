@@ -7,6 +7,7 @@ from func_args.api import OPT
 
 from ..type_enum import TypeEnum
 from ..mark_or_node import Base, BaseNode
+from ..markdown_helpers import content_to_markdown
 
 
 @dataclasses.dataclass(frozen=True)
@@ -34,3 +35,9 @@ class NodeDecisionItem(BaseNode):
     type: str = TypeEnum.decisionItem.value
     attrs: NodeDecisionItemAttrs = OPT
     content: T.List[BaseNode] = OPT
+
+    def to_markdown(
+        self,
+        ignore_error: bool = False,
+    ) -> str:
+        return content_to_markdown(content=self.content, ignore_error=ignore_error)

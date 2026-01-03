@@ -1,0 +1,62 @@
+{
+    "type": "doc",
+    "content": [
+        {
+            "type": "decisionList",
+            "attrs": {
+                "localId": "8984dcfa-e423-4d83-ae2c-501dee166a48"
+            },
+            "content": [
+                {
+                    "type": "decisionItem",
+                    "attrs": {
+                        "state": "DECIDED",
+                        "localId": "8b87d6fb-7e1a-404c-805f-cd9aca6a9fb0"
+                    },
+                    "content": [
+                        {
+                            "text": "decision ",
+                            "type": "text"
+                        },
+                        {
+                            "text": "1",
+                            "type": "text",
+                            "marks": [
+                                {
+                                    "type": "strong"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "decisionItem",
+                    "attrs": {
+                        "state": "DECIDED",
+                        "localId": "a50ac992-cd30-4500-8dc9-3f9462d01060"
+                    },
+                    "content": [
+                        {
+                            "text": "decision 2",
+                            "type": "text"
+                        }
+                    ]
+                },
+                {
+                    "type": "decisionItem",
+                    "attrs": {
+                        "state": "DECIDED",
+                        "localId": "f2df7ca7-974f-4118-a017-c66ccb2ebe32"
+                    },
+                    "content": [
+                        {
+                            "text": "decision 3",
+                            "type": "text"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": 1
+}

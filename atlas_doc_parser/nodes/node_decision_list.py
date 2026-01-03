@@ -32,3 +32,37 @@ class NodeDecisionList(BaseNode):
     type: str = TypeEnum.decisionList.value
     attrs: NodeDecisionListAttrs = OPT
     content: T.List[BaseNode] = OPT
+
+    def to_markdown(
+        self,
+        ignore_error: bool = False,
+    ) -> str:
+        """
+        Convert the decision list to Markdown format.
+
+        Each decision item is rendered as a blockquote line with ``> `` prefix,
+        separated by blank lines.
+        """
+        lines = []
+
+        for item in self.content:
+            if self.is_type_of(item, TypeEnum.decisionItem):
+                # Process the decision item content (text nodes)
+                content_parts = []
+                for node in item.content:
+                    try:
+                        md = node.to_markdown()
+                        content_parts.append(md)
+                    except Exception as e:
+                        if ignore_error:
+                            pass
+                        else:
+                            raise e
+
+                # Join content parts and format as blockquote
+                item_content = "".join(content_parts).rstrip()
+                line = f"> {item_content}"
+                lines.append(line)
+
+        # Join with blank lines between each decision
+        return "\n\n".join(lines)
