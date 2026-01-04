@@ -15,6 +15,64 @@ x.y.z (Backlog)
 **Miscellaneous**
 
 
+1.0.1 (2026-01-04)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Major Refactor**
+
+This release represents a significant architectural overhaul focused on reliability, maintainability, and AI-native development practices.
+
+**Architecture Changes**
+
+- Refactored from monolithic ``model.py`` to modular structure with separate ``marks/`` and ``nodes/`` directories
+- Each ADF type now has its own dedicated module (e.g., ``node_paragraph.py``, ``mark_strong.py``)
+- Added code generation for ``api.py`` to ensure consistent public API exports
+- Introduced ``TypeEnum`` for type-safe ADF type handling
+- Added graceful error handling: unimplemented types are now skipped with optional warnings instead of crashing
+
+**New Mark Types**
+
+- :class:`~atlas_doc_parser.marks.mark_alignment.MarkAlignment`
+- :class:`~atlas_doc_parser.marks.mark_border.MarkBorder`
+- :class:`~atlas_doc_parser.marks.mark_breakout.MarkBreakout`
+- :class:`~atlas_doc_parser.marks.mark_data_consumer.MarkDataConsumer`
+- :class:`~atlas_doc_parser.marks.mark_fragment.MarkFragment`
+
+**New Node Types**
+
+- :class:`~atlas_doc_parser.nodes.node_caption.NodeCaption`
+- :class:`~atlas_doc_parser.nodes.node_decision_item.NodeDecisionItem`
+- :class:`~atlas_doc_parser.nodes.node_decision_list.NodeDecisionList`
+- :class:`~atlas_doc_parser.nodes.node_embed_card.NodeEmbedCard`
+- :class:`~atlas_doc_parser.nodes.node_extension.NodeExtension`
+- :class:`~atlas_doc_parser.nodes.node_media_inline.NodeMediaInline`
+
+**Testing Improvements**
+
+- Comprehensive test coverage using real Confluence page data
+- Two-layer testing architecture: ``PageSample`` (page-level) and ``AdfSample`` (element-level)
+- JMESPath-based element extraction for precise testing
+- Round-trip serialization tests for all implemented types
+
+**Documentation**
+
+- Complete maintainer guide with 5 sections:
+    - Project overview and design philosophy
+    - Cross-referencing three sources of truth (JSON schema, official docs, real pages)
+    - Base class architecture and markdown helpers
+    - Step-by-step guide for implementing new marks/nodes
+    - Testing workflow documentation
+- User-facing getting started guide with practical examples
+- AI-consumable documentation structure
+
+**AI-Native Development**
+
+- Claude Code skills for development workflow:
+    - ``/dev`` - Maintainer guide quick reference
+    - ``/adf-format-json-schema`` - Query ADF JSON schema
+    - ``/adf-json-example`` - Fetch real ADF from Confluence
+    - ``/implement-model`` - Automated implementation workflow
+
+
 0.1.2 (2025-03-03)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
