@@ -50,7 +50,24 @@ Welcome to ``atlas_doc_parser`` Documentation
 .. image:: https://atlas-doc-parser.readthedocs.io/en/latest/_static/atlas_doc_parser-logo.png
     :target: https://atlas-doc-parser.readthedocs.io/en/latest/
 
-A Python library for parsing Atlassian Document Format (ADF) - the rich text format used in Confluence pages and Jira issue fields. This library converts ADF JSON into Python objects and enables conversion to various documentation formats.
+**Turn your Confluence pages and Jira issues into AI-ready Markdown.**
+
+Confluence and Jira store rich text as `Atlassian Document Format (ADF) <https://developer.atlassian.com/cloud/jira/platform/apis/document/structure/>`_ - a complex JSON structure that LLMs can't directly consume. This library solves that:
+
+.. code-block:: python
+
+    from atlas_doc_parser.api import NodeDoc
+
+    # Parse ADF JSON from Confluence/Jira API
+    doc = NodeDoc.from_dict(adf_json)
+
+    # Convert to clean Markdown
+    markdown = doc.to_markdown()
+
+    # Feed to your AI
+    response = llm.chat(f"Summarize this: {markdown}")
+
+Now your team's knowledge in Confluence and Jira becomes training data, context, or input for any AI workflow.
 
 
 .. _install:
