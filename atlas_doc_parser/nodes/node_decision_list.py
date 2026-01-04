@@ -43,7 +43,7 @@ class NodeDecisionList(BaseNode):
         """
         Convert the decision list to Markdown format.
 
-        Each decision item is rendered as a blockquote with ``> `` prefix
+        Each decision item is rendered as a blockquote with ``>`` prefix
         on every line, separated by blank lines between items.
         """
         decision_blocks = []

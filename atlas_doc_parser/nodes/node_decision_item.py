@@ -68,7 +68,7 @@ class NodeDecisionItem(BaseNode):
         """
         Convert the decision item to Markdown format.
 
-        Each line is prefixed with ``> `` for blockquote formatting.
+        Each line is prefixed with ``>`` for blockquote formatting.
         Leading empty lines after the first content line are skipped,
         and consecutive empty lines are collapsed.
         """
