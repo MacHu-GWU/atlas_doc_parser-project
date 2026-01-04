@@ -10,8 +10,7 @@ from ..vendor.pytest_cov_helper import (
     run_cov_test as _run_cov_test,
 )
 
-from ..base import T_BASE
-from ..model import T_NODE
+from ..mark_or_node import T_BASE, T_NODE
 
 
 def run_unit_test(
@@ -39,8 +38,8 @@ def run_cov_test(
     )
 
 
-# DEFAULT_VERBOSE = True
-DEFAULT_VERBOSE = False
+DEFAULT_VERBOSE = True
+# DEFAULT_VERBOSE = False
 
 
 def print_adf_json(
