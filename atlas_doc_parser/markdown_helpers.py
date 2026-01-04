@@ -32,19 +32,21 @@ def strip_double_empty_line(
     """
     Remove excessive consecutive empty lines from text.
 
-    In Markdown, multiple blank lines are typically rendered the same as
-    a single blank line. This function normalizes the output by replacing
-    three or more consecutive newlines with exactly two (one blank line).
+    During ``to_markdown()`` conversion, many block-level nodes automatically
+    add blank lines before/after themselves to ensure proper separation from
+    surrounding content. This can result in 3 or more consecutive blank lines
+    when multiple blocks are adjacent, which looks ugly in the final output.
 
-    Args:
-        text: The input text that may contain excessive blank lines.
-        n: Number of replacement iterations to perform. Default is 3,
-           which handles up to 5 consecutive newlines being reduced to 2.
+    This function normalizes the output by collapsing excessive blank lines
+    (3+ newlines) down to exactly one blank line (2 newlines).
 
-    Returns:
-        Text with at most one consecutive blank line (two newlines).
+    :param text: The input text that may contain excessive blank lines.
+    :param n: Number of replacement iterations to perform. Default is 3,
+        which handles up to 5 consecutive newlines being reduced to 2.
+    :return: Text with at most one consecutive blank line (two newlines).
 
-    Example:
+    Example::
+
         >>> strip_double_empty_line("Hello\\n\\n\\n\\nWorld")
         'Hello\\n\\nWorld'
     """
@@ -59,28 +61,29 @@ def content_to_markdown(
     ignore_error: bool = False,
 ) -> str:
     """
-    Convert a list of child nodes to concatenated Markdown text.
+    Recursively convert a node's content (child nodes) to Markdown text.
+
+    This is the core recursive function for ``to_markdown()`` conversion.
+    It iterates through all child nodes in the ``content`` list, calls
+    ``to_markdown()`` on each, and concatenates the results.
 
     This function is used for **inline content** where child nodes should be
     joined without separators. For example, a paragraph containing multiple
-    text nodes with different marks should be concatenated directly.
+    text nodes with different formatting should be concatenated directly.
 
-    Args:
-        content: List of child nodes to convert. If ``OPT`` (not provided),
-            returns an empty string.
-        concat: String to join the converted markdown of each node.
-            Default is empty string for inline concatenation.
-        ignore_error: If True, silently skip nodes that fail to convert.
-            If False (default), propagate exceptions.
+    :param content: List of child nodes to convert. If ``OPT`` (not provided),
+        returns an empty string.
+    :param concat: String to join the converted markdown of each node.
+        Default is empty string for inline concatenation.
+    :param ignore_error: If True, silently skip nodes that fail to convert.
+        If False (default), propagate exceptions. This flag is passed down
+        to nested ``to_markdown()`` calls.
+    :return: Concatenated Markdown text from all child nodes.
 
-    Returns:
-        Concatenated Markdown text from all child nodes.
+    Example::
 
-    Example:
-        For a paragraph with content ``[TextNode("Hello "), TextNode("world")]``:
-
-        >>> content_to_markdown(paragraph.content)
-        'Hello world'
+        # In NodeParagraph.to_markdown():
+        md = content_to_markdown(self.content, ignore_error=ignore_error)
     """
     if content is OPT:
         return ""
@@ -104,33 +107,30 @@ def doc_content_to_markdown(
     ignore_error: bool = False,
 ) -> str:
     """
-    Convert document-level (whole confluence page) block content to Markdown text.
+    Convert document-level (whole Confluence page) content to Markdown text.
 
-    This function is used for **block-level content** where each child node
-    represents a separate block (paragraph, heading, list, etc.). Unlike
-    :func:`content_to_markdown`, this function:
+    This function is specifically for the ``NodeDoc`` root node - the entire
+    page level. It differs from :func:`content_to_markdown` in that it handles
+    **block-level content** with additional processing:
 
-    1. Joins blocks with newlines (default separator)
-    2. Adds extra padding around certain block types (lists, code blocks)
-       to ensure proper Markdown rendering
-    3. Cleans up excessive blank lines in the final output
+    1. Joins blocks with newlines (not empty string)
+    2. Adds extra blank lines around lists and code blocks for proper rendering
+    3. Cleans up excessive blank lines using :func:`strip_double_empty_line`
 
-    The extra padding is needed because some Markdown renderers require
-    blank lines before/after lists and code blocks to render them correctly.
+    The extra padding around lists and code blocks is needed because some
+    Markdown renderers require blank lines before/after these elements to
+    render them correctly as separate blocks.
 
-    Args:
-        content: List of block-level child nodes. If ``OPT``, returns empty string.
-        concat: String to join blocks. Default is newline for block separation.
-        ignore_error: If True, silently skip nodes that fail to convert.
+    :param content: List of block-level child nodes (paragraphs, headings,
+        lists, tables, etc.). If ``OPT``, returns empty string.
+    :param concat: String to join blocks. Default is newline for block separation.
+    :param ignore_error: If True, silently skip nodes that fail to convert.
+    :return: Markdown text with proper block separation.
 
-    Returns:
-        Markdown text with proper block separation.
+    Example::
 
-    Example:
-        For a doc with ``[Paragraph, BulletList, Paragraph]``:
-
-        >>> doc_content_to_markdown(doc.content)
-        'First paragraph\\n\\n- item 1\\n- item 2\\n\\nSecond paragraph'
+        # In NodeDoc.to_markdown():
+        return doc_content_to_markdown(self.content, ignore_error=ignore_error)
     """
     if content is OPT:
         return ""
@@ -168,31 +168,27 @@ def add_style_to_markdown(
     node: "T_NODE",
 ) -> str:
     """
-    Apply mark styles to Markdown text.
+    Apply a node's marks (formatting) to Markdown text.
 
-    In ADF, marks represent text formatting like bold, italic, links, etc.
-    A node can have multiple marks that should be applied in sequence.
-    Each mark's ``to_markdown()`` method wraps the text with appropriate
-    Markdown syntax.
+    This function handles the ``marks`` field of a node. In ADF, marks represent
+    text formatting like bold, italic, links, text color, etc. A node can have
+    multiple marks that should be applied in sequence.
 
-    The order of mark application matters for nested formatting:
-    - Input: "text" with marks [strong, em]
-    - After strong: "**text**"
-    - After em: "*\\*\\*text\\*\\**"
+    Each mark's ``to_markdown(text)`` method wraps the text with appropriate
+    Markdown syntax (e.g., ``**text**`` for bold, ``*text*`` for italic).
 
-    Args:
-        md: The base Markdown text to style.
-        node: The ADF node containing marks to apply. If ``node.marks`` is
-            not a list, the text is returned unchanged.
+    :param md: The base Markdown text to apply formatting to.
+    :param node: The ADF node containing marks to apply. If ``node.marks`` is
+        not a list (e.g., the node doesn't support marks), the text is returned
+        unchanged.
+    :return: Markdown text with all mark styles applied.
 
-    Returns:
-        Markdown text with all mark styles applied.
+    Example::
 
-    Example:
-        For a text node "hello" with marks ``[MarkStrong, MarkEm]``:
-
-        >>> add_style_to_markdown("hello", text_node)
-        '*\\*\\*hello\\*\\**'
+        # In NodeText.to_markdown():
+        md = self.text
+        md = add_style_to_markdown(md, self)
+        return md
     """
     try:
         if isinstance(node.marks, list):

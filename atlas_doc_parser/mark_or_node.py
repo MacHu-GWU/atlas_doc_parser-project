@@ -171,8 +171,27 @@ class BaseMark(BaseMarkOrNode):
         """
         Apply this mark's formatting to text.
 
-        Subclasses should override this method.
-        Default implementation returns text unchanged.
+        The default implementation returns the input text unchanged. This design
+        reflects the library's philosophy:
+
+        1. **Content extraction over formatting.** In the AI era, we convert ADF
+           to Markdown primarily to extract textual content for LLMs, RAG systems,
+           and knowledge bases. Preserving formatting is secondary to preserving
+           content.
+
+        2. **When in doubt, preserve content without formatting.** If a mark type
+           doesn't have a standard Markdown equivalent (e.g., background color),
+           we return the raw text rather than inventing custom syntax or losing
+           the content entirely.
+
+        3. **Use native Markdown only.** We prefer standard Markdown syntax
+           (``**bold**``, ``*italic*``). Dialect-specific extensions are avoided.
+
+        Subclasses override this method to apply formatting. For example,
+        ``MarkStrong.to_markdown("text")`` returns ``"**text**"``.
+
+        :param text: The text content to format.
+        :return: The formatted text. Default returns text unchanged.
         """
         return text
 
@@ -288,7 +307,32 @@ class BaseNode(BaseMarkOrNode):
         """
         Convert this node to Markdown format.
 
-        Subclasses should override this method.
+        The default implementation raises ``NotImplementedError``. This is
+        intentional for several reasons:
+
+        1. **Fail fast during development.** When implementing new node types,
+           we want to immediately discover which nodes haven't implemented
+           ``to_markdown()`` rather than silently producing empty output or
+           skipping content. This helps catch missing implementations early.
+
+        2. **The ignore_error parameter provides an escape hatch.** In production,
+           if our code has bugs or a node type is partially implemented, users
+           can pass ``ignore_error=True`` to gracefully skip nodes that fail
+           to convert. This flag should be propagated recursively to all nested
+           ``to_markdown()`` calls via helper functions like ``content_to_markdown()``.
+
+        3. **Error handling is explicit.** The library user decides whether to
+           fail fast (for debugging and development) or degrade gracefully
+           (for production use cases where partial output is acceptable).
+
+        Subclasses must override this method to provide actual conversion logic.
+
+        :param ignore_error: If True, errors in nested conversions are silently
+            skipped. If False (default), errors propagate immediately. This flag
+            should be passed down to any nested ``to_markdown()`` calls.
+        :return: The Markdown representation of this node.
+        :raises NotImplementedError: Always raised by the base class to ensure
+            subclasses implement this method.
         """
         raise NotImplementedError(
             f"{self.__class__.__name__} has not implemented ``to_markdown()``"
