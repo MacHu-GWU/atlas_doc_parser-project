@@ -9,7 +9,7 @@ name = "atlas_doc_parser"
 # Currently, poetry 2.1.X doesn't support dynamic versioning
 # (Read https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#version)
 # So this value has to be aligned with the one in ``atlas_doc_parser/_version.py``
-version = "0.1.2"
+version = "1.0.1"
 description = "Atlassian Document Format Parser."
 # Read https://dev-exp-share.readthedocs.io/en/latest/search.html?q=Pick+An+Open+Source+License+For+Python+Project&check_keywords=yes&area=default
 # To pick a license and update the ``license``, ``classifier`` field in ``pyproject.toml``
@@ -63,6 +63,7 @@ dev = [
     "wheel>=0.45.0,<1.0.0", # build wheel package
     "build>=1.2.1,<2.0.0", # build source distribution
     "jinja2>=3.0.0,<4.0.0", # templating engine
+    "jupyterlab>=4.0.0,<5.0.0", # interactive development environment
 ]
 
 # ------------------------------------------------------------------------------
