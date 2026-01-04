@@ -53,6 +53,8 @@ The `official ADF documentation <https://developer.atlassian.com/cloud/jira/plat
 - Examples may not cover all attributes
 
 
+.. _source3-real-confluence-pages:
+
 Source 3: Real Confluence Pages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Actual ADF JSON extracted from real Confluence pages shows how the format is used in practice.
@@ -75,6 +77,8 @@ We maintain a dedicated Confluence folder for test pages:
 
 This folder contains sample pages for each ADF node and mark type, used for extracting real-world ADF JSON examples.
 
+
+.. _tracking-the-three-sources:
 
 Tracking the Three Sources
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

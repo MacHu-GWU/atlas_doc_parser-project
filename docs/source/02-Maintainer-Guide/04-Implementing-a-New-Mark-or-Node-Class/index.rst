@@ -1,3 +1,5 @@
+.. _implementing-a-new-mark-or-node-class:
+
 Implementing a New Mark or Node Class
 ==============================================================================
 This document provides a step-by-step guide for implementing a new ADF mark or node dataclass, including the rules and conventions to follow.
