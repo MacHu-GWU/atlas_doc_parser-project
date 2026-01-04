@@ -19,6 +19,9 @@
       "Bash(make:*)",
       "Bash(uvx:*)",
       "Skill(mini-kanban:mini-kanban)",
+      "Skill(adf-format-json-schema)",
+      "Skill(adf-json-example)",
+      "Skill(dev)",
       "WebFetch(domain:developer.atlassian.com)",
       "WebFetch(domain:docs.claude.com)"
     ]

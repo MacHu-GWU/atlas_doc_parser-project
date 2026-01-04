@@ -8,6 +8,7 @@ omit =
     atlas_doc_parser/_version.py
     atlas_doc_parser/cli.py
     atlas_doc_parser/paths.py
+    atlas_doc_parser/gen_code.py
 
 [report]
 # Regexes for lines to exclude from consideration
