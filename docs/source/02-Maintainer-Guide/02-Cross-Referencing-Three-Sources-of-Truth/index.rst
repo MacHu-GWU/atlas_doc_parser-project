@@ -189,6 +189,6 @@ We chose this pragmatic, verification-based approach because:
 1. **Reliability over elegance**: A fully automated schema-driven generator sounds nice, but breaks when schemas don't match reality.
 2. **Incremental progress**: We can implement models one at a time, testing each thoroughly before moving on.
 3. **Real-world validation**: Every model is verified against actual Confluence/Jira output, not just specifications.
-4. **Graceful degradation**: Unimplemented types are skipped rather than causing failures (see :doc:`../graceful-handling-of-unimplemented-types`).
+4. **Graceful degradation**: Unimplemented types are skipped rather than causing failures (see :doc:`../06-Graceful-Handling-of-Unimplemented-Types/index`).
 
 The result is a library that may not cover 100% of ADF types immediately, but what it does cover works reliably in production.
