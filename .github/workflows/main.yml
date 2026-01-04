@@ -18,10 +18,10 @@ jobs:
       USING_COVERAGE: "3.10,3.11,3.12,3.13,3.14"
     strategy:
       matrix:
-#        os: ["ubuntu-latest", "windows-latest"]
-        os: ["ubuntu-latest", ] # for debug only
-#        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
-        python-version: ["3.10", ] # for debug only
+        os: ["ubuntu-latest", "windows-latest"]
+#        os: ["ubuntu-latest", ] # for debug only
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+#        python-version: ["3.10", ] # for debug only
         exclude:
           - os: windows-latest # this is a useless exclude rules for demonstration use only
             python-version: 2.7
