@@ -735,7 +735,7 @@ class AdfSampleEnum:
         | **col 1**<br>second line<br> | **col 2**<br>second line<br> |
         | --- | --- |
         | > abc<br>> <br>> - 1<br>> - 2<br><br>another line<br> | > **INFO**<br>> <br>> efg<br>> <br>> 1. alice<br>> 2. bob<br><br>another line<br> |
-        | ```<br>def add_two(a, b):<br>    return a + b<br>``` | [Extension: com.atlassian.confluence.migration/nested-table] |
+        | ```<br>def add_two(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;return a + b<br>``` | [Extension: com.atlassian.confluence.migration/nested-table] |
         """,
     )
 

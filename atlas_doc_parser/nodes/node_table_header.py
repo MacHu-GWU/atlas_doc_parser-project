@@ -86,5 +86,18 @@ class NodeTableHeader(BaseNode):
         ignore_error: bool = False,
     ) -> str:
         md = content_to_markdown(content=self.content, ignore_error=ignore_error)
-        md = md.replace("|", "\\|").replace("\n", "<br>")
-        return md
+        md = md.replace("|", "\\|")
+
+        # Convert leading spaces to &nbsp; for HTML table rendering
+        # (spaces after <br> are collapsed in HTML, so we need &nbsp;)
+        lines = md.split("\n")
+        processed_lines = []
+        for line in lines:
+            stripped = line.lstrip(" ")
+            leading_spaces = len(line) - len(stripped)
+            if leading_spaces > 0:
+                # Replace leading spaces with &nbsp;
+                line = "&nbsp;" * leading_spaces + stripped
+            processed_lines.append(line)
+
+        return "<br>".join(processed_lines)
