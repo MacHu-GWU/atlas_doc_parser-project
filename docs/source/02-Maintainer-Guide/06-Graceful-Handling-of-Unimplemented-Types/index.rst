@@ -3,21 +3,16 @@ Graceful Handling of Unimplemented Types
 
 Overview
 ------------------------------------------------------------------------------
-
 The Atlassian Document Format (ADF) is a rich specification with many node and mark types. As a library that evolves incrementally, ``atlas_doc_parser`` may not implement all ADF types at any given time. This document explains how the library gracefully handles unimplemented types during parsing.
 
 
 Design Philosophy
 ------------------------------------------------------------------------------
-
 The library follows a **progressive implementation** approach:
 
 1. **Parse what we can**: When encountering an ADF document, the parser deserializes all implemented node and mark types into Python objects.
-
 2. **Skip what we can't**: Unimplemented types are silently skipped rather than causing the entire parsing operation to fail.
-
 3. **Inform the user**: When an unimplemented type is encountered, a warning is logged to inform users which types are missing. This helps users identify gaps and submit feature requests.
-
 4. **Fail on real errors**: Actual parsing errors (malformed data, type mismatches, etc.) are still raised as exceptions. Only missing type registrations are skipped.
 
 This design ensures that:
@@ -32,7 +27,6 @@ Error Handling Behavior
 
 When to Skip Errors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 Errors are **skipped** only when:
 
 - A node type is not registered in ``NODE_TYPE_TO_CLASS_MAPPING``
@@ -42,7 +36,6 @@ In these cases, the unimplemented element is simply omitted from the parsed resu
 
 When to Raise Errors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 Errors are **raised** normally when:
 
 - The ``from_dict()`` method of a dataclass fails (malformed attributes, type errors, etc.)
@@ -57,7 +50,6 @@ Implementation Details
 
 Key Components
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 The graceful handling mechanism involves several components:
 
 1. **Exception Class**: ``atlas_doc_parser.exc.UnimplementedTypeError``
@@ -78,7 +70,6 @@ The graceful handling mechanism involves several components:
 
 Code Flow
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 When parsing a document::
 
     NodeDoc.from_dict(data)
@@ -110,7 +101,6 @@ Usage Examples
 
 Default Behavior (Warnings Enabled)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 .. code-block:: python
 
     from atlas_doc_parser.nodes.node_doc import NodeDoc
@@ -131,7 +121,6 @@ Default Behavior (Warnings Enabled)
 
 Disabling Warnings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 .. code-block:: python
 
     import atlas_doc_parser.settings as settings
@@ -146,7 +135,6 @@ Disabling Warnings
 
 Testing
 ------------------------------------------------------------------------------
-
 The graceful handling mechanism is tested in ``tests/nodes/test_nodes_node_doc.py`` with the ``test_node_doc_with_unimplemented_model`` test case. This test uses a Confluence page that intentionally contains an unimplemented node type (``bodiedExtension``) to verify that:
 
 1. Parsing completes without raising an exception
@@ -156,15 +144,10 @@ The graceful handling mechanism is tested in ``tests/nodes/test_nodes_node_doc.p
 
 Contributing New Types
 ------------------------------------------------------------------------------
-
-When a user encounters an unimplemented type, the warning message directs them to submit an issue at:
-
-https://github.com/MacHu-GWU/atlas_doc_parser-project/issues
+When a user encounters an unimplemented type, the warning message directs them to submit an issue at: https://github.com/MacHu-GWU/atlas_doc_parser-project/issues
 
 To implement a new type:
 
 1. Create the dataclass in the appropriate module (``nodes/`` or ``marks/``)
 2. Register the type in the mapping dictionary (``NODE_TYPE_TO_CLASS_MAPPING`` or ``MARK_TYPE_TO_CLASS_MAPPING``)
 3. Add tests for the new type
-
-See the :doc:`/02-Maintainer-Guide/index` for detailed instructions on implementing new types.
