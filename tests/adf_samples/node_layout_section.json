@@ -1,0 +1,39 @@
+{
+    "type": "layoutSection",
+    "content": [
+        {
+            "type": "layoutColumn",
+            "attrs": {
+                "width": 50.0
+            },
+            "content": [
+                {
+                    "type": "paragraph",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "Left column"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "layoutColumn",
+            "attrs": {
+                "width": 50.0
+            },
+            "content": [
+                {
+                    "type": "paragraph",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "Right column"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
