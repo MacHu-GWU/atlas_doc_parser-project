@@ -1,0 +1,24 @@
+{
+    "type": "inlineExtension",
+    "attrs": {
+        "extensionType": "com.atlassian.confluence.macro.core",
+        "extensionKey": "pagetree",
+        "parameters": {
+            "macroParams": {
+                "root": {
+                    "value": "4762763284"
+                }
+            },
+            "macroMetadata": {
+                "macroId": {
+                    "value": "test-macro-id"
+                },
+                "schemaVersion": {
+                    "value": "1"
+                },
+                "title": "Page Tree"
+            }
+        },
+        "localId": "test-local-id"
+    }
+}

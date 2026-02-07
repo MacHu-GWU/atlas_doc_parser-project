@@ -61,6 +61,8 @@ from .nodes.node_block_card import NodeBlockCardAttrsDatasource
 from .nodes.node_block_card import NodeBlockCardAttrsDatasourceView
 from .nodes.node_blockquote import NodeBlockquote
 from .nodes.node_blockquote import NodeBlockquoteAttrs
+from .nodes.node_bodied_extension import NodeBodiedExtension
+from .nodes.node_bodied_extension import NodeBodiedExtensionAttrs
 from .nodes.node_bullet_list import NodeBulletList
 from .nodes.node_caption import NodeCaption
 from .nodes.node_caption import NodeCaptionAttrs
@@ -87,6 +89,11 @@ from .nodes.node_heading import NodeHeading
 from .nodes.node_heading import NodeHeadingAttrs
 from .nodes.node_inline_card import NodeInlineCard
 from .nodes.node_inline_card import NodeInlineCardAttrs
+from .nodes.node_inline_extension import NodeInlineExtension
+from .nodes.node_inline_extension import NodeInlineExtensionAttrs
+from .nodes.node_layout_column import NodeLayoutColumn
+from .nodes.node_layout_column import NodeLayoutColumnAttrs
+from .nodes.node_layout_section import NodeLayoutSection
 from .nodes.node_list_item import NodeListItem
 from .nodes.node_list_item import NodeListItemAttrs
 from .nodes.node_media import NodeMedia

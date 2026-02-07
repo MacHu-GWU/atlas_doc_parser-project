@@ -53,6 +53,10 @@ from .node_table_header import NodeTableHeader
 from .node_table_row import NodeTableRow
 from .node_table import NodeTable
 from .node_doc import NodeDoc
+from .node_bodied_extension import NodeBodiedExtension
+from .node_inline_extension import NodeInlineExtension
+from .node_layout_column import NodeLayoutColumn
+from .node_layout_section import NodeLayoutSection
 
 
 # =============================================================================
@@ -94,6 +98,10 @@ NODE_TYPE_TO_CLASS_MAPPING = {
     TypeEnum.tableHeader.value: NodeTableHeader,
     TypeEnum.tableRow.value: NodeTableRow,
     TypeEnum.table.value: NodeTable,
+    TypeEnum.bodiedExtension.value: NodeBodiedExtension,
+    TypeEnum.inlineExtension.value: NodeInlineExtension,
+    TypeEnum.layoutColumn.value: NodeLayoutColumn,
+    TypeEnum.layoutSection.value: NodeLayoutSection,
 }
 
 

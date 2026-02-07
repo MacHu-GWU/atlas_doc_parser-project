@@ -766,12 +766,18 @@ class AdfSampleEnum:
         # md="don't test to_markdown for this one",
     )
 
-    # This page contains only a bodiedExtension node which is not yet implemented.
-    # The parser should skip it gracefully and return an empty document.
+    # This page contains a bodiedExtension node (Page Properties macro)
+    # wrapping a table, followed by a paragraph.
     node_doc_with_unimplemented_model = PageSample(
         name="node_doc_with_unimplemented_model",
         url="https://sanhehu.atlassian.net/wiki/spaces/GitHubMacHuGWU/pages/653492720/Node+-+with-unimplemented-model",
     ).get_sample(
         jpath="@",
-        md="Hello World",
+        md="""\
+        | owner<br> | alice<br> |
+        | --- | --- |
+        | **email**<br> | alice@example.com<br> |
+        | --- | --- |
+        Hello World
+        """,
     )

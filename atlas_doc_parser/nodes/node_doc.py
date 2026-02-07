@@ -34,6 +34,8 @@ if T.TYPE_CHECKING:  # pragma: no cover
     from .node_panel import NodePanel
     from .node_table import NodeTable
     from .node_expand import NodeExpand
+    from .node_bodied_extension import NodeBodiedExtension
+    from .node_layout_section import NodeLayoutSection
 
 
 @dataclasses.dataclass(frozen=True)
@@ -75,6 +77,8 @@ class NodeDoc(BaseNode):
             "NodePanel",
             "NodeTable",
             "NodeExpand",
+            "NodeBodiedExtension",
+            "NodeLayoutSection",
         ]
     ] = REQ
 
