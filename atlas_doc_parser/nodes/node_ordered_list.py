@@ -85,7 +85,11 @@ class NodeOrderedList(BaseNode):
         indent = "    " * level  # 4 spaces per level
 
         # Start numbering from attrs.order (or 1 for inner levels)
-        if level == 0 and isinstance(self.attrs.order, int):
+        if (
+            level == 0
+            and self.attrs is not OPT
+            and isinstance(self.attrs.order, int)
+        ):
             current_num = self.attrs.order
         else:
             current_num = 1

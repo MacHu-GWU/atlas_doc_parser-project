@@ -12,6 +12,8 @@ x.y.z (Backlog)
 
 **Bugfixes**
 
+- Fix ``AttributeError`` in ``NodeOrderedList.to_markdown`` when the ``orderedList`` node has no ``attrs``. Jira omits ``attrs`` for lists starting at 1.
+
 **Miscellaneous**
 
 
